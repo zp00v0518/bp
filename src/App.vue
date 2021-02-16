@@ -1,5 +1,5 @@
 <template>
-  <el-container id="wrapper">
+  <el-container id="wrapper" direction="vertical">
     <Vheader>Header</Vheader>
     <el-container>
       <el-aside id="aside"><Menu></Menu></el-aside>
@@ -14,7 +14,7 @@ import Vheader from './components/Vheader';
 
 export default {
   name: 'App',
-  components: { Menu,Vheader }
+  components: { Menu, Vheader }
 };
 </script>
 
