@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<base href="/">
+	<meta charset="UTF-8">
+	<title>Lords</title>
+	<link rel="stylesheet" href="login/login.css">
+</head>
+
+<body>
+	<figure id="loginWrap">
+		<section id="tabsWrap" class="loginWrap_item">
+			<h3 class="tabs show" data-id="authForm">Вход</h3>
+			<h3 class="tabs" data-id="registrForm">Регистрация</h3>
+		</section>
+		<figure id="formWrap" class="loginWrap_item">
+			<form id="authForm" class="formWrap_item show">
+				<label class="label">
+					<h4 class="label_text">Email</h4><input type="email" name="email" class="input" maxlength="25" value="">
+				</label>
+				<label class="label">
+					<h4 class="label_text">Пароль</h4><input type="password" name="pass" class="input" maxlength="25" value="">
+				</label>
+				<button type="button" class="checkBtn" data-id="authForm">Войти</button>
+			</form>
+			<form id="registrForm" class="formWrap_item ">
+				<!-- <label class="label"><input type="text" name="nickName" class="input" maxlength="25" value="">
+					<h4 class="label_text">nickName</h4>
+				</label> -->
+				<label class="label"><input type="email" name="email" class="input" maxlength="25" value="">
+					<h4 class="label_text">Email</h4>
+				</label>
+				<label class="label"><input type="password" name="pass" class="input" maxlength="25" value="">
+					<h4 class="label_text">Пароль</h4>
+				</label>
+				<label class="label"><input type="password" name="pass_two" class="input" maxlength="25" value="">
+					<h4 class="label_text">Пароль еще раз</h4>
+				</label>
+				<button type="button" class="checkBtn" data-id="registrForm">Зарегистрироваться</button>
+			</form>
+		</figure>
+	</figure>
+	<script src="login/login.js"></script>
+</body>
+
+</html>

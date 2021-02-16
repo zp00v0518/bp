@@ -1,0 +1,42 @@
+@import 'variables.scss';
+@import 'mixins.scss';
+
+body {
+	min-height: 100vh;
+	padding: 0;
+	margin: 0;
+	display: block;
+	display: flex;
+}
+#app{
+	min-height: 100%;
+	flex-grow: 2;
+}
+$screen-big: 1920px;
+$screen-laptop: 1440px;
+$screen-tablet2: 1024px;
+$screen-tablet: 768px;
+$screen-phone2: 480px;
+$screen-phone: 320px;
+
+
+
+
+
+
+
+
+
+/* Color Theme Swatches in Hex */
+$My-Color-Theme-1-hex: #3B328C;
+$My-Color-Theme-2-hex: #201C4D;
+$My-Color-Theme-3-hex: #5649CC;
+$My-Color-Theme-4-hex: #5C4ED9;
+$My-Color-Theme-5-hex: #4C40B3;
+
+/* Color Theme Swatches in RGBA */
+$My-Color-Theme-1-rgba: rgba(59,50,140, 1);
+$My-Color-Theme-2-rgba: rgba(32,28,77, 1);
+$My-Color-Theme-3-rgba: rgba(86,73,204, 1);
+$My-Color-Theme-4-rgba: rgba(92,78,217, 1);
+$My-Color-Theme-5-rgba: rgba(76,64,179, 1);
