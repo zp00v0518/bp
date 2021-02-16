@@ -1,4 +1,4 @@
-# bets_parser
+# bp
 
 ## Project setup
 ```
