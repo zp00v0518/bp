@@ -6,12 +6,25 @@ module.exports = {
   devServer: {
     proxy: 'http://localhost:4000'
   },
+  configureWebpack: {
+    devtool: 'source-map'
+  },
   chainWebpack: (config) => {
     config.plugins.delete('pwa');
     config.plugins.delete('workbox');
   },
   outputDir: path.resolve(__dirname, './frontend/app'),
-  productionSourceMap: false
+  productionSourceMap: false,
+  css: {
+    loaderOptions: {
+      sass: {
+        prependData: `
+        @import "@/assets/style/variables.scss";
+        @import "@/assets/style/mixins.scss";
+        `
+      }
+    }
+  }
   // pages: {
   //   app: {
   //     entry: 'src/main.js',

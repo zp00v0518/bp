@@ -1,4 +1,12 @@
 :root {
   --main-blue: #3585fd;
+  --base-step: 4px;
+  --base-padding: calc(var(--base-step) * 6);
 }
 
+$screen-big: 1920px;
+$screen-laptop: 1440px;
+$screen-tablet2: 1024px;
+$screen-tablet: 768px;
+$screen-phone2: 480px;
+$screen-phone: 320px;

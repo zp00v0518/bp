@@ -3,7 +3,7 @@
     <Vheader>Header</Vheader>
     <el-container>
       <el-aside id="aside"><Menu></Menu></el-aside>
-      <el-main>Main</el-main>
+      <el-main>{{ msg }}</el-main>
     </el-container>
   </el-container>
 </template>
@@ -14,7 +14,12 @@ import Vheader from './components/Vheader';
 
 export default {
   name: 'App',
-  components: { Menu, Vheader }
+  components: { Menu, Vheader },
+  data() {
+    return {
+      msg: 'value'
+    };
+  }
 };
 </script>
 
