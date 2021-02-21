@@ -1,6 +1,6 @@
 const { getRandomString } = require('template_func');
-const { updateMethod } = require('../db/methods');
-const config = require('../../config');
+const { updateMethod } = require('../../db/methods');
+const config = require('../../../config');
 
 async function setCookieToUser(
   userId,

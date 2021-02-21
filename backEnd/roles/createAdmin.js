@@ -1,7 +1,7 @@
 const { patterns } = require('../template_modules');
 const insertMethod = require('../db/methods/insertMethod');
 const rolesList = require('./rolesList');
-const addNewUserToApp = require('../user/addNewUserToApp');
+const addNewUserToApp = require('../user/db/addNewUserToApp');
 const email = process.argv[2];
 const pass = process.argv[3];
 const err = new Error();

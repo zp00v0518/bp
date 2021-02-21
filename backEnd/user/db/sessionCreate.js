@@ -1,6 +1,6 @@
 const { getRandomString } = require('template_func');
-const { insertMethod } = require('../db/methods');
-const config = require('../../config');
+const { insertMethod } = require('../../db/methods');
+const config = require('../../../config');
 
 async function sessionCreate(
   { userId, req, platform = 0 },

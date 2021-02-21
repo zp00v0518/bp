@@ -1,18 +1,17 @@
 const { findMethod } = require('../db/methods');
 const { sendResponse } = require('../template_modules');
 const config = require('../../config');
-const addNewUserToApp = require('./addNewUserToApp');
-const setCookieToUser = require('./setCookieToUser');
-const sessionCreate = require('./sessionCreate');
+const addNewUserToApp = require('./db/addNewUserToApp');
+const setCookieToUser = require('./db/setCookieToUser');
+const sessionCreate = require('./db/sessionCreate');
 const Cookies = require('cookies');
-const {GETlist} = require('../router/GETrouting');
-
+const { GETlist } = require('../router/GETrouting');
 
 async function registrForm({ req, res, postData }) {
   const collectionName = config.collections.users.name;
   const findOptions = {
     query: {
-      email: postData.email
+      email: postData.data.email
     }
   };
   let user = await findMethod.one(collectionName, findOptions);
@@ -42,8 +41,13 @@ async function registrForm({ req, res, postData }) {
     } catch (err) {
       console.log(err);
     }
+  } else {
+    const answer = {};
+    answer.status = 'registrErr';
+    answer.answer = `Пользователь с таким email'ом существует`;
+    sendResponse(res, JSON.stringify(answer));
+    return;
   }
-  sendResponse(res, JSON.stringify(postData));
 }
 
 module.exports = registrForm;
