@@ -1,4 +1,4 @@
-const { insertMethod } = require('../db/methods');
+const insertMethod = require('../db/methods/insertMethod');
 const createUser = require('./createUser');
 const config = require('../../config');
 

@@ -1,7 +1,8 @@
-const fileReader = require('./fileReader.js');
-const mimeType = require('./mimeType.js');
-const sendResponse = require('./sendResponse.js');
-const reqOn = require('./reqOn.js');
+const fileReader = require('./fileReader');
+const mimeType = require('./mimeType');
+const sendResponse = require('./sendResponse');
+const reqOn = require('./reqOn');
+const patterns = require('./patterns');
 // const getCollectionName = require('./getCollectionName.js');
 // const checkSchema = require('./checkSchema.js');
 // const getParsePathToImg = require('./getParsePathToImg.js');
@@ -14,6 +15,7 @@ module.exports = {
   mimeType,
   sendResponse,
   reqOn,
+  patterns
   // getCollectionName,
   // checkSchema,
   // getParsePathToImg,
