@@ -20,9 +20,5 @@ export default {
 </script>
 
 <template>
-  <component
-    :is="selectedIcon"
-    :fill="fill"
-    :stroke="stroke"
-  />
+  <component :is="selectedIcon" :fill="fill" :stroke="stroke" />
 </template>

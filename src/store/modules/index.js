@@ -1,3 +1,4 @@
 import global from './global';
+import drawer from './drawer';
 
-export default { global };
+export default { global, drawer };

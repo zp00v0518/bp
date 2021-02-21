@@ -1,12 +1,21 @@
 <template>
   <el-header class="app-header" height="">
-    <Icon name="gamburger" class="app-header__icon"></Icon>
+    <Icon
+      name="gamburger"
+      class="app-header__icon"
+      @click="handlerClickOnGamberger"
+    ></Icon>
   </el-header>
 </template>
 
 <script>
 export default {
-  name: 'Vheader'
+  name: 'Vheader',
+  methods: {
+    handlerClickOnGamberger() {
+      this.$store.commit('SHOW_DRAWER');
+    }
+  }
 };
 </script>
 
@@ -16,6 +25,7 @@ export default {
   display: flex;
   &.el-header {
     padding: var(--base-padding);
+    height: 73px;
   }
   &__icon {
     width: 25px;

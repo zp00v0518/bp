@@ -6,15 +6,17 @@
       <el-main>{{ msg }}</el-main>
     </el-container>
   </el-container>
+  <Drawer></Drawer>
 </template>
 
 <script>
 import Menu from './components/Menu';
 import Vheader from './components/Vheader';
+import Drawer from './components/moleculs/Drawer';
 
 export default {
   name: 'App',
-  components: { Menu, Vheader },
+  components: { Menu, Vheader, Drawer },
   data() {
     return {
       msg: 'value'
