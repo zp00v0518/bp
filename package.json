@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "vue-cli-service serve",
-    "serve": "vue-cli-service serve",
+    "serv": "supervisor --inspect --watch backend server.js",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",

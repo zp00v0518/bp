@@ -1,6 +1,6 @@
-const insertMethod = require('../db/methods/insertMethod');
-const createUser = require('./createUser');
-const config = require('../../config');
+const insertMethod = require('../../db/methods/insertMethod');
+const createUser = require('../createUser');
+const config = require('../../../config');
 
 async function addNewUserToApp(userData) {
   const collectionName = config.collections.users.name;
