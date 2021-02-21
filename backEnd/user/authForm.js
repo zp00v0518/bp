@@ -1,9 +1,8 @@
-const Cookies = require('cookies');
 const { findMethod } = require('../db/methods');
 const { sendResponse } = require('../template_modules');
 const config = require('../../config');
-const setCookieToUser = require('./db/setCookieToUser');
-const sessionCreate = require('./db/sessionCreate');
+const addCookieToUserAndDb = require('./addCookieToUserAndDb');
+const { GETlist } = require('../router/GETrouting');
 
 async function authForm({ req, res, postData }) {
   const collectionName = config.collections.users.name;
@@ -23,22 +22,16 @@ async function authForm({ req, res, postData }) {
     sendResponse(res, JSON.stringify(answer));
     return;
   } else {
-    const userId = user._id;
-    const headers = req.headers;
-    headers.platform = userData.platform;
-    headers.ip = ip;
-    headers.user_id = userId;
-    const userCookies = user.cookie
-      ? user.cookie
-      : await setCookieToUser(userId);
-    const sessionCookie = await sessionCreate({
-      userId,
-      req,
-      platform: userData.platform
-    });
-    const cookies = new Cookies(req, res);
-    cookies.set('user', userCookies, { maxAge: config.time.week * 2 });
-    cookies.set('session', sessionCookie);
+    const cookiesResult = await addCookieToUserAndDb(req, res, user, postData);
+    const answer = {};
+    if (cookiesResult) {
+      answer.status = 'authOk';
+      answer.nextStep = GETlist.app;
+    } else {
+      answer.status = 'authErr';
+      answer.answer = `Something went wrong. We cannot give access to the application`;
+    }
+    sendResponse(res, JSON.stringify(answer));
   }
 }
 

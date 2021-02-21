@@ -2,9 +2,7 @@ const { findMethod } = require('../db/methods');
 const { sendResponse } = require('../template_modules');
 const config = require('../../config');
 const addNewUserToApp = require('./db/addNewUserToApp');
-const setCookieToUser = require('./db/setCookieToUser');
-const sessionCreate = require('./db/sessionCreate');
-const Cookies = require('cookies');
+const addCookieToUserAndDb = require('./addCookieToUserAndDb');
 const { GETlist } = require('../router/GETrouting');
 
 async function registrForm({ req, res, postData }) {
@@ -20,27 +18,20 @@ async function registrForm({ req, res, postData }) {
     if (!user) {
       return;
     }
-    try {
-      const userId = user._id;
-      const userCookies = await setCookieToUser(userId);
-      const sessionCookie = await sessionCreate({
-        userId,
-        req,
-        platform: postData.data.platform
-      });
-      const cookies = new Cookies(req, res);
-      cookies.set('user', userCookies, { maxAge: config.time.week * 2 });
-      cookies.set('session', sessionCookie);
-      const answer = {};
+    const cookiesResult = await addCookieToUserAndDb(req, res, user, postData);
+    const answer = {};
+    if (cookiesResult) {
       answer.status = 'registrOk';
       answer.nextStep = GETlist.app;
-      // TODO: остановился здесь. Дальше надо написать правильное перенаправление и логику авторизации
-      // answer.nextStep = config.listFile.html.cabinet + '.html';
-      sendResponse(res, JSON.stringify(answer));
-      return;
-    } catch (err) {
-      console.log(err);
+    } else {
+      answer.status = 'registrErr';
+      answer.answer = `Can't auth. Try from login tab`;
     }
+
+    // TODO: остановился здесь. Дальше надо написать правильное перенаправление и логику авторизации
+    // answer.nextStep = config.listFile.html.cabinet + '.html';
+    sendResponse(res, JSON.stringify(answer));
+    return;
   } else {
     const answer = {};
     answer.status = 'registrErr';
