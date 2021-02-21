@@ -1,10 +1,15 @@
 <template>
-  <ElDrawer v-model="isShow" @close="handleClose" :direction="'ltr'"></ElDrawer>
+  <ElDrawer v-model="isShow" @close="handleClose" :direction="'ltr'">
+    <Menu></Menu>
+  </ElDrawer>
 </template>
 
 <script>
+import Menu from '../../Menu';
+
 export default {
   name: 'Drawer',
+  components: { Menu },
   data() {
     return {
       isShow: false

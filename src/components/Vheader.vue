@@ -25,6 +25,7 @@ export default {
   display: flex;
   &.el-header {
     padding: var(--base-padding);
+    height: 73px;
   }
   &__icon {
     width: 25px;
