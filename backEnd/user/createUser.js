@@ -1,3 +1,5 @@
+const rolesList = require('../roles/rolesList');
+
 function createUser(data) {
   const user = {};
   user.pass = data.pass;
@@ -8,7 +10,7 @@ function createUser(data) {
   };
   user.cookie = '';
   user.session = [];
-  user.role = data.role || 0;
+  user.role = data.role || rolesList.user.name;
   return user;
 }
 
