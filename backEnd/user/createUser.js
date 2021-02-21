@@ -8,6 +8,7 @@ function createUser(data) {
   };
   user.cookie = '';
   user.session = [];
+  user.role = data.role || 0;
   return user;
 }
 
