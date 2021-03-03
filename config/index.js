@@ -11,7 +11,7 @@ const config = {
     ready_to_work: true
   },
   path: {
-    baseFolder:'frontend',
+    baseFolder: 'frontend',
     login: {
       folder: '/login',
       html: 'login.html'
@@ -31,7 +31,8 @@ const config = {
     commands: { name: 'commands' },
     events: { name: 'events' },
     users: { name: 'users' },
-    sessions: { name: 'sessions' }
+    sessions: { name: 'sessions' },
+    menu: { name: 'menu' }
   },
   matchKey: {
     win1: 'w1',
