@@ -21,7 +21,8 @@ export default {
     return {
       msg: 'value'
     };
-  }
+  },
+
 };
 </script>
 

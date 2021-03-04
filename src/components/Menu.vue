@@ -41,7 +41,27 @@
 
 <script>
 export default {
-  name: 'Menu'
+  name: 'Menu',
+  data() {
+    return {
+      timer: null
+    };
+  },
+  created() {
+    this.getMenu();
+  },
+  methods: {
+    async getMenu() {
+      if (this.API.wsInstance.readyState !== 1) {
+        setTimeout(() => {
+          this.getMenu();
+        }, 100);
+      } else {
+        const response = await this.API.get({ type: 'aaaa', maessage: 'dddd' });
+        console.log(response);
+      }
+    }
+  }
 };
 </script>
 

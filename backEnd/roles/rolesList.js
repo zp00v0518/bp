@@ -1,5 +1,5 @@
 const rolesList = {
-  admin: { name: 'admin' },
+  admin: { name: 'admin', permissions: 'all' },
   user: { name: 'user' }
 };
 

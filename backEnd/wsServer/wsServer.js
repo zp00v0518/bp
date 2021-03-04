@@ -1,6 +1,7 @@
 const WS = require('ws');
 const config = require('../../config');
 const handlers = require('./handlers');
+const sendWSMessage = require('./sendWSMessage');
 
 class WsServer {
   init(port) {
@@ -23,8 +24,11 @@ wsServer.on('connection', (ws) => {
     try {
       data = JSON.parse(message);
       const { type } = data;
-      if (handlers[type]) handlers[type](data, ws);
-      return;
+      if (handlers[type]) {
+        handlers[type](data, ws);
+        return;
+      }
+      sendWSMessage(ws, data);
     } catch (err) {
       console.log(err);
     }

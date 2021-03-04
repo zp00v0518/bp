@@ -26,8 +26,8 @@ app.use(router);
 app.mixin({
   data() {
     return {
-      $appConfig: config,
-      $api: WS
+      APP_CONFIG: config,
+      API: WS
     };
   }
 });
