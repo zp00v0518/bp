@@ -57,7 +57,7 @@ export default {
           this.getMenu();
         }, 100);
       } else {
-        const response = await this.API.get({ type: 'aaaa', maessage: 'dddd' });
+        const response = await this.API.get({ type: '/getMenu' });
         console.log(response);
       }
     }
