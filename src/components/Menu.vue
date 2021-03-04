@@ -1,48 +1,66 @@
 <template>
   <el-menu
-    default-active="2"
-    class="el-menu-vertical-demo"
+    class="el-menu-vertical-demo bp-menu"
     @open="handleOpen"
     @close="handleClose"
     :collapse="isCollapse"
   >
-    <el-submenu index="1">
+    <el-menu-item
+      v-for="(item, itemIndex) in menuContent"
+      :key="itemIndex"
+      :index="itemIndex"
+    >
       <template #title>
-        <i class="el-icon-location"></i>
-        <span>Navigator One</span>
+        <router-link class="bp-menu__link" :to="item.url">{{
+          item.title
+        }}</router-link>
       </template>
-      <el-menu-item-group>
-        <template #title><span>Group One</span></template>
-        <el-menu-item index="1-1">item one</el-menu-item>
-        <el-menu-item index="1-2">item two</el-menu-item>
-      </el-menu-item-group>
-      <el-menu-item-group title="Group Two">
-        <el-menu-item index="1-3">item three</el-menu-item>
-      </el-menu-item-group>
-      <el-submenu index="1-4">
-        <template #title><span>item four</span></template>
-        <el-menu-item index="1-4-1">item one</el-menu-item>
-      </el-submenu>
-    </el-submenu>
-    <el-menu-item index="2">
-      <i class="el-icon-menu"></i>
-      <template #title>Navigator Two</template>
-    </el-menu-item>
-    <el-menu-item index="3" disabled>
-      <i class="el-icon-document"></i>
-      <template #title>Navigator Three</template>
-    </el-menu-item>
-    <el-menu-item index="4">
-      <i class="el-icon-setting"></i>
-      <template #title>Navigator Four</template>
     </el-menu-item>
   </el-menu>
 </template>
 
 <script>
 export default {
-  name: 'Menu'
+  name: 'Menu',
+  data() {
+    return {
+      timer: null,
+      menu: []
+    };
+  },
+  created() {
+    this.getMenu();
+  },
+  computed: {
+    menuContent() {
+      return this.$store.state.menu.content;
+    }
+  },
+  methods: {
+    async getMenu() {
+      if (this.API.wsInstance.readyState !== 1) {
+        setTimeout(() => {
+          this.getMenu();
+        }, 100);
+      } else {
+        const response = await this.API.get({ type: '/getMenu' });
+        this.$store.commit('SET_MENU_CONTENT', response.data);
+      }
+    }
+  }
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.bp-menu {
+  .el-menu-item {
+    text-transform: capitalize;
+  }
+  &__link {
+    font-size: 18px;
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+}
+</style>

@@ -2,8 +2,12 @@
   <el-container id="wrapper" direction="vertical">
     <Vheader>Header</Vheader>
     <el-container>
-      <el-aside id="aside"><Menu></Menu></el-aside>
-      <el-main>{{ msg }}</el-main>
+      <el-aside id="aside" v-show="menuContent.length > 0" width="200px"
+        ><Menu></Menu
+      ></el-aside>
+      <el-main>
+        <router-view></router-view>
+      </el-main>
     </el-container>
   </el-container>
   <Drawer></Drawer>
@@ -19,8 +23,13 @@ export default {
   components: { Menu, Vheader, Drawer },
   data() {
     return {
-      msg: 'value'
+      msg: ''
     };
+  },
+  computed: {
+    menuContent() {
+      return this.$store.state.menu.content;
+    }
   }
 };
 </script>

@@ -1,6 +1,7 @@
 <template>
   <el-header class="app-header" height="">
     <Icon
+      v-if="menuContent.length > 0"
       name="gamburger"
       class="app-header__icon"
       @click="handlerClickOnGamberger"
@@ -11,6 +12,11 @@
 <script>
 export default {
   name: 'Vheader',
+  computed: {
+    menuContent() {
+      return this.$store.state.menu.content;
+    }
+  },
   methods: {
     handlerClickOnGamberger() {
       this.$store.commit('SHOW_DRAWER');

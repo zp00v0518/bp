@@ -18,7 +18,9 @@ class WS {
 
     this.wsInstance.onmessage = (event) => {
       const data = JSON.parse(event.data);
-      console.log(data);
+      if (window.location.hostname === 'localhost') {
+        console.log(data);
+      }
     };
     this.wsInstance.onclose = () => {
       this.store.commit('SET_SERVER_CONNECT', false);
