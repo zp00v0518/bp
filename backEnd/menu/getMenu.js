@@ -6,7 +6,7 @@ const { sendWSMessage } = require('../wsServer');
 async function getMenu(data, UserOnline) {
   const user = UserOnline.user;
 	data.data = [];
-  if (user.role !== rolesList.admin.name) {
+  if (!user || user.role !== rolesList.admin.name) {
 		sendWSMessage(UserOnline.ws, data);
 		return;
 	};

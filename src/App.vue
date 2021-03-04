@@ -2,7 +2,9 @@
   <el-container id="wrapper" direction="vertical">
     <Vheader>Header</Vheader>
     <el-container>
-      <el-aside id="aside"><Menu></Menu></el-aside>
+      <el-aside id="aside" v-show="menuContent.length > 0" width="200px"
+        ><Menu></Menu
+      ></el-aside>
       <el-main>{{ msg }}</el-main>
     </el-container>
   </el-container>
@@ -22,7 +24,11 @@ export default {
       msg: 'value'
     };
   },
-
+  computed: {
+    menuContent() {
+      return this.$store.state.menu.content;
+    }
+  }
 };
 </script>
 
