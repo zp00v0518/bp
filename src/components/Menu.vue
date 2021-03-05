@@ -38,12 +38,12 @@ export default {
   },
   methods: {
     async getMenu() {
-      if (this.API.wsInstance.readyState !== 1) {
+      if (this.$data.$api.wsInstance.readyState !== 1) {
         setTimeout(() => {
           this.getMenu();
         }, 100);
       } else {
-        const response = await this.API.get({ type: '/getMenu' });
+        const response = await this.$data.$api.get({ type: '/getMenu' });
         this.$store.commit('SET_MENU_CONTENT', response.data);
       }
     }

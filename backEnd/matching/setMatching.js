@@ -13,12 +13,12 @@ function createCommand(sport, command) {
     class: schema.class.command,
     sport,
     alias,
-    name: command.base,
+    name: command.base
   };
   return doc;
 }
 
-async function setMatching(payload, ws) {
+async function setMatching(payload, { ws }) {
   const { data } = payload;
   const docs = [];
   Object.keys(data).forEach((key) => {

@@ -6,7 +6,8 @@ const { sendWSMessage } = require('../wsServer');
 
 // const findInDB = new FindInDB();
 
-async function getMatching(data, ws) {
+async function getMatching(data, UserOnline) {
+  const ws = UserOnline.ws;
   const { type } = data;
   const collectionName = config.collections.commands.name;
   const query = {

@@ -21,17 +21,26 @@
           v-model="item.base"
           class="mathcing__body__row__select"
           filterable
+          @change="handlerChangeSelect(item)"
+          :value-key="itemIndex"
         >
           <ElOption
-            v-for="(option, optionIndex) in getBaseOptions(itemIndex)"
+            v-for="(option, optionIndex) in tabs[activeTab].commands"
             :value="option"
             :label="option"
             :key="optionIndex"
+            :value-key="itemIndex+'m'"
           ></ElOption>
         </ElSelect>
-        <ElSelect v-model="item.alias" filterable multiple>
+
+        <ElSelect
+          v-model="item.alias"
+          filterable
+          multiple
+          @change="handlerChangeMultiselect(item)"
+        >
           <ElOption
-            v-for="(option, optionIndex) in getBaseOptions(itemIndex)"
+            v-for="(option, optionIndex) in tabs[activeTab].commands"
             :value="option"
             :key="optionIndex"
             :label="option"
@@ -77,6 +86,39 @@ export default {
     }
   },
   methods: {
+    handlerChangeMultiselect(item) {
+      const { tabs, activeTab } = this;
+      const { commands } = tabs[activeTab];
+      const { alias, lastAlias } = item;
+      const isAdd = alias.length > lastAlias.length;
+      let value = alias[alias.length - 1];
+      if (!isAdd) {
+        const result = {};
+        alias.forEach((i) => (result[i] = ''));
+        lastAlias.forEach((i) => {
+          if (result[i] === undefined) result[i] = i;
+        });
+        value = Object.values(result).filter((i) => !!i)[0];
+        commands.push(value);
+      } else {
+        const index = commands.indexOf(value);
+        commands.splice(index, 1);
+      }
+      item.lastAlias = item.alias;
+      commands.sort();
+    },
+
+    handlerChangeSelect(item) {
+      const { tabs, activeTab } = this;
+      const { commands } = tabs[activeTab];
+      const index = commands.indexOf(item.base);
+      commands.splice(index, 1);
+      if (item.lastBase) {
+        commands.push(item.lastBase);
+      }
+      commands.sort();
+      item.lastBase = item.base;
+    },
     async getDataForMAtching() {
       const api = this.$data.$api;
       const message = {
@@ -84,6 +126,7 @@ export default {
       };
       const data = await api.get(message);
       const { payload } = data;
+      // payload[0].commands.length = 50;
       this.createTabs(payload);
     },
     createTabs(arr) {
@@ -96,7 +139,9 @@ export default {
       const { activeKey } = this;
       const template = {
         base: '',
-        alias: ''
+        lastBase: '',
+        alias: '',
+        lastAlias: ''
       };
       this.values[activeKey].push(template);
       // console.log(this.values);
@@ -115,15 +160,19 @@ export default {
     },
     sendData() {
       const { values } = this;
+      Object.keys(values).forEach(key => {
+        values[key] = values[key].filter(item => item.alias.length > 0 && !!item.base);
+      })
       const message = {
         type: 'set_matching',
         data: values
       };
-      const api = this.$data.$api;
-      api.get(message);
-      setTimeout(() => {
-        window.location.reload();
-      }, 200);
+      console.log(message);
+      // const api = this.$data.$api;
+      // api.get(message);
+      // setTimeout(() => {
+      //   window.location.reload();
+      // }, 200);
     }
   }
 };

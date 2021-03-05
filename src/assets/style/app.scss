@@ -12,6 +12,9 @@ body {
 #app {
   min-height: 100%;
   flex-grow: 2;
+  .el-main {
+    line-height: unset;
+  }
 }
 
 /* Color Theme Swatches in Hex */

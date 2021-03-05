@@ -60,7 +60,10 @@
     "parserOptions": {
       "parser": "babel-eslint"
     },
-    "rules": {},
+    "rules": {
+      "v-bind:key": "off",
+      "vue/valid-v-for": "off"
+    },
     "overrides": [
       {
         "files": [
