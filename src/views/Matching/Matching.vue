@@ -17,7 +17,37 @@
         v-for="(item, itemIndex) in values[activeKey]"
         :key="itemIndex"
       >
-        <ElSelect
+        <select
+          v-model="item.base"
+          class="mathcing__body__row__select"
+          @focus="activeItem = itemIndex"
+        >
+          <option value=""></option>
+          <option
+            v-for="(option, optionIndex) in getBaseOptions(itemIndex)"
+            :value="option"
+            :key="optionIndex"
+          >
+            {{ option }}
+          </option>
+        </select>
+
+        <select
+          v-model="item.alias"
+          multiple
+          :size="activeItem === itemIndex ? '10' : '1'"
+          @focus="activeItem = itemIndex"
+        >
+          <option value=""></option>
+          <option
+            v-for="(option, optionIndex) in getBaseOptions(itemIndex, true)"
+            :value="option"
+            :key="optionIndex"
+          >
+            {{ option }}
+          </option>
+        </select>
+        <!-- <ElSelect
           v-model="item.base"
           class="mathcing__body__row__select"
           filterable
@@ -31,9 +61,9 @@
             :key="optionIndex"
             :value-key="itemIndex+'m'"
           ></ElOption>
-        </ElSelect>
+        </ElSelect> -->
 
-        <ElSelect
+        <!-- <ElSelect
           v-model="item.alias"
           filterable
           multiple
@@ -45,7 +75,7 @@
             :key="optionIndex"
             :label="option"
           ></ElOption>
-        </ElSelect>
+        </ElSelect> -->
       </div>
     </div>
     <div class="mathcing__footer">
@@ -65,7 +95,8 @@ export default {
     return {
       tabs: [],
       activeTab: 0,
-      values: {}
+      values: {},
+      activeItem: -1
     };
   },
   watch: {
@@ -86,39 +117,41 @@ export default {
     }
   },
   methods: {
-    handlerChangeMultiselect(item) {
-      const { tabs, activeTab } = this;
-      const { commands } = tabs[activeTab];
-      const { alias, lastAlias } = item;
-      const isAdd = alias.length > lastAlias.length;
-      let value = alias[alias.length - 1];
-      if (!isAdd) {
-        const result = {};
-        alias.forEach((i) => (result[i] = ''));
-        lastAlias.forEach((i) => {
-          if (result[i] === undefined) result[i] = i;
-        });
-        value = Object.values(result).filter((i) => !!i)[0];
-        commands.push(value);
-      } else {
-        const index = commands.indexOf(value);
-        commands.splice(index, 1);
-      }
-      item.lastAlias = item.alias;
-      commands.sort();
-    },
+    // handlerChangeMultiselect(item) {
+    //   const { tabs, activeTab } = this;
+    //   const { commands } = tabs[activeTab];
+    //   const { alias, lastAlias } = item;
+    //   const isAdd = alias.length > lastAlias.length;
+    //   let value = alias[alias.length - 1];
+    //   if (!isAdd) {
+    //     const result = {};
+    //     alias.forEach((i) => (result[i] = ''));
+    //     lastAlias.forEach((i) => {
+    //       if (result[i] === undefined) result[i] = i;
+    //     });
+    //     value = Object.values(result).filter((i) => !!i)[0];
+    //     commands.push(value);
+    //   } else {
+    //     const index = commands.indexOf(value);
+    //     commands.splice(index, 1);
+    //   }
+    //   item.lastAlias = item.alias;
+    //   commands.sort();
+    // },
 
-    handlerChangeSelect(item) {
-      const { tabs, activeTab } = this;
-      const { commands } = tabs[activeTab];
-      const index = commands.indexOf(item.base);
-      commands.splice(index, 1);
-      if (item.lastBase) {
-        commands.push(item.lastBase);
-      }
-      commands.sort();
-      item.lastBase = item.base;
-    },
+    // handlerChangeSelect(event) {
+    // const target = event.target;
+    // console.dir(target);
+    // const { tabs, activeTab } = this;
+    // const { commands } = tabs[activeTab];
+    // const index = commands.indexOf(item.base);
+    // commands.splice(index, 1);
+    // if (item.lastBase) {
+    //   commands.push(item.lastBase);
+    // }
+    // commands.sort();
+    // item.lastBase = item.base;
+    // },
     async getDataForMAtching() {
       const api = this.$data.$api;
       const message = {
@@ -127,6 +160,7 @@ export default {
       const data = await api.get(message);
       const { payload } = data;
       // payload[0].commands.length = 50;
+      // payload[0].commands.reverse();
       this.createTabs(payload);
     },
     createTabs(arr) {
@@ -146,12 +180,15 @@ export default {
       this.values[activeKey].push(template);
       // console.log(this.values);
     },
-    getBaseOptions(index) {
+    getBaseOptions(index, isMulti = false) {
       const { activeTab, tabs, values, activeKey } = this;
       const curValue = values[activeKey];
       const usedValues = [];
       curValue.forEach((item, itemIndex) => {
-        if (itemIndex === index) return;
+        if (itemIndex === index) {
+          isMulti ? usedValues.push(item.base) : usedValues.push(...item.alias);
+          return;
+        }
         usedValues.push(item.base);
         usedValues.push(...item.alias);
       });
@@ -160,19 +197,20 @@ export default {
     },
     sendData() {
       const { values } = this;
-      Object.keys(values).forEach(key => {
-        values[key] = values[key].filter(item => item.alias.length > 0 && !!item.base);
-      })
+      // Object.keys(values).forEach((key) => {
+      //   values[key] = values[key].filter(
+      //     (item) => item.alias.length > 0 && !!item.base
+      //   );
+      // });
       const message = {
         type: 'set_matching',
         data: values
       };
-      console.log(message);
-      // const api = this.$data.$api;
-      // api.get(message);
-      // setTimeout(() => {
-      //   window.location.reload();
-      // }, 200);
+      const api = this.$data.$api;
+      api.get(message);
+      setTimeout(() => {
+        window.location.reload();
+      }, 300);
     }
   }
 };

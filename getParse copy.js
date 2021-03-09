@@ -4,7 +4,7 @@ const Favorit = require('./parser/Favorit');
 const PariMatch = require('./parser/PariMatch');
 const methods = require('./parser/methods');
 const db = require('./parser/methods/db');
-const MarathonUrls = require('./parser/MarathonBet/urls_old');
+const MarathonUrls = require('./parser/MarathonBet/urls');
 const PariMatchUrls = require('./parser/PariMatch/urls');
 const FavoritUrls = require('./parser/Favorit/urls');
 const ConnectMongoDB = require('./backEnd/db/connectMongoDB');
@@ -17,7 +17,7 @@ const allResults = [];
 const list = [
   { bet: MarathonBet, urls: MarathonUrls, name: 'MarathonBet' },
   { bet: PariMatch, urls: PariMatchUrls, name: 'PariMatch' },
-  { bet: Favorit, urls: FavoritUrls, name: 'Favorit' }
+  // { bet: Favorit, urls: FavoritUrls, name: 'Favorit' }
 ];
 
 async function goToParse(arr = []) {

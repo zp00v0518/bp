@@ -5,7 +5,7 @@ const config = require('../../config');
 const removeMatchingCommand = require('./removeMatchingCommand');
 
 function createCommand(sport, command) {
-  const alias = command.alias;
+  const alias = command.alias || [];
   if (!alias.includes(command.base)) {
     alias.push(command.base);
   }
