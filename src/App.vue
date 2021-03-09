@@ -23,7 +23,7 @@ export default {
   components: { Menu, Vheader, Drawer },
   data() {
     return {
-      msg: ''
+      msg: '' 
     };
   },
   computed: {

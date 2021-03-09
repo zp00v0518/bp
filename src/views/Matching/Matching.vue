@@ -17,26 +17,65 @@
         v-for="(item, itemIndex) in values[activeKey]"
         :key="itemIndex"
       >
-        <ElSelect
+        <select
+          v-model="item.base"
+          class="mathcing__body__row__select"
+          @focus="activeItem = itemIndex"
+        >
+          <option value=""></option>
+          <option
+            v-for="(option, optionIndex) in getBaseOptions(itemIndex)"
+            :value="option"
+            :key="optionIndex"
+          >
+            {{ option }}
+          </option>
+        </select>
+
+        <select
+          v-model="item.alias"
+          multiple
+          :size="activeItem === itemIndex ? '10' : '1'"
+          @focus="activeItem = itemIndex"
+        >
+          <option value=""></option>
+          <option
+            v-for="(option, optionIndex) in getBaseOptions(itemIndex, true)"
+            :value="option"
+            :key="optionIndex"
+          >
+            {{ option }}
+          </option>
+        </select>
+        <!-- <ElSelect
           v-model="item.base"
           class="mathcing__body__row__select"
           filterable
+          @change="handlerChangeSelect(item)"
+          :value-key="itemIndex"
         >
           <ElOption
-            v-for="(option, optionIndex) in getBaseOptions(itemIndex)"
+            v-for="(option, optionIndex) in tabs[activeTab].commands"
             :value="option"
             :label="option"
             :key="optionIndex"
+            :value-key="itemIndex+'m'"
           ></ElOption>
-        </ElSelect>
-        <ElSelect v-model="item.alias" filterable multiple>
+        </ElSelect> -->
+
+        <!-- <ElSelect
+          v-model="item.alias"
+          filterable
+          multiple
+          @change="handlerChangeMultiselect(item)"
+        >
           <ElOption
-            v-for="(option, optionIndex) in getBaseOptions(itemIndex)"
+            v-for="(option, optionIndex) in tabs[activeTab].commands"
             :value="option"
             :key="optionIndex"
             :label="option"
           ></ElOption>
-        </ElSelect>
+        </ElSelect> -->
       </div>
     </div>
     <div class="mathcing__footer">
@@ -56,7 +95,8 @@ export default {
     return {
       tabs: [],
       activeTab: 0,
-      values: {}
+      values: {},
+      activeItem: -1
     };
   },
   watch: {
@@ -77,6 +117,41 @@ export default {
     }
   },
   methods: {
+    // handlerChangeMultiselect(item) {
+    //   const { tabs, activeTab } = this;
+    //   const { commands } = tabs[activeTab];
+    //   const { alias, lastAlias } = item;
+    //   const isAdd = alias.length > lastAlias.length;
+    //   let value = alias[alias.length - 1];
+    //   if (!isAdd) {
+    //     const result = {};
+    //     alias.forEach((i) => (result[i] = ''));
+    //     lastAlias.forEach((i) => {
+    //       if (result[i] === undefined) result[i] = i;
+    //     });
+    //     value = Object.values(result).filter((i) => !!i)[0];
+    //     commands.push(value);
+    //   } else {
+    //     const index = commands.indexOf(value);
+    //     commands.splice(index, 1);
+    //   }
+    //   item.lastAlias = item.alias;
+    //   commands.sort();
+    // },
+
+    // handlerChangeSelect(event) {
+    // const target = event.target;
+    // console.dir(target);
+    // const { tabs, activeTab } = this;
+    // const { commands } = tabs[activeTab];
+    // const index = commands.indexOf(item.base);
+    // commands.splice(index, 1);
+    // if (item.lastBase) {
+    //   commands.push(item.lastBase);
+    // }
+    // commands.sort();
+    // item.lastBase = item.base;
+    // },
     async getDataForMAtching() {
       const api = this.$data.$api;
       const message = {
@@ -84,6 +159,8 @@ export default {
       };
       const data = await api.get(message);
       const { payload } = data;
+      // payload[0].commands.length = 50;
+      // payload[0].commands.reverse();
       this.createTabs(payload);
     },
     createTabs(arr) {
@@ -96,17 +173,22 @@ export default {
       const { activeKey } = this;
       const template = {
         base: '',
-        alias: ''
+        lastBase: '',
+        alias: '',
+        lastAlias: ''
       };
       this.values[activeKey].push(template);
       // console.log(this.values);
     },
-    getBaseOptions(index) {
+    getBaseOptions(index, isMulti = false) {
       const { activeTab, tabs, values, activeKey } = this;
       const curValue = values[activeKey];
       const usedValues = [];
       curValue.forEach((item, itemIndex) => {
-        if (itemIndex === index) return;
+        if (itemIndex === index) {
+          isMulti ? usedValues.push(item.base) : usedValues.push(...item.alias);
+          return;
+        }
         usedValues.push(item.base);
         usedValues.push(...item.alias);
       });
@@ -115,6 +197,11 @@ export default {
     },
     sendData() {
       const { values } = this;
+      // Object.keys(values).forEach((key) => {
+      //   values[key] = values[key].filter(
+      //     (item) => item.alias.length > 0 && !!item.base
+      //   );
+      // });
       const message = {
         type: 'set_matching',
         data: values
@@ -123,7 +210,7 @@ export default {
       api.get(message);
       setTimeout(() => {
         window.location.reload();
-      }, 200);
+      }, 300);
     }
   }
 };
