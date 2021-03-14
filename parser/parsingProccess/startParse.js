@@ -41,7 +41,8 @@ async function endParsingBets(result) {
   await dropCollection(config.db.name, config.collections.events.name);
   await db.addEventsToDB(result);
   const forkResult = await methods.checkFork();
-  console.log(forkResult);
+  await db.addForkResultToDB(forkResult);
+  // console.log(forkResult);
 }
 
 async function parseCicle() {

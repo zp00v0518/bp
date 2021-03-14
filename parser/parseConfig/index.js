@@ -1,5 +1,5 @@
 const parseConfig = {
-  parseCount: 0,
+  parseCount: 1,
   browserConfig: {
     // devtools: true,
     // headless: false,
