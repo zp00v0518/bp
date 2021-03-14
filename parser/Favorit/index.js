@@ -8,13 +8,10 @@ const {
   getTotals,
   setNamesCommand
 } = require('./methods');
+const parseConfig = require('../parseConfig');
 
 async function parse(urlsArr = []) {
-  const browser = await puppeteer.launch({
-    // devtools: true
-    // args: ['--log-level="0"']
-    // headless: true
-  });
+  const browser = await puppeteer.launch(parseConfig.browserConfig);
   const result = [];
   for (const url of urlsArr) {
     const bets = await parseOneTournament(browser, url);

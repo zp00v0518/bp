@@ -20,7 +20,7 @@ async function start() {
     const events = msg.result;
     result.push(...events);
   });
-  await test();
+  await parseCicle();
   await endParsingBets(result);
   setTimeout(()=>{
     console.log('*********************************************');
@@ -44,14 +44,14 @@ async function endParsingBets(result) {
   console.log(forkResult);
 }
 
-async function test() {
+async function parseCicle() {
   for (const arr of listForParse) {
-    console.time('qwer');
+    console.time('Блок парсился:');
     const promises = arr.map((item) => {
       return createCluster({ BET: item.name });
     });
     await Promise.all(promises);
-    console.timeEnd('qwer');
+    console.timeEnd('Блок парсился:');
   }
   return true;
 }

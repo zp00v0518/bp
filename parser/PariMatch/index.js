@@ -8,6 +8,7 @@ const {
   getDate,
   getUrlsForParse
 } = require('./methods');
+const parseConfig = require('../parseConfig');
 
 const params = {
   setNamesCommand,
@@ -19,11 +20,7 @@ const params = {
 };
 
 async function parse(urlsArr) {
-  const browser = await puppeteer.launch({
-    // devtools: true,
-    // args: ['--log-level="0"']
-    // headless: true
-  });
+  const browser = await puppeteer.launch(parseConfig.browserConfig);
   const separate = utils.splitArrOnSmallArr(urlsArr, 4);
   const result = [];
   try {

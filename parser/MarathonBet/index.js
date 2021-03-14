@@ -8,6 +8,7 @@ const {
   getUrlsForParse,
   getTotals
 } = require('./methods');
+const parseConfig = require('../parseConfig');
 
 const params = {
   setNamesCommand,
@@ -17,11 +18,7 @@ const params = {
 };
 
 async function parse(urlsArr = []) {
-  const browser = await puppeteer.launch({
-    // devtools: true
-    // args: ['--log-level="0"']
-    // headless: true
-  });
+const browser = await puppeteer.launch(parseConfig.browserConfig);
   const result = [];
 
   for (const url of urlsArr) {
@@ -48,10 +45,10 @@ async function parseOneTournament(browser, url) {
         const eventPage = await browser.newPage();
         try {
           bets = await parseOneEvent(eventPage, url);
-          // return bets;
         } catch (err) {
           console.log(err);
           console.log(`Проблема с ${url}`);
+          eventPage.close();
         }
         return bets;
       });

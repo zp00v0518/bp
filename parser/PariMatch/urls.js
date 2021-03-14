@@ -95,16 +95,16 @@
 // 'https://parimatch.com/sport/futbol/zhenshhiny-portugalija-nacionalnyjj-chempionat',
 // 'https://parimatch.com/sport/futbol/brazilija-kubok-faresa-lopesa',
 // 'https://parimatch.com/sport/futbol/ispanija-superkubok',
-
+// 'https://parimatch.com/sport/futbol/shotlandija-premership',
+// 'https://parimatch.com/sport/futbol/chempionat-evropy-gruppovojj-ehtap',
+// 'https://parimatch.com/sport/futbol/liga-chempionov-uefa-plejj-off',
+// 'https://parimatch.com/sport/futbol/liga-evropy-uefa-plejj-off',
 // ];
 
 const urls = [
   'https://parimatch.com/sport/futbol/anglija-premer-liga',
   'https://parimatch.com/sport/futbol/polsha-ekstraklasa',
-  // 'https://parimatch.com/sport/futbol/liga-evropy-uefa-plejj-off',
-  // 'https://parimatch.com/sport/futbol/liga-chempionov-uefa-plejj-off',
   'https://parimatch.com/sport/futbol/belgija-pervyjj-divizion-a',
-  // 'https://parimatch.com/sport/futbol/chempionat-evropy-gruppovojj-ehtap',
   'https://parimatch.com/sport/futbol/liga-nacijj-uefa-liga-a',
   'https://parimatch.com/sport/futbol/germanija-bundesliga',
   'https://parimatch.com/sport/futbol/ispanija-primera',
@@ -114,7 +114,6 @@ const urls = [
   'https://parimatch.com/sport/futbol/portugalija-primejjra-liga',
   'https://parimatch.com/sport/futbol/francija-liga-1',
   'https://parimatch.com/sport/futbol/turcija-superliga',
-  // 'https://parimatch.com/sport/futbol/shotlandija-premership',
   'https://parimatch.com/sport/futbol/danija-superliga',
   'https://parimatch.com/sport/futbol/avstrija-bundesliga',
   'https://parimatch.com/sport/futbol/shotlandija-chempionship',

@@ -16,7 +16,7 @@ const matching = {
 async function checkFork() {
   await findInDB.connect(config.db.name);
   const query = {
-    date: { $gt: Date.now() },
+    // date: { $gt: Date.now() },
     class: schema.class.event
   };
   const options = {
@@ -57,7 +57,7 @@ function getFork(item) {
 
 function getBets(coeffList, item, data) {
   let getBetsResult = false;
-  const totalsResult = matchTotals(coeffList, item, data);
+  const totalsResult = matchTotals (coeffList, item, data);
   let winsResult = false;
   Object.keys(matching).forEach((key) => {
     const matchList = matching[key];

@@ -1,5 +1,5 @@
 const schema = require('../backEnd/db/schema');
-const FindInDB = require('../backEnd/db/FindInDB_test');
+const FindInDB = require('../backEnd/db/FindInDB');
 const config = require('../config');
 const data = require('./data');
 
