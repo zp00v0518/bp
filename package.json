@@ -9,7 +9,8 @@
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
     "create-admin": "node backend/roles/createAdmin.js",
-    "create-menu": "node backend/menu/db/createMenuInDB.js"
+    "create-menu": "node backend/menu/db/createMenuInDB.js",
+    "parse-start": "node parser/parsingProccess/startParse.js"
   },
   "dependencies": {
     "cookies": "^0.8.0",

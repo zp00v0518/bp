@@ -1,12 +1,10 @@
 const puppeteer = require('puppeteer');
 const config = require('../config');
 const utils = require('../../utils');
+const parseConfig = require('../../parseConfig');
 
 async function getUrlsForParse() {
-  const browser = await puppeteer.launch({
-    // devtools: true,
-    // args: ['--log-level="0"']
-  });
+  const browser = await puppeteer.launch(parseConfig.browserConfig);
   const page = await browser.newPage();
   await page.goto(config.path, {
     waitUntil: 'networkidle2'
