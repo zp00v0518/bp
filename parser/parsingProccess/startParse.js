@@ -42,7 +42,7 @@ async function endParsingBets(result) {
   await db.addEventsToDB(result);
   const forkResult = await methods.checkFork();
   await db.addForkResultToDB(forkResult);
-  // console.log(forkResult);
+  console.log(forkResult);
 }
 
 async function parseCicle() {
