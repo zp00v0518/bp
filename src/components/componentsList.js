@@ -8,7 +8,8 @@ import {
   ElSubmenu,
   ElMenuItemGroup,
   ElMenuItem,
-  ElDrawer
+  ElDrawer,
+  ElPopover
 } from 'element-plus';
 
 import atoms from './atoms';
@@ -23,7 +24,8 @@ const components = [
   ElSubmenu,
   ElMenuItemGroup,
   ElMenuItem,
-  ElDrawer
+  ElDrawer,
+  ElPopover
 ];
 
 Object.keys(atoms).forEach((key) => {
