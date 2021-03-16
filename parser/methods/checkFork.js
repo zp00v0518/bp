@@ -16,14 +16,13 @@ const matching = {
 async function checkFork() {
   await findInDB.connect(config.db.name);
   const query = {
-    // date: { $gt: Date.now() },
+    date: { $gt: Date.now() },
     class: schema.class.event
   };
   const options = {
     needFields: {
       coeffList: 1,
       date: 1,
-      // _id: 0,
       command_1: 1,
       command_2: 2
     }
@@ -39,11 +38,11 @@ async function checkFork() {
       command_1: item.command_1,
       command_2: item.command_2,
       eventId: item._id,
-      date: item.date,
+      eventDate: item.date,
       fork: []
-    }
+    };
     forkItem.fork.push(...result);
-    if (forkItem.fork.length > 0) forkResult.push(forkItem)
+    if (forkItem.fork.length > 0) forkResult.push(forkItem);
   });
   console.log('Проведено сравнений:  ', count);
   return forkResult;
@@ -57,7 +56,7 @@ function getFork(item) {
     const arr = coeffList.filter((i) => i !== bets);
     const result = getBets(arr, bets);
     if (result) {
-      betsResult.push(...result)
+      betsResult.push(...result);
     }
     count++;
   });
@@ -66,8 +65,10 @@ function getFork(item) {
 
 function getBets(coeffList, item) {
   let getBetsResult = [];
+
   const totalsResult = matchTotals(coeffList, item);
   getBetsResult.push(...totalsResult);
+
   Object.keys(matching).forEach((key) => {
     const matchList = matching[key];
     const start = item.coeff[key];
@@ -82,12 +83,6 @@ function getBets(coeffList, item) {
             secondBk: getBkSection(bets, matchKey)
           };
           getBetsResult.push(cell);
-          // console.log('');
-          // console.log('********************');
-          // console.log(data.command_1);
-          // console.log(data.command_2);
-          // console.log(item.bk_id, bets.bk_id);
-          // console.log(`start: ${start}  target: ${target} result: ${result}`);
         }
       });
     });
@@ -109,49 +104,23 @@ function matchTotals(arr, item) {
       if (!betsTotals || !betsTotals[goalTotal]) return;
       const d = checkMarga(value[0], betsTotals[goalTotal][1]);
       const z = checkMarga(value[1], betsTotals[goalTotal][0]);
-      if (d < 1 || z < 1) {
-        // totlasResult = {};
-        // totlasResult[goalTotal] = {};
-        // console.log('');
-        // console.log('********************');
-        // console.log(data.command_1);
-        // console.log(data.command_2);
-        // console.log(item.bk_id, bets.bk_id, `    total: ${goalTotal}`);
-        // totlasResult[goalTotal] = {
-        //   bk: [],
-        //   bets: [],
-        //   urls: []
-        // };
-        if (d < 1) {
-          const cell = {
-            marga: d,
-            firstBk: getBkSection(item, matchKey.less, value[0]),
-            secondBk: getBkSection(bets, matchKey.more, betsTotals[goalTotal][1]),
-            total: goalTotal
-          };
-          totlasResult.push(cell)
-          // console.log(
-          //   `меньше-больше coef1:${value[0]} coef2:${betsTotals[goalTotal][1]} result: ${d}`
-          // );
-          // totlasResult[goalTotal].bk = [item.bk_id, bets.bk_id];
-          // totlasResult[goalTotal].bets = [value[0], betsTotals[goalTotal][1]];
-          // totlasResult[goalTotal].urls = [item.url, bets.url];
-        }
-        if (z < 1) {
-          const cell = {
-            marga: z,
-            firstBk: getBkSection(item, matchKey.more, value[1]),
-            secondBk: getBkSection(bets, matchKey.less, betsTotals[goalTotal][0]),
-            total: goalTotal
-          };
-          totlasResult.push(cell)
-          // console.log(
-          //   `больше-меньше coef1:${value[1]} coef2:${betsTotals[goalTotal][0]} result: ${z}`
-          // );
-          // totlasResult[goalTotal].bk = [bets.bk_id, item.bk_id];
-          // totlasResult[goalTotal].bets = [value[1], betsTotals[goalTotal][0]];
-          // totlasResult[goalTotal].urls = [bets.url, item.url];
-        }
+      if (d < 1) {
+        const cell = {
+          marga: d,
+          firstBk: getBkSection(item, matchKey.less, value[0]),
+          secondBk: getBkSection(bets, matchKey.more, betsTotals[goalTotal][1]),
+          total: goalTotal
+        };
+        totlasResult.push(cell);
+      }
+      if (z < 1) {
+        const cell = {
+          marga: z,
+          firstBk: getBkSection(item, matchKey.more, value[1]),
+          secondBk: getBkSection(bets, matchKey.less, betsTotals[goalTotal][0]),
+          total: goalTotal
+        };
+        totlasResult.push(cell);
       }
     });
   });

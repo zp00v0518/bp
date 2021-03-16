@@ -38,7 +38,7 @@ async function parseOneTournament(browser, url) {
     });
     await tournamentPage.waitForSelector('.category-label-link');
     const hrefs = await utils.getHrefs(tournamentPage, '.member-link');
-    const separate = utils.splitArrOnSmallArr(hrefs, 4);
+    const separate = utils.splitArrOnSmallArr(hrefs, parseConfig.splitUrls);
     for (const urls of separate) {
       const promises = urls.map(async (url) => {
         let bets = false;
