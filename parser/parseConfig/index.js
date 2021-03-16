@@ -1,5 +1,6 @@
 const parseConfig = {
   parseCount: 0,
+  splitUrls: 2,
   browserConfig: {
     // devtools: true,
     // headless: false,

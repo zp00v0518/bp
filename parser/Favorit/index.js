@@ -35,7 +35,7 @@ async function parseOneTournament(browser, url) {
     // *********************************
     if (hrefs.length > 30) hrefs.length = 30;
     // **********************************
-    const urlsSeparate = utils.splitArrOnSmallArr(hrefs, 3);
+    const urlsSeparate = utils.splitArrOnSmallArr(hrefs, parseConfig.splitUrls);
     for (const urls of urlsSeparate) {
       const promises = urls.map(async (url) => {
         const newPage = await browser.newPage();

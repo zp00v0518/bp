@@ -21,7 +21,7 @@ const params = {
 
 async function parse(urlsArr) {
   const browser = await puppeteer.launch(parseConfig.browserConfig);
-  const separate = utils.splitArrOnSmallArr(urlsArr, 4);
+  const separate = utils.splitArrOnSmallArr(urlsArr, parseConfig.splitUrls);
   const result = [];
   try {
     for (const urls of separate) {
@@ -54,7 +54,7 @@ async function parseOneTournament(tournamentPage, url) {
   try {
     await tournamentPage.goto(url, {
       waitUntil: 'networkidle2',
-      timeout: 20000
+      timeout: 30000
     });
     await tournamentPage.waitForSelector('#oddsList img[onclick]', {
       visible: true
@@ -64,7 +64,7 @@ async function parseOneTournament(tournamentPage, url) {
     await btn.click();
     await tournamentPage.waitForSelector('[style][id].props.processed', {
       visible: true,
-      timeout: 20000
+      timeout: 30000
     });
     const pageFrame = tournamentPage.mainFrame();
     await pageFrame.addScriptTag({ content: `${utils.parseWithFunction}` });
@@ -107,6 +107,7 @@ async function parseOneTournament(tournamentPage, url) {
     await tournamentPage.close();
     return result || [];
   } catch (err) {
+    console.log(err);
     console.log('Проблема при обработке адреса:  ', url);
     await tournamentPage.close();
     return [];
