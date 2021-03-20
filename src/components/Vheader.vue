@@ -39,17 +39,13 @@ export default {
   display: flex;
   &.el-header {
     padding: var(--base-padding);
-    // height: 73px;
     line-height: unset;
-    // background-color: var(--color-theme-4);
   }
   &__icon {
     width: 25px;
     height: 25px;
     cursor: pointer;
     display: none;
-  }
-  &__right {
   }
 }
 @media (max-width: 768px) {

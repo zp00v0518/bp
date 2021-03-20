@@ -4,7 +4,7 @@
       popper-class="check-btn"
       :content="tooltip"
       width="90px"
-			:disabled="!disabled"
+      :disabled="!disabled"
       v-model:visible="visible"
     >
       <template #reference>
@@ -13,7 +13,7 @@
           round
           :disabled="disabled"
           class="check-btn__item"
-					@click="handlerClick"
+          @click="handlerClick"
           >{{ title }}</ElButton
         >
       </template>
@@ -38,7 +38,10 @@ export default {
       const { disabled } = this;
       this.visible = !disabled ? false : true;
     },
-		handlerClick(){}
+		async handlerClick(){
+			const response = await this.$data.$api.get({ type: '/getFork' });
+			console.log(response);
+		}
   }
 };
 </script>

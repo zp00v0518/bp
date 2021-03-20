@@ -3,8 +3,8 @@ const ConnectMongoDB = require('./connectMongoDB.js');
 const mongo = new ConnectMongoDB();
 
 class InsertDB {
-  constructor() {
-    this.mongo = mongo;
+  constructor(mongoInstance = mongo) {
+    this.mongo = mongoInstance;
   }
 
   close() {
@@ -13,7 +13,7 @@ class InsertDB {
 
   async connect(dbName) {
     this.dbName = dbName;
-    const result = await mongo.connect({ dbName });
+    const result = await this.mongo.connect({ dbName });
     return result;
   }
 

@@ -39,6 +39,7 @@ async function checkFork() {
       command_2: item.command_2,
       eventId: item._id,
       eventDate: item.date,
+      created_at: Date.now(),
       fork: []
     };
     forkItem.fork.push(...result);
