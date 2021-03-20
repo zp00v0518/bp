@@ -1,7 +1,9 @@
-const appConfig = require('../../config');
-const ConnectMongoDB = require('../db/connectMongoDB.js');
-const InsertDB = require('../db/InsertDB');
+const appConfig = require('../../../config');
+const ConnectMongoDB = require('../../db/connectMongoDB.js');
+const InsertDB = require('../../db/InsertDB');
 const mongo = new ConnectMongoDB();
+const schema  = require('../../db/schema');
+
 
 async function createStaticticCollection() {
 	const insertMethod = new InsertDB(mongo);
@@ -10,7 +12,7 @@ async function createStaticticCollection() {
   const template = {
     parseCount: 0,
     lastParse: Date.now(),
-    class: 'base_statistic'
+    class: schema.baseStat.class
   };
   await insertMethod.one(collectionName, template);
   insertMethod.close();

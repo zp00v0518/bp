@@ -1,5 +1,5 @@
 const parseConfig = {
-  parseCount: 0,
+  parseCount: 1,
   splitUrls: 2,
   browserConfig: {
     // devtools: true,

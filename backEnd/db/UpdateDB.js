@@ -25,6 +25,12 @@ class UpdateDB {
     const result = await collection.updateOne(query, doc, options);
     return result;
   }
+  async oneAndReturn(collectionName, query, doc, options = null) {
+    const mergeOpsitons = Object.assign({returnOriginal: false}, options);
+    const collection = this.mongo.open(collectionName);
+    const result = await collection.findOneAndUpdate(query, doc, mergeOpsitons);
+    return result;
+  }
 
   async updateMany(
     collectionName,

@@ -6,6 +6,8 @@ const methods = require('../methods');
 const db = require('../methods/db');
 const dropCollection = require('../../backEnd/db/methods/dropCollection');
 const config = require('../../config');
+const {getStatistic} = require('../../backEnd/statistic/db');
+const { Static } = require('@vue/runtime-core');
 
 if (cluster.isMaster) {
   console.log(`Master ${process.pid} is running`);
@@ -34,10 +36,12 @@ async function endParsingBets(result) {
   console.log('Кол-во распарсенных событий', result.length);
   const commandsDBList = await db.getCommandsByName(result);
   result = methods.setCommandsId(result, commandsDBList);
+
   const commands = methods.createListCommands(result);
   if (commands.length > 0) {
     await db.addUnsetCommandsToDB(commands);
   }
+
   await dropCollection(config.db.name, config.collections.events.name);
   await db.addEventsToDB(result);
   const forkResult = await methods.checkFork();
