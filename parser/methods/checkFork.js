@@ -13,12 +13,15 @@ const matching = {
   [matchKey.draw]: [matchKey.win1_win2]
 };
 
-async function checkFork() {
+async function checkFork(test = false) {
   await findInDB.connect(config.db.name);
+
   const query = {
-    date: { $gt: Date.now() },
     class: schema.class.event
   };
+  if (!test) {
+    query.date = { $gt: Date.now() };
+  }
   const options = {
     needFields: {
       coeffList: 1,

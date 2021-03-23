@@ -6,8 +6,7 @@ const methods = require('../methods');
 const db = require('../methods/db');
 const dropCollection = require('../../backEnd/db/methods/dropCollection');
 const config = require('../../config');
-const {getStatistic} = require('../../backEnd/statistic/db');
-const { Static } = require('@vue/runtime-core');
+const { incrementStatistic } = require('../../backEnd/statistic/db');
 
 if (cluster.isMaster) {
   console.log(`Master ${process.pid} is running`);
@@ -24,16 +23,19 @@ async function start() {
   });
   await parseCicle();
   await endParsingBets(result);
-  setTimeout(()=>{
+  setTimeout(() => {
     console.log('*********************************************');
     console.log('');
     console.log('');
     start();
-  },1000 * 60)
+  }, 1000 * 60);
 }
 
 async function endParsingBets(result) {
   console.log('Кол-во распарсенных событий', result.length);
+
+  const statistic = await incrementStatistic();
+
   const commandsDBList = await db.getCommandsByName(result);
   result = methods.setCommandsId(result, commandsDBList);
 
@@ -44,7 +46,9 @@ async function endParsingBets(result) {
 
   await dropCollection(config.db.name, config.collections.events.name);
   await db.addEventsToDB(result);
-  const forkResult = await methods.checkFork();
+
+  let forkResult = await methods.checkFork();
+  forkResult = methods.addStatisticToForkResult(forkResult, statistic);
   await db.addForkResultToDB(forkResult);
   console.log(forkResult);
 }
