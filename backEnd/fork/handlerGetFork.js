@@ -12,9 +12,14 @@ async function handlerGetFork(data, UserOnline) {
   // let forkResult = await checkFork(true);
   // forkResult = addStatisticToForkResult(forkResult, statistic);
   // await db.addForkResultToDB(forkResult);
-
   const result = await getLastFork();
-  console.log(result);
+  const message = {
+    type: data.type,
+    data: {
+      result
+    }
+  };
+  sendWSMessage(ws, message);
 }
 
 module.exports = handlerGetFork;
