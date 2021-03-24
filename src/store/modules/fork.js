@@ -3,7 +3,7 @@ const fork = {
     current: []
   },
   mutations: {
-    SET_CURRENT_FORK(state, payload) {
+    SET_CURRENT_FORK(state, payload = []) {
       state.current = payload;
     }
   },

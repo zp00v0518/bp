@@ -1,3 +1,4 @@
 const getBkById = require('./getBkById');
+const getListBk = require('./getListBk');
 
-module.exports = { getBkById };
+module.exports = { getBkById, getListBk };

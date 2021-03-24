@@ -41,7 +41,7 @@ export default {
     async handlerClick() {
       const response = await this.$data.$api.get({ type: '/getFork' });
       const { data } = response;
-      this.$store.commit('SET_CURRENT_FORK', data);
+      this.$store.commit('SET_CURRENT_FORK', data.result);
     }
   }
 };

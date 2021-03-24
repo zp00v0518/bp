@@ -7,6 +7,7 @@
         class="app-header__icon"
         @click="handlerClickOnGamberger"
       ></Icon>
+      <router-link to="/">Home</router-link>
     </div>
     <div class="app-header__right">
       <CheckFork></CheckFork>

@@ -23,12 +23,26 @@ export default {
   components: { Menu, Vheader, Drawer },
   data() {
     return {
-      msg: '' 
+      msg: ''
     };
+  },
+  created() {
+    this.initApp();
   },
   computed: {
     menuContent() {
       return this.$store.state.menu.content;
+    }
+  },
+  methods: {
+    async initApp() {
+      if (this.$data.$api.wsInstance.readyState !== 1) {
+        setTimeout(() => {
+          this.initApp();
+        }, 100);
+      } else {
+        this.$store.dispatch('GET_BK_LIST', this.$data.$api);
+      }
     }
   }
 };
