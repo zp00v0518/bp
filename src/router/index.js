@@ -7,6 +7,11 @@ const routes = [
     path: '/matching',
     name: 'Matching',
     component: Views.Matching
+  },
+  {
+    path: '/',
+    name: 'ForkView',
+    component: Views.ForkView
   }
   // {
   //   path: '/about',

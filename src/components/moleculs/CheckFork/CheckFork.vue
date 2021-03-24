@@ -38,10 +38,11 @@ export default {
       const { disabled } = this;
       this.visible = !disabled ? false : true;
     },
-		async handlerClick(){
-			const response = await this.$data.$api.get({ type: '/getFork' });
-			console.log(response);
-		}
+    async handlerClick() {
+      const response = await this.$data.$api.get({ type: '/getFork' });
+      const { data } = response;
+      this.$store.commit('SET_CURRENT_FORK', data);
+    }
   }
 };
 </script>

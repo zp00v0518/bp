@@ -1,3 +1,4 @@
 import Matching from './Matching';
+import ForkView from './ForkView';
 
-export default { Matching };
+export default { Matching, ForkView };
