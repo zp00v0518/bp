@@ -1,13 +1,20 @@
 :root {
   --main-blue: #3585fd;
+  --main-backgroud: #e9eef3;
   --base-step: 4px;
   --double-step: calc(var(--base-step) * 2);
   --base-padding: calc(var(--base-step) * 6);
+  --half-base-padding: calc(var(--base-padding) / 2); 
   --color-theme-1: #3b328c;
   --color-theme-2: #201c4d;
   --color-theme-3: #5649cc;
   --color-theme-4: #5c4ed9;
   --color-theme-5: #4c40b3;
+  --base-font-size: 16px;
+  --primary-text: #303133;
+  --regular-text: #606266;
+  --secondary-text: #909399;
+  --placeholder: #C0C4CC;
 }
 
 $screen-big: 1920px;

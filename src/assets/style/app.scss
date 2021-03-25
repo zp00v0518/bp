@@ -14,6 +14,13 @@ body {
   flex-grow: 2;
   .el-main {
     line-height: unset;
+    padding: var(--base-padding);
+    margin: 0 var(--base-padding);
+    background-color: white;
+    // border-radius: 10px;
+  }
+  .el-container{
+    background: var(--main-backgroud);
   }
 }
 
