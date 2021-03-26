@@ -78,9 +78,13 @@ export default {
   text-align: center;
   line-height: 160px;
 }
-@media (max-width: $screen-tablet) {
+@media (max-width: $tablet) {
   #aside {
     display: none;
   }
+  .app-header__icon {
+    display: block;
+  }
 }
+
 </style>

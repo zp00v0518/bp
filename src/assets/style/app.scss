@@ -19,9 +19,12 @@ body {
     background-color: white;
     // border-radius: 10px;
   }
-  .el-container{
+  .el-container {
     background: var(--main-backgroud);
   }
+  @media (max-width: $tablet-medium) {
+    .el-main {
+      margin: 0;
+    }
+  }
 }
-
-

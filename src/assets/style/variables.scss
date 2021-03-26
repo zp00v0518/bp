@@ -17,12 +17,14 @@
   --placeholder: #C0C4CC;
 }
 
-$screen-big: 1920px;
-$screen-laptop: 1440px;
-$screen-tablet2: 1024px;
-$screen-tablet: 768px;
-$screen-phone2: 480px;
-$screen-phone: 320px;
+$desctop: 1920px;
+$laptop: 1440px;
+$laptop-small: 1024px;
+$tablet: 992px;
+$tablet-medium: 768px;
+$phone: 650px;
+$phone-medium: 480px;
+$phone-small: 320px;
 
 /* Color Theme Swatches in RGBA */
 // $color-theme-1-rgba: rgba(59, 50, 140, 1);

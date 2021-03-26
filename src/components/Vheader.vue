@@ -49,9 +49,4 @@ export default {
     display: none;
   }
 }
-@media (max-width: 768px) {
-  .app-header__icon {
-    display: block;
-  }
-}
 </style>

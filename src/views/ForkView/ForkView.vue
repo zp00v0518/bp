@@ -28,9 +28,9 @@ import ForkItem from './ForkItem';
 export default {
   name: 'ForkView',
   components: { ForkItem },
-  created() {
-    console.log(this.currentFork);
-  },
+  // created() {
+  //   console.log(this.currentFork);
+  // },
   computed: {
     currentFork() {
       return this.$store.state.fork.current;
