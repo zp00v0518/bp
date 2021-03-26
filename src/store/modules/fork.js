@@ -1,13 +1,22 @@
 const fork = {
   state: {
-    current: []
+    current: [],
+    previous: []
   },
   mutations: {
     SET_CURRENT_FORK(state, payload = []) {
       state.current = sortingByMarga(forkAdapter(payload));
+    },
+    SET_PREVIOUS_FORK(state, payload = []) {
+      state.previous = sortingByMarga(forkAdapter(payload));
     }
   },
-  actions: {}
+  actions: {
+    async GET_PREVIOUS_FORK(context, api) {
+      const response = await api.get({ type: '/getPreviousFork' });
+      context.commit('SET_PREVIOUS_FORK', response.data.result);
+    }
+  }
 };
 
 function forkAdapter(arr) {

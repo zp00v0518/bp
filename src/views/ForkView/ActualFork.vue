@@ -1,7 +1,7 @@
 <template>
   <div class="fork">
     <div class="fork__curr">
-      <template v-if="forkList.length > 0">
+      <template v-if="Object.keys(forkList).length > 0">
         <div class="fork__find-date">
           Найдено: <span>{{ getFindDate(forkList[0].created_at) }}</span>
         </div>

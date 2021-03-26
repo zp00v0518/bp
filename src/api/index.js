@@ -3,6 +3,7 @@ class WS {
     this.connectionToWs(wsAddr);
     this.store = store || null;
     this.timerId = null;
+    this.consoleTimer = null;
   }
 
   connectionToWs(wsAddr) {
@@ -20,6 +21,12 @@ class WS {
       const data = JSON.parse(event.data);
       if (window.location.hostname === 'localhost') {
         console.log(data);
+        if (this.consoleTimer) {
+          clearTimeout(this.consoleTimer);
+        }
+        this.consoleTimer = setTimeout(() => {
+          console.clear();
+        }, 5000);
       }
     };
     this.wsInstance.onclose = () => {

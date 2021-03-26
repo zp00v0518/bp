@@ -53,7 +53,6 @@ export default {
       secondBkBet: 0
     };
   },
-  created() {},
   computed: {
     profit_1() {
       return this.getProfit();
