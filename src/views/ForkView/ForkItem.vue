@@ -15,14 +15,14 @@
       <BkBlock
         :data="data.firstBk"
         @change-sum="handlerChange"
-        :betSum="firstBk"
+        :betSum="firstBkBet"
       ></BkBlock>
       <div class="fork-item__main__icon"><img :src="Pic" /></div>
       <BkBlock
         :data="data.secondBk"
         right
         @change-sum="handlerChange"
-        :betSum="secondBk"
+        :betSum="secondBkBet"
       ></BkBlock>
     </div>
   </div>
@@ -41,9 +41,12 @@ export default {
   data() {
     return {
       Pic,
-      firstBk: 10,
-      secondBk: 20
+      firstBkBet: 100,
+      secondBkBet: 0
     };
+  },
+  created() {
+    this.handlerChange({ value: this.firstBkBet });
   },
   methods: {
     getFindDate(value) {
@@ -53,14 +56,25 @@ export default {
       return date;
     },
     handlerChange(ev) {
+      const { data } = this;
       const { value, right } = ev;
       if (!right) {
-        this.secondBk = 3333;
+        this.secondBkBet = this.checkSizeBet(
+          value,
+          data.firstBk.coeff,
+          data.secondBk.coeff
+        );
         return;
       }
-      this.firstBk = 1111;
+      this.firstBkBet = this.checkSizeBet(
+        value,
+        data.secondBk.coeff,
+        data.firstBk.coeff
+      );
     },
-    checkSizeBet() {}
+    checkSizeBet(baseBet = 100, coeff1, coeff2) {
+      return (coeff1 / coeff2) * baseBet;
+    }
   }
 };
 </script>
@@ -102,7 +116,6 @@ export default {
     }
   }
   &__main {
-    // width: 100%;
     padding: var(--half-base-padding);
     display: flex;
     justify-content: space-between;
@@ -121,7 +134,6 @@ export default {
   }
 }
 @media (max-width: $phone) {
-// @media (max-width: $tablet-medium) {
   .fork-item__main {
     flex-direction: column;
     align-items: center;

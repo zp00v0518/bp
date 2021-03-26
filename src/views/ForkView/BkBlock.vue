@@ -27,6 +27,7 @@
 <script>
 export default {
   name: 'BkBlock',
+   emits: ['change'],
   props: {
     data: null,
     right: { type: Boolean, default: false },
