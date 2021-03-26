@@ -90,6 +90,7 @@ export default {
     &__title {
       display: flex;
       flex-direction: column;
+      color: tomato;
       span {
         text-align: center;
         font-size: calc(var(--base-font-size) + 4px);
@@ -125,7 +126,7 @@ export default {
       background-color: white;
       display: flex;
       align-items: center;
-      margin: 0 var(--base-padding);
+      margin: var(--half-base-padding) var(--base-padding);
       img {
         max-width: 100%;
         max-height: 100%;

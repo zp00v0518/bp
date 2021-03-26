@@ -1,6 +1,8 @@
 <template>
   <div class="bk-block" :class="{ 'bk-block--right': right }">
-    <div class="bk-block__name">{{ curBk.name }}</div>
+    <a :href="data.url || '/'" class="bk-block__name a-link" target="_blank">
+      {{ curBk.name }}
+    </a>
     <div class="bk-block__row">
       <span class="bk-block__row--label">Тип ставки</span>
       <span class="bk-block__row--value bk-block__bet">{{ data.bet }}</span>
@@ -27,7 +29,7 @@
 <script>
 export default {
   name: 'BkBlock',
-   emits: ['change'],
+  emits: ['change'],
   props: {
     data: null,
     right: { type: Boolean, default: false },
@@ -67,6 +69,7 @@ export default {
     text-align: center;
     padding: 0 var(--base-padding);
     margin-bottom: var(--double-step);
+    display: block;
   }
   &__row {
     margin-bottom: var(--double-step);
