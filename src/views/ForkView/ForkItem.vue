@@ -52,9 +52,10 @@ export default {
 .fork-item {
   border: 1px solid;
   display: flex;
+  flex-direction: column;
   &__info {
-    border-right: 1px solid;
-    padding: var(--base-padding) var(--half-base-padding);
+    border-bottom: 1px solid;
+    padding: var(--half-base-padding);
     &__title {
       display: flex;
       flex-direction: column;
@@ -71,6 +72,7 @@ export default {
       margin-top: var(--half-base-padding);
       margin-bottom: var(--half-base-padding);
 			white-space: nowrap;
+      text-align: center;
       span {
         &:first-child {
           margin-right: calc(var(--base-padding) * 2);

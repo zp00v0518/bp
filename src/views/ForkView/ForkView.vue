@@ -55,11 +55,18 @@ export default {
   &__curr {
     &__item {
       margin: var(--base-padding);
-      width: fit-content;
+      // width: fit-content;
     }
     &__main {
       display: flex;
       flex-wrap: wrap;
+      justify-content: space-around;
+      // display: grid;
+      // grid-template-columns: repeat(auto-fill, minmax(300px, auto));
+      // column-gap:  var(--base-padding);
+      // row-gap:  var(--base-padding);
+      // max-width: 100%;
+      // grid-template-rows: repeat(auto-fit, 1fr);
     }
   }
 }
