@@ -6,12 +6,13 @@
           {{ getFindDate(currentFork[0].created_at) }}
         </div>
         <div class="fork__curr__main">
-          <ForkItem
+          <div
+            class="fork__curr__item--wrap"
             v-for="(curFork, curForkIndex) in currentFork"
             :key="curForkIndex"
-            :data="curFork"
-            class="fork__curr__item"
-          ></ForkItem>
+          >
+            <ForkItem :data="curFork" class="fork__curr__item"></ForkItem>
+          </div>
         </div>
       </template>
       <tamplate v-else>
@@ -54,19 +55,15 @@ export default {
   text-align: left;
   &__curr {
     &__item {
-      margin: var(--base-padding);
-      // width: fit-content;
+      &--wrap {
+        padding: 0 var(--double-step);
+        margin: var(--half-base-padding) auto;
+      }
     }
     &__main {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-around;
-      // display: grid;
-      // grid-template-columns: repeat(auto-fill, minmax(300px, auto));
-      // column-gap:  var(--base-padding);
-      // row-gap:  var(--base-padding);
-      // max-width: 100%;
-      // grid-template-rows: repeat(auto-fit, 1fr);
     }
   }
 }
