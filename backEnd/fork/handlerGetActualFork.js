@@ -5,16 +5,16 @@ const { sendWSMessage } = require('../wsServer');
 // const { checkFork, addStatisticToForkResult } = require('../../parser/methods');
 // const db = require('../../parser/methods/db');
 
-const getCurrentFork = require('./getCurrentFork');
+const getActualFork = require('./getActualFork');
 
-async function handlerGetFork(data, UserOnline) {
+async function handlerGetActualFork(data, UserOnline) {
   const { ws } = UserOnline;
   if (!ws) return;
   // const statistic = await incrementStatistic();
   // let forkResult = await checkFork(true);
   // forkResult = addStatisticToForkResult(forkResult, statistic);
   // await db.addForkResultToDB(forkResult);
-  const result = await getCurrentFork();
+  const result = await getActualFork();
   const message = {
     type: data.type,
     data: {
@@ -24,4 +24,4 @@ async function handlerGetFork(data, UserOnline) {
   sendWSMessage(ws, message);
 }
 
-module.exports = handlerGetFork;
+module.exports = handlerGetActualFork;
