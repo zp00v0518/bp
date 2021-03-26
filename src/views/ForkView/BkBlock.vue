@@ -78,6 +78,9 @@ export default {
     &--value {
       margin-left: var(--half-base-padding);
       font-weight: bold;
+      // &.el-input-number--mini {
+      //   width: 85px;
+      // }
     }
     &--label {
       position: relative;

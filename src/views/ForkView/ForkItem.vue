@@ -3,7 +3,7 @@
     <div class="fork-item__info">
       <div class="fork-item__info__title">
         <!-- <span>Доходность:</span> -->
-        <span title="Доходность">{{ data.marga.toFixed(4) }}</span>
+        <span title="Коэффициент доходности">{{ data.marga.toFixed(4) }}</span>
       </div>
       <div class="fork-item__info__commands">
         <span>{{ data.command_1 }}</span>
@@ -25,6 +25,14 @@
         :betSum="secondBkBet"
       ></BkBlock>
     </div>
+    <div class="fork-item__profit--wrap">
+      <div class="fork-item__profit">
+        Прибыль: <span class="fork-item__profit--sum">{{ profit_1 }}</span>
+      </div>
+      <div class="fork-item__profit">
+        Прибыль: <span class="fork-item__profit--sum">{{ profit_2 }}</span>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -45,10 +53,27 @@ export default {
       secondBkBet: 0
     };
   },
-  created() {
-    this.handlerChange({ value: this.firstBkBet });
+  created() {},
+  computed: {
+    profit_1() {
+      return this.getProfit();
+    },
+    profit_2() {
+      return this.getProfit(true);
+    }
   },
   methods: {
+    getProfit(second) {
+      const { data, firstBkBet, secondBkBet } = this;
+      const { firstBk, secondBk } = data;
+      let value = 0;
+      if (second) {
+        value = +secondBk.coeff * secondBkBet - firstBkBet;
+      } else {
+        value = +firstBk.coeff * firstBkBet - secondBkBet;
+      }
+      return Math.abs(value).toFixed(2);
+    },
     getFindDate(value) {
       const z = new Date(value);
       var options = { hour: 'numeric', minute: 'numeric' };
@@ -59,15 +84,18 @@ export default {
       const { data } = this;
       const { value, right } = ev;
       if (!right) {
+        this.firstBkBet = value;
         this.secondBkBet = this.checkSizeBet(
-          value,
+          this.firstBkBet,
           data.firstBk.coeff,
           data.secondBk.coeff
         );
         return;
       }
+      this.secondBkBet = value;
+
       this.firstBkBet = this.checkSizeBet(
-        value,
+        this.secondBkBet,
         data.secondBk.coeff,
         data.firstBk.coeff
       );
@@ -75,6 +103,11 @@ export default {
     checkSizeBet(baseBet = 100, coeff1, coeff2) {
       return (coeff1 / coeff2) * baseBet;
     }
+  },
+  mounted() {
+    this.$nextTick(() => {
+      this.handlerChange({ value: this.firstBkBet });
+    });
   }
 };
 </script>
@@ -131,6 +164,17 @@ export default {
         max-width: 100%;
         max-height: 100%;
       }
+    }
+  }
+  &__profit {
+    &--sum {
+      font-weight: bold;
+    }
+    &--wrap {
+      padding: var(--half-base-padding);
+      padding-top: 0;
+      display: flex;
+      justify-content: space-between;
     }
   }
 }

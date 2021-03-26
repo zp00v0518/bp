@@ -5,6 +5,7 @@ const fork = {
   mutations: {
     SET_CURRENT_FORK(state, payload = []) {
       state.current = sortingByMarga(forkAdapter(payload));
+      // state.current.length = 2;
     }
   },
   actions: {}
