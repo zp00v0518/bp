@@ -8,7 +8,7 @@ const handlers = {
   get_matching: matching.getMatching,
   set_matching: matching.setMatching,
   [routerList.getMenu.name]: getMenu,
-  '/getFork': handlerGetFork,
+  '/getCurrFork': handlerGetFork,
   '/get_bk_list': handlerGetBKList
 };
 
