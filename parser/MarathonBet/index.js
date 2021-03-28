@@ -2,13 +2,15 @@ const puppeteer = require('puppeteer');
 const config = require('./config');
 const { getUrlsForParse } = require('./methods');
 const parseOneTournament = require('./methods/parseOneTournament');
+const getCategoryUrls = require('./methods/getCategoryUrls');
 const parseConfig = require('../parseConfig');
 
 async function parse(urlsArr = []) {
   const browser = await puppeteer.launch(parseConfig.browserConfig);
   const result = [];
-
-  for (const url of urlsArr) {
+  const curUrls = await getCategoryUrls(browser, config.path);
+  curUrls.length = 1;
+  for (const url of curUrls) {
     const bets = await parseOneTournament(browser, url);
     result.push(...bets);
   }
