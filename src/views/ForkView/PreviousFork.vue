@@ -59,6 +59,8 @@ export default {
 
 <style lang="scss">
 .previos-fork {
+  border-top: 1px solid #999999;
+  padding-top: var(--base-padding);
   &__title {
     font-weight: bold;
     font-size: calc(var(--base-font-size) * 1.6);
