@@ -16,18 +16,29 @@ const params = {
   getTotatls
 };
 
-async function parseOneTournament(tournamentPage, url) {
-  // const tournamentPage = await browser.newPage();
+async function parseOneTournament(tournamentPage, url, count = 0) {
+  let result = [];
   try {
     await tournamentPage.goto(url, {
       waitUntil: 'networkidle2',
       timeout: 30000
     });
-    await tournamentPage.waitForSelector('#oddsList img[onclick]', {
-      visible: true
-    });
-    // await tournamentPage.waitForSelector('#oddsList');
-    const btn = await tournamentPage.$('#oddsList img[onclick]');
+    // const btnSelector = '#oddsList img[onclick]';
+    const btnSelector = '#diProps button[onclick]';
+    const repeatBtnSelector = '.bet-container input[value="Повторить запрос"]';
+    const ops = { visible: true };
+
+    await tournamentPage.waitForSelector(
+      `${btnSelector}, ${repeatBtnSelector}`,
+      ops
+    );
+    let btn = await tournamentPage.$(btnSelector);
+    if (!btn) {
+      btn = await tournamentPage.$(repeatBtnSelector);
+      await btn.click();
+      await tournamentPage.waitForSelector(btnSelector, { visible: true });
+      btn = await tournamentPage.$(btnSelector);
+    }
     await btn.click();
     await tournamentPage.waitForSelector('[style][id].props.processed', {
       visible: true,
@@ -35,8 +46,7 @@ async function parseOneTournament(tournamentPage, url) {
     });
     const pageFrame = tournamentPage.mainFrame();
     await pageFrame.addScriptTag({ content: `${utils.parseWithFunction}` });
-
-    const result = await pageFrame.$eval(
+    result = await pageFrame.$eval(
       '.dt.twp',
       async (elem, objStr) => {
         try {
@@ -71,14 +81,14 @@ async function parseOneTournament(tournamentPage, url) {
       },
       utils.stringifyWithFunc(params)
     );
-    await tournamentPage.close();
-    return result || [];
   } catch (err) {
-    console.log(err);
-    console.log('Проблема при обработке адреса:  ', url);
-    await tournamentPage.close();
-    return [];
+    if (err.name !== 'TimeoutError') {
+      console.log(err);
+      console.log('Проблема при обработке адреса:  ', url);
+    }
   }
+  await tournamentPage.close();
+  return result;
 }
 
 module.exports = parseOneTournament;
