@@ -1,12 +1,37 @@
 :root {
   --main-blue: #3585fd;
+  --main-backgroud: #e9eef3;
   --base-step: 4px;
+  --double-step: calc(var(--base-step) * 2);
   --base-padding: calc(var(--base-step) * 6);
+  --half-base-padding: calc(var(--base-padding) / 2); 
+  --color-theme-1: #3b328c;
+  --color-theme-2: #201c4d;
+  --color-theme-3: #5649cc;
+  --color-theme-4: #5c4ed9;
+  --color-theme-5: #4c40b3;
+  --base-font-size: 16px;
+  --primary-text: #303133;
+  --regular-text: #606266;
+  --secondary-text: #909399;
+  --placeholder: #C0C4CC;
+  --link: var(--color-theme-4);
+  --link-hover: var(--color-theme-5);
+  // --link: #2c68ac;
 }
 
-$screen-big: 1920px;
-$screen-laptop: 1440px;
-$screen-tablet2: 1024px;
-$screen-tablet: 768px;
-$screen-phone2: 480px;
-$screen-phone: 320px;
+$desctop: 1920px;
+$laptop: 1440px;
+$laptop-small: 1024px;
+$tablet: 992px;
+$tablet-medium: 768px;
+$phone: 650px;
+$phone-medium: 480px;
+$phone-small: 320px;
+
+/* Color Theme Swatches in RGBA */
+// $color-theme-1-rgba: rgba(59, 50, 140, 1);
+// $color-theme-2-rgba: rgba(32, 28, 77, 1);
+// $color-theme-3-rgba: rgba(86, 73, 204, 1);
+// $color-theme-4-rgba: rgba(92, 78, 217, 1);
+// $color-theme-5-rgba: rgba(76, 64, 179, 1);

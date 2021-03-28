@@ -9,6 +9,7 @@ const list = [
   [
     { bet: MarathonBet, urls: MarathonUrls, name: 'MarathonBet' },
     { bet: Favorit, urls: FavoritUrls, name: 'Favorit' }
+    // { bet: PariMatch, urls: PariMatchUrls, name: 'PariMatch' }
   ],
   [{ bet: PariMatch, urls: PariMatchUrls, name: 'PariMatch' }]
 ];

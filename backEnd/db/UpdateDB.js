@@ -3,8 +3,8 @@ const ConnectMongoDB = require('./connectMongoDB.js');
 const mongo = new ConnectMongoDB();
 
 class UpdateDB {
-  constructor() {
-    this.mongo = mongo;
+  constructor(mongoInstance = mongo) {
+    this.mongo = mongoInstance;
     this.dbName = null;
     this.isReady = false;
   }
@@ -15,7 +15,7 @@ class UpdateDB {
 
   async connect(dbName) {
     this.dbName = dbName;
-    const result = await mongo.connect({ dbName });
+    const result = await this.mongo.connect({ dbName });
     this.isReady = true;
     return result;
   }
@@ -23,6 +23,12 @@ class UpdateDB {
   async one(collectionName, query, doc, options = null) {
     const collection = this.mongo.open(collectionName);
     const result = await collection.updateOne(query, doc, options);
+    return result;
+  }
+  async oneAndReturn(collectionName, query, doc, options = null) {
+    const mergeOpsitons = Object.assign({returnOriginal: false}, options);
+    const collection = this.mongo.open(collectionName);
+    const result = await collection.findOneAndUpdate(query, doc, mergeOpsitons);
     return result;
   }
 

@@ -1,6 +1,7 @@
 @import 'variables.scss';
 @import 'mixins.scss';
 @import 'links';
+@import 'atoms';
 
 body {
   min-height: 100vh;
@@ -14,19 +15,17 @@ body {
   flex-grow: 2;
   .el-main {
     line-height: unset;
+    padding: var(--base-padding);
+    margin: 0 var(--base-padding);
+    background-color: white;
+    // border-radius: 10px;
+  }
+  .el-container {
+    background: var(--main-backgroud);
+  }
+  @media (max-width: $tablet-medium) {
+    .el-main {
+      margin: 0;
+    }
   }
 }
-
-/* Color Theme Swatches in Hex */
-$My-Color-Theme-1-hex: #3b328c;
-$My-Color-Theme-2-hex: #201c4d;
-$My-Color-Theme-3-hex: #5649cc;
-$My-Color-Theme-4-hex: #5c4ed9;
-$My-Color-Theme-5-hex: #4c40b3;
-
-/* Color Theme Swatches in RGBA */
-$My-Color-Theme-1-rgba: rgba(59, 50, 140, 1);
-$My-Color-Theme-2-rgba: rgba(32, 28, 77, 1);
-$My-Color-Theme-3-rgba: rgba(86, 73, 204, 1);
-$My-Color-Theme-4-rgba: rgba(92, 78, 217, 1);
-$My-Color-Theme-5-rgba: rgba(76, 64, 179, 1);

@@ -1,5 +1,6 @@
 const sports = require('./sports');
 const time = require('./time');
+const collections = require('./collections');
 const matchKey = require('../parser/parseConfig/matchKey');
 
 const config = {
@@ -29,22 +30,7 @@ const config = {
   db: {
     name: 'bets'
   },
-  collections: {
-    commands: { name: 'commands' },
-    events: { name: 'events' },
-    users: { name: 'users' },
-    sessions: { name: 'sessions' },
-    menu: { name: 'menu' },
-    results: { name: 'results' }
-  },
-  // matchKey: {
-  //   win1: 'w1',
-  //   win2: 'w2',
-  //   draw: 'x',
-  //   win1_win2: 'w1_w2',
-  //   win1_draw: 'w1_x',
-  //   win2_draw: 'w2_x'
-  // },
+  collections,
   sports
 };
 
