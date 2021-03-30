@@ -10,6 +10,7 @@ async function parse(urlsArr) {
   const browser = await puppeteer.launch(parseConfig.browserConfig);
   const curRuls = await getCategoryUrls(browser, config.path);
   const separate = utils.splitArrOnSmallArr(curRuls, parseConfig.splitUrls);
+  console.log(`Длин массива  = ${separate.length}`)
   const result = [];
   try {
     for (const urls of separate) {

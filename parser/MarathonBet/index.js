@@ -9,7 +9,7 @@ async function parse(urlsArr = []) {
   const browser = await puppeteer.launch(parseConfig.browserConfig);
   const result = [];
   const curUrls = await getCategoryUrls(browser, config.path);
-  curUrls.length = 1;
+  // curUrls.length = 1;
   for (const url of curUrls) {
     const bets = await parseOneTournament(browser, url);
     result.push(...bets);

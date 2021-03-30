@@ -19,8 +19,10 @@ async function parseOneTournament(browser, url) {
         try {
           bets = await parseOneEvent(eventPage, url);
         } catch (err) {
-          console.log(err);
-          console.log(`Проблема с ${url}`);
+          if (err.name !== 'TimeoutError') {
+            console.log(err);
+            console.log(`Проблема с ${url}`);
+          }
           eventPage.close();
         }
         return bets;
