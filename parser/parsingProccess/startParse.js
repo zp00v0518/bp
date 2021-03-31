@@ -33,7 +33,6 @@ async function start() {
 
 async function endParsingBets(result) {
   console.log('Кол-во распарсенных событий', result.length);
-
   const statistic = await incrementStatistic();
 
   const commandsDBList = await db.getCommandsByName(result);

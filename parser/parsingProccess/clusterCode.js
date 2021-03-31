@@ -14,9 +14,10 @@ async function clusterCode() {
     betTarget.urls.length = parseConfig.parseCount;
   }
   console.time(`Парсинг ${betName} :`);
-  console.log(`начался парсинг  ${betName}`)
+  // console.log(`начался парсинг  ${betName}`)
   const result = await parseOneBet(betTarget.bet, betTarget.urls);
   console.timeEnd(`Парсинг ${betName} :`);
+  console.log(`Кол-во событий распарсенных в ${betName}: ${result.length}`);
   process.send({ result });
   process.exit();
 }
