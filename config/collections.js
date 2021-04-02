@@ -6,7 +6,8 @@ const collections = {
   menu: { name: 'menu' },
   results: { name: 'results' },
   statistic: { name: 'statistic' },
-  bk: { name: 'bk' }
+  bk: { name: 'bk' },
+  sports: { name: 'sports' }
 };
 
 module.exports = collections;

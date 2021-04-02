@@ -4,7 +4,7 @@ const parseConfig = {
   browserConfig: {
     // devtools: true,
     // headless: false,
-    args: ['--log-level="0"'] ,
+    args: ['--log-level="0"'],
     defaultViewport: null
   }
 };
