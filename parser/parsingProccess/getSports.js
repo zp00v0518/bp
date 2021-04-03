@@ -7,7 +7,7 @@ async function parseCicle() {
 		const z = await item.bet.getSports();
 		result.push(z);
   }
-  return true;
+  return result;
 }
 
 parseCicle()
