@@ -9,6 +9,24 @@ const baseStat = {
   parseCount: { type: Number, name: 'parseCount' },
   lastParse: { type: Number, name: 'lastParse' }
 };
+
+const sportCategory = {
+  class: 'sport_category',
+  name: { type: String, name: 'name' },
+  alias: { type: Array, name: 'alias', item: { type: String } },
+  links: {
+    type: Array,
+    name: 'links',
+    item: {
+      type: Object,
+      fields: {
+        url: { type: String, name: 'url' },
+        name: { type: String, name: 'name' },
+        bkId: { type: Number, name: 'bkId' }
+      }
+    }
+  }
+};
 // const results = {
 //   command_1: { type: String, name: 'command_1' },
 //   command_2: { type: String, name: 'command_2' },
@@ -19,7 +37,8 @@ const baseStat = {
 
 const schema = {
   class: classList,
-  baseStat
+  baseStat,
+  sportCategory
 };
 
 module.exports = schema;

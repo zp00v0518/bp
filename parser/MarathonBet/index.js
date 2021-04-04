@@ -41,4 +41,4 @@ function modifDataToDB(data) {
   return data;
 }
 
-module.exports = { parse, setBkId, modifDataToDB, getUrlsForParse, getSports };
+module.exports = { parse, setBkId, modifDataToDB, getUrlsForParse, getSports, config };

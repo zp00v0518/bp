@@ -7,7 +7,7 @@ const collections = {
   results: { name: 'results' },
   statistic: { name: 'statistic' },
   bk: { name: 'bk' },
-  sports: { name: 'sports' }
+  sports: { name: 'sports_category' }
 };
 
 module.exports = collections;

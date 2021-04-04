@@ -8,7 +8,7 @@ function parseSportsCategory(elem) {
     };
     return el;
   });
-	return result;
+  return result;
 }
 
 module.exports = parseSportsCategory;
