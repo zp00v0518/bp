@@ -2,7 +2,8 @@ const puppeteer = require('puppeteer');
 const parseConfig = require('../../parseConfig');
 const utils = require('../../utils');
 const parseSportsCategory = require('./parseSportsCategory');
-const setSportOnDB = require('./db/setSportOnDB');
+// const setSportOnDB = require('./db/setSportOnDB');
+const { setSportOnDB } = require('../../methods/db');
 
 const funcInPage = {
   parseSportsCategory
@@ -15,7 +16,8 @@ async function getSports() {
   //   headless: false,
   //   args: ['--window-size=1920,1070', '--window-position=-310,-1080']
   // };
-  const browser = await puppeteer.launch(parseConfig.browserConfig
+  const browser = await puppeteer.launch(
+    parseConfig.browserConfig
     // Object.assign(parseConfig.browserConfig, devSettings)
   );
   const betPage = await browser.newPage();
