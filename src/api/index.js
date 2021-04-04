@@ -21,12 +21,12 @@ class WS {
       const data = JSON.parse(event.data);
       if (window.location.hostname === 'localhost') {
         console.log(data);
-        if (this.consoleTimer) {
-          clearTimeout(this.consoleTimer);
-        }
-        this.consoleTimer = setTimeout(() => {
-          console.clear();
-        }, 5000);
+        // if (this.consoleTimer) {
+        //   clearTimeout(this.consoleTimer);
+        // }
+        // this.consoleTimer = setTimeout(() => {
+        //   console.clear();
+        // }, 5000);
       }
     };
     this.wsInstance.onclose = () => {

@@ -4,6 +4,7 @@ const { getMenu } = require('../menu');
 const handlerGetActualFork = require('../fork/handlerGetActualFork');
 const getPreviousForkHandler = require('../fork/getPreviousForkHandler');
 const handlerGetBKList = require('../bk/handlerGetBKList');
+const { getListSportCategoryHandle } = require('../sportCategory');
 
 const handlers = {
   get_matching: matching.getMatching,
@@ -11,7 +12,8 @@ const handlers = {
   [routerList.getMenu.name]: getMenu,
   '/getActualFork': handlerGetActualFork,
   '/getPreviousFork': getPreviousForkHandler,
-  '/get_bk_list': handlerGetBKList
+  '/get_bk_list': handlerGetBKList,
+  '/getListSportCategory': getListSportCategoryHandle
 };
 
 module.exports = handlers;

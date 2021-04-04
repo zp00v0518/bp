@@ -1,6 +1,6 @@
 const sport_category = require('./sport_category.json');
-const appConfig = require('../../config');
-const { BulkWriteDB, schema } = require('../db');
+const appConfig = require('../../../config');
+const { BulkWriteDB, schema } = require('../../db');
 
 async function createSportCategories() {
   if (sport_category.length === 0) return;

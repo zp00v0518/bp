@@ -7,7 +7,7 @@ const routes = [
     path: '/matching/:category',
     name: 'CategoryMatching',
     component: defineAsyncComponent(() =>
-      import(/* webpackChunkName: "about" */ '../views/CategoryMatching/CategoryMatching.vue')
+      import(/* webpackChunkName: "about" */ '../views/CategoryMatching')
     )
   },
   {
