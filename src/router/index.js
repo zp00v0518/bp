@@ -1,12 +1,14 @@
-// import { defineAsyncComponent } from 'vue';
+import { defineAsyncComponent } from 'vue';
 import { createRouter, createWebHistory } from 'vue-router';
 import Views from '../views';
 
 const routes = [
   {
-    path: '/matching',
-    name: 'Matching',
-    component: Views.Matching
+    path: '/matching/:category',
+    name: 'CategoryMatching',
+    component: defineAsyncComponent(() =>
+      import(/* webpackChunkName: "about" */ '../views/CategoryMatching/CategoryMatching.vue')
+    )
   },
   {
     path: '/',

@@ -13,6 +13,7 @@
           v-for="(child, childIndex) in item.children"
           :key="childIndex"
           :index="child.url"
+          @click="handleClick(child.url)"
         >
           <template #title>
             <router-link class="bp-menu__link" :to="child.url">{{
@@ -24,7 +25,7 @@
 
       <el-menu-item v-else :key="itemIndex + 1" :index="item.url">
         <template #title>
-          <router-link class="bp-menu__link" :to="item.url">{{
+          <router-link class="bp-menu__link bp-menu__title" :to="item.url">{{
             item.title
           }}</router-link>
         </template>
@@ -34,6 +35,8 @@
 </template>
 
 <script>
+import { goToUrl } from '../utils';
+
 export default {
   name: 'Menu',
   data() {
@@ -63,6 +66,13 @@ export default {
         const response = await this.$data.$api.get({ type: '/getMenu' });
         this.$store.commit('SET_MENU_CONTENT', response.data);
       }
+    },
+    handleClick(url) {
+      if (event) {
+        event.stopPropagation();
+        event.preventDefault();
+      }
+      goToUrl(url);
     }
   }
 };
@@ -75,10 +85,13 @@ export default {
   // }
   &__title {
     text-transform: capitalize;
+    font-weight: bold;
+  }
+  .bp-menu__title {
     font-size: calc(var(--base-font-size) + 2px);
   }
   &__link {
-    font-size: calc(var(--base-font-size) + 2px);
+    font-size: calc(var(--base-font-size) - 2px);
     width: 100%;
     height: 100%;
     display: block;

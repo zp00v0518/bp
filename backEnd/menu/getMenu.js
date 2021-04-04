@@ -14,11 +14,6 @@ async function getMenu(data, UserOnline) {
   const response = await findMethod.all(collectionName);
   let menu = response.result;
   const result = [];
-  // menu.forEach((item) => {
-  //   if (!item.url) {
-  //     item.url = '/' + item.title;
-  //   }
-  // });
   menu.forEach((item, index, arr) => {
     if (!item.url) {
       item.url = '/' + item.title;
@@ -29,6 +24,7 @@ async function getMenu(data, UserOnline) {
     }
     const elem = arr.find((i) => i.id === item.parent);
     if (!Array.isArray(elem.children)) elem.children = [];
+    item.url = [elem.url, item.url].join('');
     elem.children.push(item);
   });
   data.data = result;
