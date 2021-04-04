@@ -2,7 +2,9 @@ const classList = {
   command: 'command',
   unset: 'unset',
   event: 'event',
-  baseStat: 'baseStat'
+  baseStat: 'baseStat',
+  sport: 'sport',
+  sport_category: 'sport_category'
 };
 const baseStat = {
   class: 'baseStat',
@@ -11,7 +13,7 @@ const baseStat = {
 };
 
 const sportCategory = {
-  class: 'sport_category',
+  class: classList.sport_category,
   name: { type: String, name: 'name' },
   alias: { type: Array, name: 'alias', item: { type: String } },
   links: {
