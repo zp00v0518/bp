@@ -5,12 +5,13 @@ const { getUrlsForParse } = require('./methods');
 const getCategoryUrls = require('./methods/getCategoryUrls');
 const parseOneTournament = require('./methods/parseOneTournament');
 const parseConfig = require('../parseConfig');
+const { getSports } = require('./sports');
 
 async function parse(urlsArr) {
   const browser = await puppeteer.launch(parseConfig.browserConfig);
   const curRuls = await getCategoryUrls(browser, config.path);
   const separate = utils.splitArrOnSmallArr(curRuls, parseConfig.splitUrls);
-  console.log(`Длин массива  = ${separate.length}`)
+  console.log(`Длин массива  = ${separate.length}`);
   const result = [];
   try {
     for (const urls of separate) {
@@ -30,11 +31,8 @@ async function parse(urlsArr) {
         result.push(...bets);
       });
     }
-    // await browser.close();
-    // return result;
   } catch (err) {
     console.log(err);
-    // return result;
   }
   await browser.close();
   return result;
@@ -62,4 +60,11 @@ function modifDataToDB(data) {
   return data;
 }
 
-module.exports = { parse, setBkId, modifDataToDB, getUrlsForParse };
+module.exports = {
+  parse,
+  setBkId,
+  modifDataToDB,
+  getUrlsForParse,
+  getSports,
+  config
+};
