@@ -1,8 +1,4 @@
-const {
-  schema,
-  connectMongoDB,
-  BulkWriteDB
-} = require('../../../backEnd/db/');
+const { schema, connectMongoDB, BulkWriteDB } = require('../../../backEnd/db/');
 const appConfig = require('../../../config');
 const collectionName = appConfig.collections.sports.name;
 const dbName = appConfig.db.name;
@@ -21,20 +17,15 @@ async function setSportOnDB(baseArr) {
 
 function createListBulkWrite(data) {
   const curSchema = schema.sportCategory;
-  const linkItem = curSchema.links.item.fields;
   const result = [];
-  const linksKey = curSchema.links.name;
-  const bkIdKey = linkItem.bkId.name;
+  const bkKey = curSchema.bkId.name;
+  const nameKey = curSchema.name.name;
   data.forEach((item) => {
     const template = {
       filter: {
         class: curSchema.class,
-        [linksKey]: {
-          $elemMatch: {
-            [linkItem.name.name]: item[linkItem.name.name],
-            [bkIdKey]: item[linksKey][0][bkIdKey]
-          }
-        }
+        [bkKey]: item[bkKey],
+        [nameKey]: item[nameKey]
       },
       update: {
         $setOnInsert: item
@@ -49,18 +40,12 @@ function createListBulkWrite(data) {
 function getListForSave(arr, config) {
   const baseSchema = schema.sportCategory;
   const list = arr.map((el) => {
-    const template = {};
-    template[baseSchema.name.name] = el.name;
-    template[baseSchema.alias.name] = [];
-    template[baseSchema.alias.name].push(el.name);
-    template[baseSchema.links.name] = [];
-    const itemSchema = baseSchema.links.item.fields;
-    const bkEl = {
-      [itemSchema.url.name]: el.url,
-      [itemSchema.name.name]: el.name,
-      [itemSchema.bkId.name]: config.id
+    const template = {
+      class: baseSchema.class,
+      [baseSchema.url.name]: el.url,
+      [baseSchema.bkId.name]: config.id,
+      [baseSchema.name.name]: el.name
     };
-    template[baseSchema.links.name].push(bkEl);
     return template;
   });
   return list;

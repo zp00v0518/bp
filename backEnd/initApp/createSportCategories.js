@@ -1,6 +1,6 @@
 const sport_category = require('./sport_category.json');
 const appConfig = require('../../config');
-const { BulkWriteDB } = require('../db');
+const { BulkWriteDB, schema } = require('../db');
 
 async function createSportCategories() {
   if (sport_category.length === 0) return;
@@ -16,6 +16,7 @@ async function createSportCategories() {
 function createListBulkWrite(data) {
   const result = [];
   data.forEach((item) => {
+    item.class = schema.class.sport;
     const template = {
       filter: {
         name: item.name

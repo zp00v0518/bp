@@ -46,7 +46,6 @@ async function getSports() {
     );
   } catch (err) {
     console.log(err);
-    return result;
   }
   await browser.close();
   await setSportOnDB.apply(this, [result]);

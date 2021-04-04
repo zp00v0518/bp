@@ -5,22 +5,35 @@ const { sendWSMessage } = require('../wsServer');
 
 async function getMenu(data, UserOnline) {
   const user = UserOnline.user;
-	data.data = [];
+  data.data = [];
   if (!user || user.role !== rolesList.admin.name) {
-		sendWSMessage(UserOnline.ws, data);
-		return;
-	};
+    sendWSMessage(UserOnline.ws, data);
+    return;
+  }
   const collectionName = config.collections.menu.name;
-  const result = await findMethod.all(collectionName);
-  const menu = result.result;
-  menu.forEach((item) => {
+  const response = await findMethod.all(collectionName);
+  let menu = response.result;
+  const result = [];
+  // menu.forEach((item) => {
+  //   if (!item.url) {
+  //     item.url = '/' + item.title;
+  //   }
+  // });
+  menu.forEach((item, index, arr) => {
     if (!item.url) {
       item.url = '/' + item.title;
     }
+    if (item.parent === undefined) {
+      result.push(item);
+      return;
+    }
+    const elem = arr.find((i) => i.id === item.parent);
+    if (!Array.isArray(elem.children)) elem.children = [];
+    elem.children.push(item);
   });
-  data.data = menu;
+  data.data = result;
   sendWSMessage(UserOnline.ws, data);
-  return result.result;
+  return menu;
 }
 
 module.exports = getMenu;
