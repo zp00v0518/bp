@@ -4,3 +4,6 @@ createStaticticCollection();
 
 const createBkList = require('../../parser/methods/db/createBkList');
 createBkList();
+
+const createSportCategories = require('./createSportCategories');
+createSportCategories();
