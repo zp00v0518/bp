@@ -1,4 +1,8 @@
-const { schema, InsertDB, connectMongoDB } = require('../../../../backEnd/db/');
+const {
+  schema,
+  connectMongoDB,
+  BulkWriteDB
+} = require('../../../../backEnd/db/');
 const appConfig = require('../../../../config');
 const collectionName = appConfig.collections.sports.name;
 const dbName = appConfig.db.name;
@@ -7,11 +11,39 @@ const mongo = new connectMongoDB();
 async function setSportOnDB(baseArr) {
   const { config } = this;
   const list = getListForSave(baseArr, config);
-  const insertMethod = new InsertDB(mongo);
-  await insertMethod.connect(dbName);
-  await insertMethod.many(collectionName, list);
-  insertMethod.close();
+  const bulkWrite = new BulkWriteDB(mongo);
+  await bulkWrite.connect(dbName);
+  const bulkList = createListBulkWrite(list);
+  await bulkWrite.set(collectionName, bulkList);
+  bulkWrite.close();
   return;
+}
+
+function createListBulkWrite(data) {
+  const curSchema = schema.sportCategory;
+  const linkItem = curSchema.links.item.fields;
+  const result = [];
+  const linksKey = curSchema.links.name;
+  const bkIdKey = linkItem.bkId.name;
+  data.forEach((item) => {
+    const template = {
+      filter: {
+        class: curSchema.class,
+        [linksKey]: {
+          $elemMatch: {
+            [linkItem.name.name]: item[linkItem.name.name],
+            [bkIdKey]: item[linksKey][0][bkIdKey]
+          }
+        }
+      },
+      update: {
+        $setOnInsert: item
+      },
+      upsert: true
+    };
+    result.push({ updateOne: template });
+  });
+  return result;
 }
 
 function getListForSave(arr, config) {
