@@ -1,12 +1,13 @@
 const { sendWSMessage } = require('../wsServer');
+const { getAllSports } = require('./db');
 
 async function getListSportCategoryHandle(data, UserOnline) {
-  console.log(123);
   const { ws } = UserOnline;
   if (!ws || ws.readyState !== 1) return;
+  const result = await getAllSports();
   const message = {
     type: data.type,
-    data: {}
+    data: result
   };
   sendWSMessage(ws, message);
 }
