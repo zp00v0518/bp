@@ -61,7 +61,7 @@ export default {
       if (this.$data.$api.wsInstance.readyState !== 1) {
         setTimeout(() => {
           this.getMenu();
-        }, 100);
+        }, 10);
       } else {
         const response = await this.$data.$api.get({ type: '/getMenu' });
         this.$store.commit('SET_MENU_CONTENT', response.data);

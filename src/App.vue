@@ -39,7 +39,7 @@ export default {
       if (this.$data.$api.wsInstance.readyState !== 1) {
         setTimeout(() => {
           this.initApp();
-        }, 100);
+        }, 20);
       } else {
         this.$store.dispatch('GET_BK_LIST', this.$data.$api);
       }
