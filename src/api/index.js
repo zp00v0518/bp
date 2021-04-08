@@ -20,7 +20,7 @@ class WS {
     this.wsInstance.onmessage = (event) => {
       const data = JSON.parse(event.data);
       if (window.location.hostname === 'localhost') {
-        // console.log(data);
+        // console.log(data); 
         // if (this.consoleTimer) {
         //   clearTimeout(this.consoleTimer);
         // }

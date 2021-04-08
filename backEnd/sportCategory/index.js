@@ -1,3 +1,4 @@
 const getListSportCategoryHandle = require('./getListSportCategoryHandle');
+const getUnsetCategoryHandle = require('./getUnsetCategoryHandle');
 
-module.exports = { getListSportCategoryHandle };
+module.exports = { getListSportCategoryHandle, getUnsetCategoryHandle };

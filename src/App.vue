@@ -2,7 +2,7 @@
   <el-container id="wrapper" direction="vertical">
     <Vheader>Header</Vheader>
     <el-container>
-      <el-aside id="aside" v-show="menuContent.length > 0" width="200px"
+      <el-aside id="aside" v-show="menuContent.length > 0" width="150px"
         ><Menu></Menu
       ></el-aside>
       <el-main>
@@ -78,7 +78,7 @@ export default {
   text-align: center;
   line-height: 160px;
 }
-@media (max-width: $tablet) {
+@media (max-width: $tablet - 200px) {
   #aside {
     display: none;
   }

@@ -1,3 +1,4 @@
 const getAllSports = require('./getAllSports');
+const getUnsetCategory = require('./getUnsetCategory');
 
-module.exports = { getAllSports };
+module.exports = { getAllSports, getUnsetCategory };

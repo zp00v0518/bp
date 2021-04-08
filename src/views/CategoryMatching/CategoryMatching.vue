@@ -29,7 +29,6 @@ export default {
   methods: {
     handleTabClick({ index }) {
       this.activeTab = index;
-      console.log(this.bkList);
     },
     async getListCategory() {
       if (this.$data.$api.wsInstance.readyState !== 1) {
@@ -41,7 +40,14 @@ export default {
           type: '/getListSportCategory'
         });
         this.tabs = response.data;
+        await this.getUnsetCategory();
       }
+    },
+    async getUnsetCategory(){
+      const response =  await this.$data.$api.get({
+          type: '/getUnsetCategory'
+        });
+        console.log(response)
     }
   }
 };
