@@ -12,6 +12,7 @@ async function setSportRefsOnCategory(data, idsSport) {
 
 function createListBulkWrite(data = {}, idsSports) {
   const result = [];
+  const { sportCategory } = schema;
   Object.keys(data).forEach((key) => {
     const { ids } = data[key];
     const arrIds = ids.map((i) => new ObjectId(i));
@@ -22,8 +23,8 @@ function createListBulkWrite(data = {}, idsSports) {
       },
       update: {
         $set: {
-          ref_sport: new ObjectId(idsSports[key]),
-          name_sport: key
+          [sportCategory.ref.name]: new ObjectId(idsSports[key]),
+          [sportCategory.name_sport.name]: key
         }
       },
       upsert: false

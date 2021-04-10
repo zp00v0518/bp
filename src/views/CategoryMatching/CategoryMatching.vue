@@ -3,7 +3,7 @@
     <ElButton class="match-category__save" type="primary" @click="saveWork"
       >Сохранить выбор</ElButton
     >
-    <ElTabs tab-position="top" @tab-click="handleTabClick" v-model="activeTab">
+    <ElTabs tab-position="left" @tab-click="handleTabClick" v-model="activeTab">
       <ElTabPane
         :label="tab.name"
         v-for="(tab, tabIndex) in tabs"

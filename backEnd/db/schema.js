@@ -15,9 +15,11 @@ const baseStat = {
 const sportCategory = {
   class: classList.sport_category,
   name: { type: String, name: 'name' },
-  bkId: {type: String, name: 'bkId'},
+  bkId: { type: String, name: 'bkId' },
   url: { type: String, name: 'url' },
   category: { type: String, name: 'category' },
+  ref: { type: String, name: 'ref_sport' },
+  name_sport: { type: String, name: 'name_sport' }
 };
 
 const schema = {
