@@ -18,9 +18,9 @@ class WS {
     };
 
     this.wsInstance.onmessage = (event) => {
-      // const data = JSON.parse(event.data);
+      const data = JSON.parse(event.data);
       if (window.location.hostname === 'localhost') {
-        // console.log(data); 
+        console.log(data);
         // if (this.consoleTimer) {
         //   clearTimeout(this.consoleTimer);
         // }
@@ -51,6 +51,10 @@ class WS {
       }
       wsInstance.addEventListener('message', handler);
     });
+  }
+  sendMessage(message) {
+    const { wsInstance } = this;
+    wsInstance.send(JSON.stringify(message));
   }
 }
 

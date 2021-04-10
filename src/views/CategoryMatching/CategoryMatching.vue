@@ -1,28 +1,40 @@
 <template>
-  <ElTabs tab-position="top" @tab-click="handleTabClick">
-    <ElTabPane
-      :label="tab.name"
-      v-for="(tab, tabIndex) in tabs"
-      :key="tabIndex"
+  <div class="match-category">
+    <ElButton class="match-category__save" type="primary" @click="saveWork"
+      >Сохранить выбор</ElButton
     >
-      <ElTable :data="tableData" v-if="tableData.length > 0">
-        <ElTableColumn label="Контора" prop="name"></ElTableColumn>
-        <ElTableColumn label="Выбор">
-          <template #default="scope">
-            <ElSelect v-model="scope.row.value" clearable @change="handlerChange($event, scope)">
-              <ElOption
-                v-for="item in scope.row.choices"
-                :label="item.name"
-                :value="item.name"
-                :key="item.name"
-              ></ElOption>
-            </ElSelect>
-          </template>
-        </ElTableColumn>
-        <ElTableColumn label="Url" prop="url"></ElTableColumn>
-      </ElTable>
-    </ElTabPane>
-  </ElTabs>
+    <ElTabs tab-position="top" @tab-click="handleTabClick" v-model="activeTab">
+      <ElTabPane
+        :label="tab.name"
+        v-for="(tab, tabIndex) in tabs"
+        :key="tabIndex"
+      >
+        <ElTable
+          :data="tabs[activeTab].data"
+          v-if="tabs[activeTab].data && tabs[activeTab].data.length > 0"
+        >
+          <ElTableColumn label="Контора" prop="name"></ElTableColumn>
+          <ElTableColumn label="Выбор">
+            <template #default="scope">
+              <ElSelect v-model="scope.row.choiced" clearable filterable>
+                <ElOption
+                  v-for="item in scope.row.choices"
+                  :label="item.name"
+                  :value="item._id"
+                  :key="item._id"
+                ></ElOption>
+              </ElSelect>
+            </template>
+          </ElTableColumn>
+          <ElTableColumn label="Url" prop="url">
+            <template #default="scope">{{
+              getUrlSportCategory(scope)
+            }}</template>
+          </ElTableColumn>
+        </ElTable>
+      </ElTabPane>
+    </ElTabs>
+  </div>
 </template>
 
 <script>
@@ -46,12 +58,43 @@ export default {
     }
   },
   methods: {
-    // TODO: остановился здесь
-    handlerChange(){
-      console.log(...arguments);
+    getUrlSportCategory({ row }) {
+      if (!row.choiced) return '';
+      const value = row.choiced;
+      const item = row.choices.find((i) => i._id === value);
+      return item.url;
     },
-    handleTabClick({ index }) {
-      this.activeTab = index;
+    saveWork() {
+      const data = this.formatDataForBackEnd();
+      const { $api } = this.$data;
+      if ($api.wsInstance.readyState !== 1) {
+        console.error('Связь утеряна');
+        return;
+      }
+      const message = {
+        type: '/saveMatchedSports',
+        data
+      };
+      $api.sendMessage(message);
+    },
+    formatDataForBackEnd() {
+      const { tabs } = this;
+      const result = {};
+      Object.keys(tabs).forEach((key) => {
+        const item = tabs[key];
+        const sportName = item.name;
+        result[sportName] = {
+          ids: []
+        };
+        item.data.forEach((el) => {
+          if (!el.choiced) return;
+          result[sportName].ids.push(el.choiced);
+        });
+      });
+      Object.keys(result).forEach((key) => {
+        if (result[key].ids.length === 0) delete result[key];
+      });
+      return result;
     },
     async getListCategory() {
       if (this.$data.$api.wsInstance.readyState !== 1) {
@@ -74,8 +117,10 @@ export default {
       if (Object.keys(bkList).length === 0) {
         await this.$store.dispatch('GET_BK_LIST', this.$data.$api);
       }
-      this.tableData = this.adaptDataByBkName(response.data);
-      console.log(this.tableData);
+      const data = this.adaptDataByBkName(response.data);
+      this.tabs.forEach((item) => {
+        item.data = JSON.parse(JSON.stringify(data));
+      });
     },
     adaptDataByBkName(data, field = 'bkId') {
       const result = {};
@@ -101,4 +146,15 @@ export default {
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.match-category {
+  &__save {
+    &.el-button {
+      margin-bottom: var(--base-padding);
+    }
+  }
+  .el-tabs__item {
+    text-transform: capitalize;
+  }
+}
+</style>

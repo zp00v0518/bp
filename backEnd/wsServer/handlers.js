@@ -6,7 +6,8 @@ const getPreviousForkHandler = require('../fork/getPreviousForkHandler');
 const handlerGetBKList = require('../bk/handlerGetBKList');
 const {
   getListSportCategoryHandle,
-  getUnsetCategoryHandle
+  getUnsetCategoryHandle,
+  saveMatchedSportsHandle
 } = require('../sportCategory');
 
 const handlers = {
@@ -17,7 +18,8 @@ const handlers = {
   '/getPreviousFork': getPreviousForkHandler,
   '/get_bk_list': handlerGetBKList,
   '/getListSportCategory': getListSportCategoryHandle,
-  '/getUnsetCategory': getUnsetCategoryHandle
+  '/getUnsetCategory': getUnsetCategoryHandle,
+  '/saveMatchedSports': saveMatchedSportsHandle,
 };
 
 module.exports = handlers;

@@ -28,8 +28,9 @@ async function getMenu(data, UserOnline) {
     elem.children.push(item);
   });
   data.data = result;
-  sendWSMessage(UserOnline.ws, data);
-  return menu;
+  // sendWSMessage(UserOnline.ws, data);
+  return data;
+  // return menu;
 }
 
 module.exports = getMenu;

@@ -1,4 +1,3 @@
-const getListSportCategoryHandle = require('./getListSportCategoryHandle');
-const getUnsetCategoryHandle = require('./getUnsetCategoryHandle');
+const wsHandles = require('./wsHandles');
 
-module.exports = { getListSportCategoryHandle, getUnsetCategoryHandle };
+module.exports = { ...wsHandles };

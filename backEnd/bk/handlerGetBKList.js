@@ -1,4 +1,3 @@
-const { sendWSMessage } = require('../wsServer');
 const { getListBk } = require('./db');
 
 async function handlerGetBKList(data, UserOnline) {
@@ -11,8 +10,7 @@ async function handlerGetBKList(data, UserOnline) {
       list
     }
   };
-  sendWSMessage(ws, message);
-  return;
+  return message;
 }
 
 module.exports = handlerGetBKList;

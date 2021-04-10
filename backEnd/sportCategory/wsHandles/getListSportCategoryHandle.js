@@ -1,5 +1,4 @@
-const { sendWSMessage } = require('../wsServer');
-const { getAllSports } = require('./db');
+const { getAllSports } = require('../db');
 
 async function getListSportCategoryHandle(data, UserOnline) {
   const { ws } = UserOnline;
@@ -9,7 +8,7 @@ async function getListSportCategoryHandle(data, UserOnline) {
     type: data.type,
     data: result
   };
-  sendWSMessage(ws, message);
+  return message;
 }
 
 module.exports = getListSportCategoryHandle;

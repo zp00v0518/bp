@@ -30,14 +30,17 @@ wsServer.on('connection', async (ws, req) => {
   ws.on('close', () => {
     delete UserOnLine[userCookies];
   });
-  ws.on('message', (message) => {
+  ws.on('message', async (message) => {
     if (!UserOnLine[userCookies]) return;
     let data;
     try {
       data = JSON.parse(message);
       const { type } = data;
       if (handlers[type]) {
-        handlers[type](data, UserOnLine[userCookies]);
+        const message = await handlers[type](data, UserOnLine[userCookies]);
+        if (message) {
+          sendWSMessage(ws, message);
+        }
         return;
       }
       sendWSMessage(ws, data);

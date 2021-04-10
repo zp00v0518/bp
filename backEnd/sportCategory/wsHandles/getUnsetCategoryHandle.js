@@ -1,5 +1,4 @@
-const { sendWSMessage } = require('../wsServer');
-const { getUnsetCategory } = require('./db');
+const { getUnsetCategory } = require('../db');
 
 async function getUnsetCategoryHandle(data, UserOnline) {
   const { ws } = UserOnline;
@@ -9,8 +8,7 @@ async function getUnsetCategoryHandle(data, UserOnline) {
     type: data.type,
     data: result
   };
-
-  sendWSMessage(ws, message);
+  return message;
 }
 
 module.exports = getUnsetCategoryHandle;
