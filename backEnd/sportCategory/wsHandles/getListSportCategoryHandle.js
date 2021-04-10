@@ -1,8 +1,6 @@
 const { getAllSports } = require('../db');
 
-async function getListSportCategoryHandle(data, UserOnline) {
-  const { ws } = UserOnline;
-  if (!ws || ws.readyState !== 1) return;
+async function getListSportCategoryHandle(data) {
   const result = await getAllSports();
   const message = {
     type: data.type,
