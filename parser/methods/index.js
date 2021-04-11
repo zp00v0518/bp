@@ -4,6 +4,7 @@ const checkFork = require('./checkFork');
 const addStatisticToForkResult = require('./addStatisticToForkResult');
 const setInfoOnTournament = require('./setInfoOnTournament');
 const getTemplateTurnament = require('./getTemplateTurnament');
+const getTournamentsBaseFunc = require('./getTournamentsBaseFunc');
 
 module.exports = {
   setCommandsId,
@@ -11,5 +12,6 @@ module.exports = {
   checkFork,
   addStatisticToForkResult,
   setInfoOnTournament,
-  getTemplateTurnament
+  getTemplateTurnament,
+  getTournamentsBaseFunc
 };

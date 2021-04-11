@@ -7,9 +7,9 @@ const PariMatch = require('../PariMatch');
 
 const list = [
   [
-    { bet: MarathonBet, name: 'MarathonBet' },
-    { bet: Favorit, urls: FavoritUrls, name: 'Favorit' }
-    // { bet: PariMatch, urls: PariMatchUrls, name: 'PariMatch' }
+    // { bet: MarathonBet, name: 'MarathonBet' },
+    // { bet: Favorit, urls: FavoritUrls, name: 'Favorit' }
+    { bet: PariMatch, urls: PariMatchUrls, name: 'PariMatch' }
   ],
   // [{ bet: PariMatch, urls: PariMatchUrls, name: 'PariMatch' }]
 ];
