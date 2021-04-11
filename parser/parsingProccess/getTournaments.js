@@ -1,4 +1,5 @@
 const listForParse = require('./listForParse');
+const { saveTournamentsOnDb } = require('../methods/db');
 
 async function parseCicle() {
   const list = listForParse.flat(Infinity);
@@ -7,6 +8,7 @@ async function parseCicle() {
     const z = await item.bet.getTournaments();
     result.push(...z);
   }
+  await saveTournamentsOnDb(result);
   return result;
 }
 

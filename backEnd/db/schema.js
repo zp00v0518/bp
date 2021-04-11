@@ -4,11 +4,12 @@ const classList = {
   event: 'event',
   baseStat: 'baseStat',
   sport: 'sport',
-  sport_category: 'sport_category'
+  sport_category: 'sport_category',
+  tournament: 'tournament'
 };
 const refs = {
   sport: { type: String, name: 'ref_sport' },
-  sport_category: { type: String, name: 'sport_category' },
+  sport_category: { type: String, name: 'sport_category' }
 };
 
 const baseStat = {

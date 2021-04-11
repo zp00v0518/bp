@@ -4,6 +4,7 @@ const addEventsToDB = require('./addEventsToDB');
 const addForkResultToDB = require('./addForkResultToDB');
 const setSportOnDB = require('./setSportOnDB');
 const getUrlsForParseTournament = require('./getUrlsForParseTournament');
+const saveTournamentsOnDb = require('./saveTournamentsOnDb');
 
 module.exports = {
   getCommandsByName,
@@ -11,5 +12,6 @@ module.exports = {
   addEventsToDB,
   addForkResultToDB,
   setSportOnDB,
-  getUrlsForParseTournament
+  getUrlsForParseTournament, 
+  saveTournamentsOnDb
 };

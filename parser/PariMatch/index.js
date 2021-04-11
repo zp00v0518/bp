@@ -6,6 +6,7 @@ const getCategoryUrls = require('./methods/getCategoryUrls');
 const parseOneTournament = require('./methods/parseOneTournament');
 const parseConfig = require('../parseConfig');
 const { getSports } = require('./sports');
+const { getTournaments } = require('./tournaments');
 
 async function parse(urlsArr) {
   const browser = await puppeteer.launch(parseConfig.browserConfig);
@@ -65,5 +66,6 @@ module.exports = {
   modifDataToDB,
   getUrlsForParse,
   getSports,
-  config
+  config,
+  getTournaments
 };
