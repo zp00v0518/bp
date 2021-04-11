@@ -5,7 +5,7 @@ async function parseCicle() {
   const result = [];
   for (const item of list) {
     const z = await item.bet.getTournaments();
-    result.push(z);
+    result.push(...z);
   }
   return result;
 }
