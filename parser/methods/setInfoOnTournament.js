@@ -6,6 +6,7 @@ function setInfoOnTournament(elemArrs, сategory) {
     elem[refs.sport_category.name] = сategory._id;
     elem[refs.sport.name] = сategory[refs.sport.name];
     elem[sportCategory.name_sport.name] = сategory[sportCategory.name_sport.name];
+    elem[sportCategory.bkId.name] = сategory[sportCategory.bkId.name];
   });
 }
 
