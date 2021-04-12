@@ -1,4 +1,4 @@
-const sport_category = require('./sport_category.json');
+const sport_category = require('./sport_category');
 const appConfig = require('../../../config');
 const { BulkWriteDB, schema } = require('../../db');
 const dropSportCollection = require('../db/dropSportCollection');

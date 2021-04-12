@@ -1,7 +1,7 @@
 const sport_category = {
   soccer: {
     name: 'футбол',
-    key: 'soccer'
+    key: 'soccer' // ключ key в БД пока не используется
   },
   basketball: {
     name: 'баскетбол',

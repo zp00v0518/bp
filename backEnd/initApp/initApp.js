@@ -7,3 +7,6 @@ createBkList();
 
 const createSportCategories = require('../sportCategory/init');
 createSportCategories();
+
+const createTournamentOnDb = require('../tournament/init');
+createTournamentOnDb();
