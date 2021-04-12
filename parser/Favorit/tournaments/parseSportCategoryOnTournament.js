@@ -34,22 +34,26 @@ async function responseCallback(response, item, config) {
   if (!method || method !== 'POST') return;
   const requestUrl = req._url;
   if (requestUrl !== config.response.api1) return;
-  const reqData = JSON.parse(req._postData);
-  if (reqData.method !== 'frontend/tournament/get') return;
-  const data = await response.json();
-  if (data && data.result) {
+  try {
+    const reqData = JSON.parse(req._postData);
+    if (reqData.method !== 'frontend/tournament/get') return;
+    const data = await response.json();
+    if (data && data.result) {
+      const reg = /s\/sport/gi;
+      const categoryUrl = item.url.replace(reg, 's/category');
 
-    const reg = /s\/sport/gi;
-    const categoryUrl = item.url.replace(reg, 's/category');
-
-    const result = data.result.map((tournament) => {
-      const template = getTemplateTurnament();
-      template.url = categoryUrl + tournament.category_id;
-      template.name = tournament.tournament_name;
-      return template;
-    });
-    return result;
+      const result = data.result.map((tournament) => {
+        const template = getTemplateTurnament();
+        template.url = categoryUrl + tournament.category_id;
+        template.name = tournament.tournament_name;
+        return template;
+      });
+      return result;
+    }
+  } catch (err) {
+    console.log(err);
   }
+
   return false;
 }
 

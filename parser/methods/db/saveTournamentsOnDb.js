@@ -23,12 +23,13 @@ function createListBulkWrite(data) {
         ...item
       },
       update: {
-        $addToSet: item
+        $setOnInsert: item
       },
       upsert: true
     };
     result.push({ updateOne: template });
   });
+  return result;
 }
 
 module.exports = saveTournamentsOnDb;

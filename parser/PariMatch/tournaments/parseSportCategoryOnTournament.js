@@ -35,7 +35,6 @@ async function parseSportCategoryOnTournament(page, item) {
     console.log(err);
   }
   setInfoOnTournament(urls, item);
-  page.close();
   return urls;
 }
 
