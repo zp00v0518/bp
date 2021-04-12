@@ -5,7 +5,8 @@ const classList = {
   baseStat: 'baseStat',
   sport: 'sport',
   sport_category: 'sport_category',
-  tournament: 'tournament'
+  tournament: 'tournament',
+  tournament_type: 'tournament_type'
 };
 const refs = {
   sport: { type: String, name: 'ref_sport' },

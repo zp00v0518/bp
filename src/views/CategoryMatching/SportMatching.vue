@@ -1,6 +1,6 @@
 <template>
-  <div class="match-category">
-    <ElButton class="match-category__save" type="primary" @click="saveWork"
+  <div class="match-sport">
+    <ElButton class="match-sport__save" type="primary" @click="saveWork"
       >Сохранить выбор</ElButton
     >
     <ElTabs tab-position="top" @tab-click="handleTabClick" v-model="activeTab">
@@ -144,7 +144,7 @@ export default {
 </script>
 
 <style lang="scss">
-.match-category {
+.match-sport {
   &__save {
     &.el-button {
       margin-bottom: var(--base-padding);
