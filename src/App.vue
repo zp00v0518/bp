@@ -42,6 +42,7 @@ export default {
         }, 20);
       } else {
         this.$store.dispatch('GET_BK_LIST', this.$data.$api);
+        this.$store.dispatch('GET_SPORT_TYPES', this.$data.$api);
       }
     }
   }
@@ -78,7 +79,7 @@ export default {
   text-align: center;
   line-height: 160px;
 }
-@media (max-width: $tablet - 200px) {
+@media (max-width: $tablet) {
   #aside {
     display: none;
   }

@@ -4,7 +4,8 @@ import Views from '../views';
 
 const routes = [
   {
-    path: '/matching/:category',
+    props: true,
+    path: '/matching/:type',
     name: 'CategoryMatching',
     component: defineAsyncComponent(() =>
       import(/* webpackChunkName: "about" */ '../views/CategoryMatching')

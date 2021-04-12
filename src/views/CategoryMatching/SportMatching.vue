@@ -43,8 +43,7 @@
 import { sortArrByField } from '../../utils';
 
 export default {
-  name: 'CategoryMatching',
-  props: ['type'],
+  name: 'SportMatching',
   created() {
     this.getUnsetCategory();
   },
