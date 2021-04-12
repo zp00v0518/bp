@@ -4,12 +4,13 @@ const { BulkWriteDB, schema } = require('../../db');
 const dropSportCollection = require('../db/dropSportCollection');
 
 async function createSportCategories() {
-  if (sport_category.length === 0) return;
+  const values = Object.values(sport_category);
+  if (values.length === 0) return;
   await dropSportCollection();
   const bulkWrite = new BulkWriteDB();
   await bulkWrite.connect(appConfig.db.name);
   const collection = appConfig.collections.sports.name;
-  const bulkList = createListBulkWrite(sport_category);
+  const bulkList = createListBulkWrite(values);
   await bulkWrite.set(collection, bulkList);
 
   bulkWrite.close();

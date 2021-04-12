@@ -1,4 +1,4 @@
-const dropMenuCollection = require('./dropMenuCollection');
+const dropMenuCollection = require('../db/dropMenuCollection');
 const config = require('../../../config');
 const InsertDB = require('../../db/InsertDB');
 const ConnectMongoDB = require('../../db/connectMongoDB.js');
