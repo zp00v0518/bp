@@ -9,6 +9,7 @@ const {
   getUnsetCategoryHandle,
   saveMatchedSportsHandle
 } = require('../sportCategory');
+const { getBaseTournamentsHandler } = require('../tournament/wsHandlers');
 
 const handlers = {
   get_matching: matching.getMatching,
@@ -20,6 +21,7 @@ const handlers = {
   '/getListSportCategory': getListSportCategoryHandle,
   '/getUnsetCategory': getUnsetCategoryHandle,
   '/saveMatchedSports': saveMatchedSportsHandle,
+  '/getBaseTournaments': getBaseTournamentsHandler
 };
 
 module.exports = handlers;

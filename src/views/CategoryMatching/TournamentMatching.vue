@@ -1,30 +1,30 @@
 <template>
   <div class="match-sport">
-    <ElButton class="match-sport__save" type="primary">Сохранить выбор</ElButton
+    <ElButton class="match-sport__save" type="primary"
+      >Сохранить выбор</ElButton
     >
-    <ElTabs tab-position="top" @tab-click="handleTabClick" v-model="activeTab">
+    <ElTabs
+      tab-position="top"
+      @tab-click="handleTabClick"
+      v-model="activeSportTab"
+    >
       <ElTabPane
         :label="tab.name"
         v-for="(tab, tabIndex) in sportTypes"
         :key="tabIndex"
       >
-      
       </ElTabPane>
     </ElTabs>
   </div>
 </template>
 
 <script>
-import { sortArrByField } from '../../utils';
-
 export default {
   name: 'TournamentMatching',
-  created() {
-  },
+  created() {},
   data() {
     return {
-      activeTab: '0',
-      tableData: []
+      activeSportTab: '0'
     };
   },
   computed: {
@@ -35,9 +35,7 @@ export default {
       return this.$store.state.sportTypes.sportTypes;
     }
   },
-  methods: {
-
-  }
+  methods: {}
 };
 </script>
 

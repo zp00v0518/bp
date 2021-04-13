@@ -41,8 +41,10 @@ export default {
           this.initApp();
         }, 20);
       } else {
-        this.$store.dispatch('GET_BK_LIST', this.$data.$api);
-        this.$store.dispatch('GET_SPORT_TYPES', this.$data.$api);
+        const api = this.$data.$api;
+        this.$store.dispatch('GET_BK_LIST', api);
+        this.$store.dispatch('GET_SPORT_TYPES', api);
+        this.$store.dispatch('GET_BASE_TOURNAMENT', api);
       }
     }
   }
