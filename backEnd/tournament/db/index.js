@@ -1,3 +1,4 @@
 const getBaseTournaments = require('./getBaseTournaments');
+const getBkTournaments = require('./getBkTournaments');
 
-module.exports = { getBaseTournaments };
+module.exports = { getBaseTournaments, getBkTournaments };
