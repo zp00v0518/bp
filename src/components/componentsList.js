@@ -16,7 +16,9 @@ import {
   ElTable,
   ElTableColumn,
   ElSelect,
-  ElOption
+  ElOption,
+  ElDialog,
+  ElInput
 } from 'element-plus';
 
 import atoms from './atoms';
@@ -39,7 +41,9 @@ const components = [
   ElTable,
   ElTableColumn,
   ElSelect,
-  ElOption
+  ElOption,
+  ElDialog,
+  ElInput
 ];
 
 Object.keys(atoms).forEach((key) => {

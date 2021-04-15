@@ -3,6 +3,18 @@
 @import 'links';
 @import 'atoms';
 
+:root {
+  &::-webkit-scrollbar {
+    width: 6px; /* ширина scrollbar'a */
+    background: transparent; /* опционально */
+    height: 8px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #dfdfdf;
+    border-radius: 6px;
+  }
+}
+
 body {
   min-height: 100vh;
   padding: 0;

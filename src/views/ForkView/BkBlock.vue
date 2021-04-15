@@ -88,10 +88,8 @@ export default {
       align-items: center;
       &:before {
         content: ':';
-        // color: red;
         position: absolute;
         right: calc(var(--base-step) - var(--base-step) * 2.5);
-        // font-size: 20px;
       }
     }
   }

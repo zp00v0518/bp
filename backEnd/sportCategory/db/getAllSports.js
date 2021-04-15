@@ -9,7 +9,7 @@ async function getAllSports() {
   };
   const needFields = {
     class: 0,
-    _id: 0
+    // _id: 0
   };
   const result = await findMethod.all(collectionName, query, { needFields });
   return result.result;

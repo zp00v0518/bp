@@ -23,8 +23,25 @@
             v-for="(tournamentTab, tournamentTabIndex) in activeBaseTournament"
             :key="tournamentTabIndex"
           >
-          </ElTabPane
-        ></ElTabs>
+            <table>
+              <thead>
+                <tr>
+                  <th v-for="(col, colIndex) in columns" :key="colIndex">
+                    {{ col.title }}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="(item, itemIndex) in tableData" :key="itemIndex">
+                  <td>
+                    {{ item.bkName }}
+                  </td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </ElTabPane>
+        </ElTabs>
       </ElTabPane>
     </ElTabs>
   </div>
@@ -38,7 +55,13 @@ export default {
     return {
       activeSportTab: '0',
       activeTournamentTab: '0',
-      timeout: null
+      timeout: null,
+      tableData: {},
+      columns: [
+        { field: 'bkName', title: 'Контора' },
+        { title: 'Турнир' },
+        { title: 'Ссылка' }
+      ]
     };
   },
   computed: {
@@ -55,6 +78,10 @@ export default {
       const { activeSportTab, sportTypes, baseTournaments } = this;
       const name = sportTypes[activeSportTab].key;
       return baseTournaments[name];
+    },
+    activeSport() {
+      const { sportTypes, activeSportTab } = this;
+      return sportTypes[activeSportTab];
     }
   },
   created() {
@@ -69,8 +96,30 @@ export default {
         }, 20);
       } else {
         const response = await api.get({ type: '/getBkTournaments' });
-        console.log(response);
+        this.adaptDataForTable(response.data);
       }
+    },
+    adaptDataForTable(data) {
+      const { bkList } = this;
+      const result = {};
+      data.forEach((item) => {
+        const { bkId, name_sport } = item;
+        if (!result[bkId]) {
+          result[bkId] = {
+            bkName: bkList[bkId].name
+          };
+        }
+        if (!result[bkId][name_sport]) {
+          result[bkId][name_sport] = {
+            choices: [],
+            choiced: '',
+            url: ''
+          };
+        }
+        // result[bkId][name_sport].choices.push(item);
+      });
+      console.log(result);
+      this.tableData = result;
     }
   }
 };
