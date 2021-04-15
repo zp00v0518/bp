@@ -3,16 +3,21 @@
     <ElButton class="match-tournament__save" type="primary"
       >Сохранить выбор</ElButton
     >
+    <ElInput
+      type="text"
+      v-model.lazy="search"
+      class="match-tournament--search"
+    ></ElInput>
     <ElTabs tab-position="top" v-model="activeSportTab">
       <ElTabPane
         :label="tab.name"
         v-for="(tab, tabIndex) in sportTypes"
         :key="tabIndex"
       >
-        <ElTabs tab-position="left">
+        <ElTabs tab-position="left" v-model="activeTournamentTab">
           <ElTabPane
             :label="tour.type_name"
-            v-for="(tour, tourIndex) in tournamentList"
+            v-for="(tour, tourIndex) in filterTournament"
             :key="tourIndex"
           >
             <table>
@@ -60,7 +65,8 @@ export default {
       bkName: '',
       popupData: [],
       adaptData: {},
-      tournametTarget: ''
+      tournametTarget: '',
+      search: ''
     };
   },
   computed: {
@@ -83,8 +89,16 @@ export default {
       return sportTypes[activeSportTab];
     },
     activeTournament() {
-      const { tournamentList, activeTournamentTab } = this;
-      return tournamentList[activeTournamentTab];
+      const { filterTournament, activeTournamentTab } = this;
+      return filterTournament[activeTournamentTab];
+    },
+    filterTournament() {
+      const { search, tournamentList } = this;
+      if (!search) return tournamentList;
+      const v = search.toLowerCase();
+      return tournamentList.filter((i) =>
+        i.type_name.toLowerCase().includes(v)
+      );
     }
   },
   created() {
@@ -99,7 +113,7 @@ export default {
       this.bkName = bkItem.name;
       this.tournametTarget = activeTournament.type_name;
       this.isShowDialog = true;
-      console.log(this.popupData)
+      console.log(this.popupData);
     },
     closeDialog() {
       this.isShowDialog = false;
@@ -158,6 +172,9 @@ export default {
       line-height: unset;
       padding-bottom: 24px;
     }
+  }
+  &--search {
+    margin-bottom: var(--base-padding);
   }
   table {
     width: 100%;
