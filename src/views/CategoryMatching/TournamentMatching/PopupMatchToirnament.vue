@@ -6,16 +6,13 @@
     width="80%"
   >
     <template #title>
-      <div class="match-tournament__popup--title">{{ bkName }}</div>
+      <div class="match-tournament__popup--title">{{ editBk.name }}</div>
       <div class="match-tournament__popup--subtitle">
         <span class="match-tournament__popup--subtitle--txt"
           >{{ tournametTarget }}
         </span>
-        <ElButton type="success">Выбрал</ElButton>
+        <ElButton type="success" @click="handlerClick">Выбрал</ElButton>
       </div>
-      <!-- <div class="match-tournament__popup--btn">
-        <ElButton type="success">Выбрал</ElButton>
-      </div> -->
     </template>
     <div class="match-tournament__popup__table--wrap">
       <table>
@@ -64,7 +61,7 @@
 export default {
   name: 'PopupMatchToirnament',
   props: {
-    bkName: { type: String, default: '' },
+    editBk: { type: Object, default: ()=>({}) },
     tournametTarget: { type: String, default: '' },
     data: { type: [Object, Array], default: () => [] }
   },
@@ -82,6 +79,15 @@ export default {
       choice: '',
       search: ''
     };
+  },
+  methods: {
+    handlerClick() {
+      if (!this.choice) {
+        this.$data.$message.error('Ниче ты еще не выбрал');
+        return;
+      }
+      this.$emit('choice', { value: this.choice, bk: this.editBk });
+    }
   }
 };
 </script>

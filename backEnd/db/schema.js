@@ -10,7 +10,8 @@ const classList = {
 };
 const refs = {
   sport: { type: String, name: 'ref_sport' },
-  sport_category: { type: String, name: 'sport_category' }
+  sport_category: { type: String, name: 'sport_category' },
+  tournament: { type: String, name: 'tournament_type' }
 };
 const baseCase = {
   name_sport: { type: String, name: 'name_sport' }
@@ -35,7 +36,7 @@ const tournament_type = {
   class: classList.tournament_type,
   name_sport: baseCase.name_sport,
   type_name: { type: String, name: 'type_name' },
-  ref_sport: refs.sport,
+  ref_sport: refs.sport
 };
 
 const schema = {
@@ -43,7 +44,7 @@ const schema = {
   baseStat,
   sportCategory,
   refs,
-  tournament_type,
+  tournament_type
 };
 
 module.exports = schema;

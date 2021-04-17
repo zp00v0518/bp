@@ -1,4 +1,3 @@
-// const { sendWSMessage } = require('../wsServer');
 const { insertMethod } = require('../db/methods');
 const { schema } = require('../db');
 const config = require('../../config');
@@ -31,11 +30,6 @@ async function setMatching(payload, { ws }) {
   const collectionName = config.collections.commands.name;
   await insertMethod.many(collectionName, docs);
   await removeMatchingCommand(docs);
-  // const message = {
-  //   type,
-  //   payload: docs,
-  // };
-  // sendWSMessage(ws, message);
 }
 
 module.exports = setMatching;

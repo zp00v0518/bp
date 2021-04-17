@@ -16,10 +16,10 @@ async function removeMatchingCommand(docs) {
     const item = list[key];
     const query = {
       class: schema.class.unset,
-      sport: key,
+      sport: key
     };
     const doc = {
-      $pullAll: { commands: item },
+      $pullAll: { commands: item }
     };
     await updateMethod.one(collectionName, query, doc);
   });

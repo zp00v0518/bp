@@ -9,6 +9,7 @@ import config from '../config';
 import Api from './api';
 import 'element-plus/lib/theme-chalk/index.css';
 import componentsList from './components/componentsList';
+import { ElMessage } from 'element-plus';
 
 const WS = new Api();
 // eslint-disable-next-line
@@ -27,7 +28,8 @@ app.mixin({
   data() {
     return {
       $api: WS,
-      $appConfig: config
+      $appConfig: config,
+      $message: ElMessage
     };
   }
 });
