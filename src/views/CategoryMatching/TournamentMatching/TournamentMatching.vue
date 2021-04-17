@@ -281,10 +281,6 @@ export default {
       const item = ref.querySelector('.match-tournament__table--wrap table');
       const elemStyle = item.getBoundingClientRect();
       if (elemStyle.top <= 0) {
-        // item.scrollIntoView({
-        //   behavior: 'smooth',
-        //   block: 'start'
-        // });
         item.scrollIntoView(true);
         document.scrollingElement.scrollTop -= 200;
       }
