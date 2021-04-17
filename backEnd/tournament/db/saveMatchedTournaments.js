@@ -7,7 +7,7 @@ async function saveMatchedTournaments(data) {
   const collectionName = appConfig.collections.tournaments.name;
   const bulkList = createListBulkWrite(data);
   const result = await bulkWriteMethod.set(collectionName, bulkList);
-  return result;
+  return result.result;
 }
 
 function createListBulkWrite(data = {}) {

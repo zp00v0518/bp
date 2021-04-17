@@ -11,22 +11,36 @@
       v-model.lazy="search"
       class="match-tournament--search"
     ></ElInput>
-    <ElTabs tab-position="top" v-model="activeSportTab">
+    <ElTabs tab-position="top" v-model="activeSportTab" ref="container">
       <ElTabPane
         :label="tab.name"
         v-for="(tab, tabIndex) in sportTypes"
         :key="tabIndex"
       >
-        <ElTabs tab-position="left" v-model="activeTournamentTab">
+        <ElTabs
+          tab-position="left"
+          v-model="activeTournamentTab"
+          @tab-click="handlerClickOnTabTournament"
+        >
           <ElTabPane
-            :label="tour.type_name"
             v-for="(tour, tourIndex) in filterTournament"
             :key="tourIndex"
           >
+            <template #label>
+              <span class="match-tournament__item"
+                ><span>{{ tour.type_name }}</span>
+                <span
+                  v-if="dataforSave[tour._id]"
+                  class="match-tournament__item--count"
+                  >{{ dataforSave[tour._id].length }}</span
+                >
+              </span>
+            </template>
+
             <div class="match-tournament__table--wrap">
               <table
                 v-if="
-                  Object.values(adaptData).length > 0 &&
+                  isReadyComponent &&
                     +activeTournamentTab === tourIndex &&
                     +activeSportTab === tabIndex
                 "
@@ -98,7 +112,9 @@ export default {
       adaptData: {},
       tournametTarget: '',
       search: '',
-      dataforSave: {}
+      dataforSave: {},
+      isReadyComponent: false,
+      firstData: []
     };
   },
   computed: {
@@ -137,6 +153,13 @@ export default {
     this.getBkTournaments();
   },
   methods: {
+    handlerClickOnTabTournament() {
+      this.$nextTick(() => {
+        setTimeout(() => {
+          this.scrollContent();
+        }, 0);
+      });
+    },
     getTournamentForView(bkItem) {
       const { activeTournament, dataforSave } = this;
       const activeId = activeTournament._id;
@@ -164,6 +187,10 @@ export default {
     showDialog(bkItem) {
       const { activeTournament } = this;
       const elem = this.getCurrentDataBK(bkItem);
+      if (!elem) {
+        this.$data.$message.error('Нет наборов для данного спорта');
+        return;
+      }
       this.popupData = elem.choices;
       this.editBk = bkItem;
       this.tournametTarget = activeTournament.type_name;
@@ -173,17 +200,8 @@ export default {
       this.closeDialog();
       const { activeTournament } = this;
       const idTournament = activeTournament._id;
-      if (!this.dataforSave[idTournament]) this.dataforSave[idTournament] = [];
-      const { value, bk } = ev;
-      const elem = this.getCurrentDataBK(bk);
-      const item = elem.choices.find((i) => i._id === value);
-      const index = this.dataforSave[idTournament].findIndex(
-        (i) => i.bkId === item.bkId
-      );
-      if (index > -1) {
-        this.dataforSave[idTournament].splice(index, 1);
-      }
-      this.dataforSave[idTournament].push(item);
+      const { value } = ev;
+      this.setValueInStore(idTournament, value);
     },
     closeDialog() {
       this.isShowDialog = false;
@@ -197,6 +215,7 @@ export default {
         }, 20);
       } else {
         const response = await api.get({ type: '/getBkTournaments' });
+        this.firstData = response.data;
         this.adaptDataForTable(response.data);
       }
     },
@@ -204,7 +223,7 @@ export default {
       const { bkList } = this;
       const result = {};
       data.forEach((item) => {
-        const { bkId, name_sport } = item;
+        const { bkId, name_sport, tournament_type } = item;
         if (!result[bkId]) {
           result[bkId] = {
             bkName: bkList[bkId].name
@@ -218,8 +237,12 @@ export default {
           };
         }
         result[bkId][name_sport].choices.push(item);
+        if (tournament_type) {
+          this.setValueInStore(tournament_type, item._id);
+        }
       });
       this.adaptData = result;
+      this.isReadyComponent = true;
     },
     async saveDataOnServer() {
       const { dataforSave } = this;
@@ -241,8 +264,30 @@ export default {
         type: '/saveMatchedTournaments',
         data: copy
       };
-      const response = await $api.get(message);
-      console.log(response);
+      await $api.get(message);
+    },
+    setValueInStore(tourId, setId) {
+      const { dataforSave, firstData } = this;
+      if (!dataforSave[tourId]) dataforSave[tourId] = [];
+      const item = firstData.find((i) => i._id === setId);
+      const index = dataforSave[tourId].findIndex((i) => i.bkId === item.bkId);
+      if (index > -1) {
+        dataforSave[tourId].splice(index, 1);
+      }
+      dataforSave[tourId].push(item);
+    },
+    scrollContent() {
+      const ref = this.$refs.container.$el;
+      const item = ref.querySelector('.match-tournament__table--wrap table');
+      const elemStyle = item.getBoundingClientRect();
+      if (elemStyle.top <= 0) {
+        // item.scrollIntoView({
+        //   behavior: 'smooth',
+        //   block: 'start'
+        // });
+        item.scrollIntoView(true);
+        document.scrollingElement.scrollTop -= 200;
+      }
     }
   }
 };
@@ -259,12 +304,13 @@ export default {
     text-transform: capitalize;
   }
   .el-tabs__nav.is-left {
-    max-width: 200px;
+    max-width: 230px;
     .el-tabs__item {
       white-space: normal;
       height: unset;
       line-height: unset;
       padding-bottom: 24px;
+      padding-left: 24px;
     }
   }
   &--search {
@@ -279,6 +325,26 @@ export default {
     }
     &--bk {
       width: 100px;
+    }
+  }
+  &__item {
+    position: relative;
+    &--count {
+      position: absolute;
+      transform: translate(-34px, 1px);
+      left: 0;
+      top: 0;
+      color: white;
+      margin-left: var(--double-step);
+      background-color: var(--color-theme-4);
+      border-radius: 50%;
+      width: 12px;
+      height: 12px;
+      display: inline-block;
+      text-align: center;
+      padding: var(--base-step);
+      font-weight: bold;
+      font-size: 12px;
     }
   }
 }

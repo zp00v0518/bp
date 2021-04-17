@@ -10,4 +10,3 @@ async function saveMatchedTournamentsHandler(data) {
 }
 
 module.exports = saveMatchedTournamentsHandler;
-s
