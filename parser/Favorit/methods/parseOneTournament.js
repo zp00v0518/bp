@@ -21,11 +21,11 @@ async function parseOneTournament(browser, url) {
         const newPage = await browser.newPage();
         try {
           const bets = await parseOneEvent(newPage, url);
-          newPage.close();
+          await newPage.close();
           return bets || false;
         } catch (err) {
           console.log(err);
-          newPage.close();
+          await newPage.close();
           return false;
         }
       });

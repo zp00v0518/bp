@@ -31,12 +31,12 @@ async function parseOneTournament(browser, url) {
       const arr = f.filter((i) => i);
       result.push(...arr);
     }
-    tournamentPage.close();
+    await tournamentPage.close();
     return result || [];
   } catch (err) {
     console.log(err);
     console.log('Проблема при обработке адреса:  ', url);
-    tournamentPage.close();
+    await tournamentPage.close();
     return result;
   }
 }

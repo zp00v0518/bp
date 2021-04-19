@@ -16,9 +16,11 @@ const params = {
   getTotatls
 };
 
-async function parseOneTournament(tournamentPage, url, count = 0) {
+async function parseOneTournament(browser, url) {
   let result = [];
+  let tournamentPage
   try {
+    tournamentPage = browser.goto ? browser : await browser.newPage();
     await tournamentPage.goto(url, {
       waitUntil: 'networkidle2',
       timeout: 30000

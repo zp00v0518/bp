@@ -1,12 +1,8 @@
 const cluster = require('cluster');
 const createCluster = require('./createCluster');
 const clusterCode = require('./clusterCode');
-const listForParse = require('./listForParse');
-const methods = require('../methods');
-const db = require('../methods/db');
-const dropCollection = require('../../backEnd/db/methods/dropCollection');
-const config = require('../../config');
-const { incrementStatistic } = require('../../backEnd/statistic/db');
+const getTournametsForParse = require('./getTournametsForParse');
+let parsingList = {};
 
 if (cluster.isMaster) {
   console.log(`Master ${process.pid} is running`);
@@ -21,45 +17,18 @@ async function start() {
     const events = msg.result;
     result.push(...events);
   });
+  parsingList = await getTournametsForParse();
+  parsingList = Object.entries(parsingList);
   await parseCicle();
-  await endParsingBets(result);
-  setTimeout(() => {
-    console.log('*********************************************');
-    console.log('');
-    console.log('');
-    start();
-  }, 1000 * 60);
-}
-
-async function endParsingBets(result) {
-  console.log('Кол-во распарсенных событий', result.length);
-  const statistic = await incrementStatistic();
-
-  const commandsDBList = await db.getCommandsByName(result);
-  result = methods.setCommandsId(result, commandsDBList);
-
-  const commands = methods.createListCommands(result);
-  if (commands.length > 0) {
-    await db.addUnsetCommandsToDB(commands);
-  }
-
-  await dropCollection(config.db.name, config.collections.events.name);
-  await db.addEventsToDB(result);
-
-  let forkResult = await methods.checkFork();
-  forkResult = methods.addStatisticToForkResult(forkResult, statistic);
-  await db.addForkResultToDB(forkResult);
-  console.log(forkResult);
 }
 
 async function parseCicle() {
-  for (const arr of listForParse) {
-    console.time('Блок парсился:');
-    const promises = arr.map((item) => {
-      return createCluster({ BET: item.name });
-    });
-    await Promise.all(promises);
-    console.timeEnd('Блок парсился:');
+  for (const arr of parsingList) {
+    const tournament = arr[1][0].name;
+    const str = `${tournament}  парсился: `;
+    console.time(str);
+    await createCluster({ BET: JSON.stringify(arr) });
+    console.timeEnd(str);
   }
   return true;
 }

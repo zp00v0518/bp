@@ -1,35 +1,38 @@
 const listForParse = require('./listForParse');
 const parseOneBet = require('./parseOneBet');
-const parseConfig = require('../parseConfig');
+const endParsingBets = require('./endParsingBets');
 
 async function clusterCode() {
   const betName = process.env.BET;
-  const betTarget = findBet(betName);
-  if (!betTarget) {
-    console.log(`Парсинг ${betName} не начался. Что-то пошло не так. ${betName} не найдена.`)
-    process.send({ result: [] });
+  const data = JSON.parse(betName);
+  const listTournaments = data[1];
+  if (!listTournaments) {
+    console.log('Турниры для парсинга отсутствуют');
     process.exit();
   }
-  if (parseConfig.parseCount > 0) {
-    betTarget.urls.length = parseConfig.parseCount;
-  }
-  console.time(`Парсинг ${betName} :`);
-  // console.log(`начался парсинг  ${betName}`)
-  const result = await parseOneBet(betTarget.bet, betTarget.urls);
-  console.timeEnd(`Парсинг ${betName} :`);
-  console.log(`Кол-во событий распарсенных в ${betName}: ${result.length}`);
+
+  let promises = listTournaments.map((item) => {
+    try {
+      const betTarget = findBet(item.bkId);
+      if (!betTarget) return false;
+      return parseOneBet(betTarget, item);
+    } catch (err) {
+      return false;
+    }
+  });
+  promises = promises.filter((i) => !!i);
+  let result = await Promise.all(promises);
+  result = await endParsingBets(result);
+  console.log(result)
   process.send({ result });
   process.exit();
 }
 
-function findBet(name) {
+function findBet(id) {
   let result = {};
-  listForParse.some((arr) => {
-    const item = arr.find((i) => i.name === name);
-    if (item) result = item;
-    return !!item;
-  });
-  return result;
+  const list = listForParse.flat(Infinity);
+  result = list.find((i) => i.config.id === id);
+  return result || {};
 }
 
 module.exports = clusterCode;

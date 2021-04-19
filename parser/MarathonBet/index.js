@@ -49,5 +49,6 @@ module.exports = {
   getUrlsForParse,
   getSports,
   config,
-  getTournaments
+  getTournaments,
+  parseOneTournament
 };
