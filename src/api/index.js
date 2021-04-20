@@ -40,7 +40,13 @@ class WS {
   get(e) {
     const { wsInstance } = this;
     const { type } = e;
-    return new Promise((resolve) => {
+
+    return new Promise((resolve, reject) => {
+      if (wsInstance.readyState !== 1) {
+        console.log('Socket is close');
+        reject(false);
+        return;
+      }
       wsInstance.send(JSON.stringify(e));
       function handler(res) {
         const data = JSON.parse(res.data);
@@ -54,6 +60,10 @@ class WS {
   }
   sendMessage(message) {
     const { wsInstance } = this;
+    if (wsInstance.readyState !== 1) {
+      console.log('Socket is close');
+      return false;
+    }
     wsInstance.send(JSON.stringify(message));
   }
 }
