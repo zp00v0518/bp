@@ -97,57 +97,24 @@
 
 <script>
 import PopupMatchToirnament from './PopupMatchToirnament';
+import matchMixin from '../matchMixin';
 
 export default {
   name: 'TournamentMatching',
   components: { PopupMatchToirnament },
+  mixins: [matchMixin],
   data() {
     return {
       tournamentTabs: [],
-      activeSportTab: '0',
-      activeTournamentTab: '0',
       isShowDialog: false,
       editBk: '',
       popupData: [],
       adaptData: {},
       tournametTarget: '',
-      search: '',
       dataforSave: {},
       isReadyComponent: false,
       firstData: []
     };
-  },
-  computed: {
-    bkList() {
-      return this.$store.state.global.bkList;
-    },
-    sportTypes() {
-      return this.$store.state.sportTypes.sportTypes;
-    },
-    baseTournaments() {
-      return this.$store.state.tournaments.baseTournaments;
-    },
-    tournamentList() {
-      const { activeSportTab, sportTypes, baseTournaments } = this;
-      const name = sportTypes[activeSportTab].key;
-      return baseTournaments[name];
-    },
-    activeSport() {
-      const { sportTypes, activeSportTab } = this;
-      return sportTypes[activeSportTab];
-    },
-    activeTournament() {
-      const { filterTournament, activeTournamentTab } = this;
-      return filterTournament[activeTournamentTab];
-    },
-    filterTournament() {
-      const { search, tournamentList } = this;
-      if (!search) return tournamentList;
-      const v = search.toLowerCase();
-      return tournamentList.filter((i) =>
-        i.type_name.toLowerCase().includes(v)
-      );
-    }
   },
   created() {
     this.getBkTournaments();

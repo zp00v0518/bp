@@ -5,6 +5,7 @@
 <script>
 import SportMatching from './SportMatching';
 import TournamentMatching from './TournamentMatching';
+import CommandsMatching from './CommandsMatching';
 
 export default {
   name: 'CategoryMatching',
@@ -13,7 +14,8 @@ export default {
     return {
       listComponents: {
         sport: SportMatching,
-        tournament: TournamentMatching
+        tournament: TournamentMatching,
+        commands: CommandsMatching
       }
     };
   },

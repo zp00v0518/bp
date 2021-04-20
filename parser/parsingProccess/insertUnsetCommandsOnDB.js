@@ -1,11 +1,15 @@
 const appConfig = require('../../config');
 const InsertDB = require('../../backEnd/db/InsertDB');
+const schema = require('../../backEnd/db/schema');
 const connectMongoDB = require('../../backEnd/db/connectMongoDB');
 const collectionName = appConfig.collections.commands.name;
 const dbName = appConfig.db.name;
 
 async function insertUnsetCommandsOnDB(arr = []) {
   if (arr.length === 0) return;
+  arr.forEach((item) => {
+    item.class = schema.class.command;
+  });
   const mongo = new connectMongoDB();
   const insert = new InsertDB(mongo);
   await insert.connect(dbName);
