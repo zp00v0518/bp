@@ -16,7 +16,7 @@
           @click="handleClick(child.url)"
         >
           <template #title>
-            <router-link class="bp-menu__link" :to="child.url">{{
+            <router-link class="bp-menu__link" :to="child.url" @click="hideDrawer">{{
               child.title
             }}</router-link>
           </template>
@@ -57,6 +57,9 @@ export default {
     }
   },
   methods: {
+    hideDrawer(){
+      this.$store.commit('HIDE_DRAWER');
+    },
     async getMenu() {
       if (this.$data.$api.wsInstance.readyState !== 1) {
         setTimeout(() => {

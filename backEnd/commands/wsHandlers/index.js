@@ -1,3 +1,3 @@
-const getCommandsByTournamentsHandler = require('./getCommandsByTournamentsHandler');
+const getBaseCommandHandler = require('./getBaseCommandHandler');
 
-module.exports = { getCommandsByTournamentsHandler };
+module.exports = { getBaseCommandHandler };

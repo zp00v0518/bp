@@ -1,5 +1,6 @@
 const classList = {
   command: 'command',
+  command_type: 'command_type',
   unset: 'unset',
   event: 'event',
   baseStat: 'baseStat',
@@ -39,12 +40,27 @@ const tournament_type = {
   ref_sport: refs.sport
 };
 
+const command_type = {
+  class: classList.command_type,
+  name: { type: String, name: 'name' },
+  [refs.tournament.name]: refs.tournament
+};
+const command = {
+  class: classList.command,
+  bkId: { type: Number, name: 'bkId' },
+  name: { type: String, name: 'name' },
+  url: { type: String, name: 'url' },
+  ref_tournament: { type: String, name: 'ref_tournament' }
+};
+
 const schema = {
   class: classList,
   baseStat,
   sportCategory,
   refs,
-  tournament_type
+  tournament_type,
+  command_type,
+  command
 };
 
 module.exports = schema;

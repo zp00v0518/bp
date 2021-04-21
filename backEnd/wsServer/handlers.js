@@ -14,7 +14,7 @@ const {
   getBkTournamentsHandler,
   saveMatchedTournamentsHandler
 } = require('../tournament/wsHandlers');
-const { getCommandsByTournamentsHandler } = require('../commands/wsHandlers');
+const { getBaseCommandHandler } = require('../commands/wsHandlers');
 
 const handlers = {
   get_matching: matching.getMatching,
@@ -29,7 +29,7 @@ const handlers = {
   '/getBaseTournaments': getBaseTournamentsHandler,
   '/getBkTournaments': getBkTournamentsHandler,
   '/saveMatchedTournaments': saveMatchedTournamentsHandler,
-  '/getCommandsByTournaments': getCommandsByTournamentsHandler
+  '/getBaseCommand': getBaseCommandHandler
 };
 
 module.exports = handlers;

@@ -25,7 +25,12 @@
             v-for="(tour, tourIndex) in filterTournament"
             :key="tourIndex"
             :label="tour.type_name"
-          ></ElTabPane>
+          >
+            <!-- ********************************* -->
+
+
+            <!-- ******************************** -->
+          </ElTabPane>
         </ElTabs>
       </ElTabPane>
     </ElTabs>
@@ -65,8 +70,9 @@ export default {
       const { activeTournament, $data } = this;
       const { $api } = $data;
       const message = {
-        type: '/getCommandsByTournaments',
-        id: activeTournament._id
+        type: '/getBaseCommand',
+        id: activeTournament._id,
+        field: 'id'
       };
       const response = await $api.get(message);
       console.log(response);
