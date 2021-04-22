@@ -57,6 +57,11 @@ class FindInDB {
     };
     return findResult;
   }
+  async distinct(collectionName = 'test', field = '_id') {
+    const collection = this.mongo.open(collectionName);
+    const result = await collection.distinct(field);
+    return result;
+  }
 }
 
 module.exports = FindInDB;

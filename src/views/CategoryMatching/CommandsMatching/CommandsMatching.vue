@@ -28,7 +28,6 @@
           >
             <!-- ********************************* -->
 
-
             <!-- ******************************** -->
           </ElTabPane>
         </ElTabs>
@@ -71,8 +70,7 @@ export default {
       const { $api } = $data;
       const message = {
         type: '/getBaseCommand',
-        id: activeTournament._id,
-        field: 'id'
+        tournamet_id: activeTournament._id
       };
       const response = await $api.get(message);
       console.log(response);

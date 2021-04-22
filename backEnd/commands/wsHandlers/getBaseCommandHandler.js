@@ -4,19 +4,15 @@ const {
 } = require('../db');
 
 async function getBaseCommandHandler(data) {
-  const { id, field } = data;
-  let baseCommands = [];
-  let BKCommands = [];
+  const { tournamet_id } = data;
+  const baseCommands = await getBaseCommandsByTournament(tournamet_id);
+  const BKCommands = await getBKCommandsByTournament(tournamet_id);
   const message = {
     type: data.type,
     baseCommands,
     BKCommands,
-    id
+    tournamet_id
   };
-  if (field === 'id') {
-    baseCommands = await getBaseCommandsByTournament(id);
-    BKCommands = await getBKCommandsByTournament(id);
-  }
   return message;
 }
 module.exports = getBaseCommandHandler;
