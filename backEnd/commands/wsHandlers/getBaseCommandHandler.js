@@ -10,8 +10,7 @@ async function getBaseCommandHandler(data) {
   const message = {
     type: data.type,
     baseCommands,
-    BKCommands,
-    tournamet_id
+    BKCommands
   };
   return message;
 }

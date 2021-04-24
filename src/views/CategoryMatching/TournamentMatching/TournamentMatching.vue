@@ -25,6 +25,7 @@
           <ElTabPane
             v-for="(tour, tourIndex) in filterTournament"
             :key="tourIndex"
+            lazy
           >
             <template #label>
               <span class="match-tournament__item"
@@ -267,13 +268,14 @@ export default {
     text-transform: capitalize;
   }
   .el-tabs__nav.is-left {
-    max-width: 230px;
+    max-width: 250px;
     .el-tabs__item {
       white-space: normal;
       height: unset;
       line-height: unset;
       padding-bottom: 24px;
       padding-left: 24px;
+      display: flex;
     }
   }
   &--search {
