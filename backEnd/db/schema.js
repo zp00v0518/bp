@@ -1,6 +1,6 @@
 const classList = {
   command: 'command',
-  command_type: 'command_type',
+  base_command: 'base_command',
   unset: 'unset',
   event: 'event',
   baseStat: 'baseStat',
@@ -40,8 +40,8 @@ const tournament_type = {
   ref_sport: refs.sport
 };
 
-const command_type = {
-  class: classList.command_type,
+const base_command = {
+  class: classList.base_command,
   name: { type: String, name: 'name' },
   [refs.tournament.name]: refs.tournament
 };
@@ -50,7 +50,8 @@ const command = {
   bkId: { type: Number, name: 'bkId' },
   name: { type: String, name: 'name' },
   url: { type: String, name: 'url' },
-  ref_tournament: { type: String, name: 'ref_tournament' }
+  ref_tournament: { type: String, name: 'ref_tournament' },
+  ref_base_command: { type: String, name: 'ref_base_command' }
 };
 
 const schema = {
@@ -59,7 +60,7 @@ const schema = {
   sportCategory,
   refs,
   tournament_type,
-  command_type,
+  base_command,
   command
 };
 

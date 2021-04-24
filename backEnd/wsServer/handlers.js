@@ -4,17 +4,9 @@ const { getMenu } = require('../menu');
 const handlerGetActualFork = require('../fork/handlerGetActualFork');
 const getPreviousForkHandler = require('../fork/getPreviousForkHandler');
 const handlerGetBKList = require('../bk/handlerGetBKList');
-const {
-  getListSportCategoryHandle,
-  getUnsetCategoryHandle,
-  saveMatchedSportsHandle
-} = require('../sportCategory');
-const {
-  getBaseTournamentsHandler,
-  getBkTournamentsHandler,
-  saveMatchedTournamentsHandler
-} = require('../tournament/wsHandlers');
-const { getBaseCommandHandler } = require('../commands/wsHandlers');
+const sportCategory = require('../sportCategory');
+const tournaments = require('../tournament/wsHandlers');
+const commandsHandlers = require('../commands/wsHandlers');
 
 const handlers = {
   get_matching: matching.getMatching,
@@ -23,13 +15,14 @@ const handlers = {
   '/getActualFork': handlerGetActualFork,
   '/getPreviousFork': getPreviousForkHandler,
   '/get_bk_list': handlerGetBKList,
-  '/getListSportCategory': getListSportCategoryHandle,
-  '/getUnsetCategory': getUnsetCategoryHandle,
-  '/saveMatchedSports': saveMatchedSportsHandle,
-  '/getBaseTournaments': getBaseTournamentsHandler,
-  '/getBkTournaments': getBkTournamentsHandler,
-  '/saveMatchedTournaments': saveMatchedTournamentsHandler,
-  '/getBaseCommand': getBaseCommandHandler
+  '/getListSportCategory': sportCategory.getListSportCategoryHandle,
+  '/getUnsetCategory': sportCategory.getUnsetCategoryHandle,
+  '/saveMatchedSports': sportCategory.saveMatchedSportsHandle,
+  '/getBaseTournaments': tournaments.getBaseTournamentsHandler,
+  '/getBkTournaments': tournaments.getBkTournamentsHandler,
+  '/saveMatchedTournaments': tournaments.saveMatchedTournamentsHandler,
+  '/getBaseCommand': commandsHandlers.getBaseCommandHandler,
+  '/saveMatchedCommand': commandsHandlers.saveMatchedCommandHandler
 };
 
 module.exports = handlers;

@@ -118,16 +118,40 @@ export default {
   },
   created() {},
   methods: {
-    saveDataOnServer(e) {
-      console.log(this.BKCommands);
-      console.log(this.baseCommands);
+    async saveDataOnServer() {
+      const { baseCommands, $data } = this;
+      const { $api, $message } = $data;
+      if (Object.keys(baseCommands).length === 0) {
+        $message.warning('Ничего не выбрано');
+        return;
+      }
+      if (!this.checkNames()) {
+        $message.error('Какая-то из команд без имени');
+        return;
+      }
+      const message = {
+        type: '/saveMatchedCommand',
+        commands: baseCommands
+      };
+      // const response = await $api.get(message);
+      // console.log(response);
+    },
+    checkExistsName() {
+      const { baseCommands } = this;
+      const flag = Object.values(baseCommands).every((i) => i.name);
+      return flag;
+    },
+    checkNames() {
+      const { baseCommands } = this;
+      const flag = Object.values(baseCommands).every((i) => i.name);
+      return flag;
     },
     addTabHandler() {
       const { activeTournament } = this;
       const template = {
         name: '',
         isNew: true,
-        tournamet_type: activeTournament._id,
+        tournament_type: activeTournament._id,
         commands: this.commandsField()
       };
       this.baseCommands.unshift(template);
@@ -157,7 +181,7 @@ export default {
       this.loading.close();
     },
     async changeTournaments() {
-      const data = await this.getListCommands();
+      await this.getListCommands();
     },
     async getListCommands() {
       const { activeTournament, $data } = this;

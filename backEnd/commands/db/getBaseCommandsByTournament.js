@@ -5,10 +5,10 @@ const config = require('../../../config');
 
 async function getBaseCommandsByTournament(id = '') {
   const collectionName = config.collections.commands.name;
-  const { command_type } = schema;
+  const { base_command } = schema;
   const query = {
-    class: schema.class.command_type,
-    [command_type.tournament_type.name]: new ObjectId(id)
+    class: schema.class.base_command,
+    [base_command.tournament_type.name]: new ObjectId(id)
   };
   const result = await findMethod.all(collectionName, query);
   return result.result;
