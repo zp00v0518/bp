@@ -42,7 +42,7 @@
               @tab-add="addTabHandler"
               v-if="
                 +activeTournamentTab === tourIndex &&
-                +activeSportTab === tabIndex
+                  +activeSportTab === tabIndex
               "
             >
               <ElTabPane
@@ -81,9 +81,8 @@
                                 filterable
                               >
                                 <template
-                                  v-for="(
-                                    BKCommand, BKCommandIndex
-                                  ) in BKCommands[bkItem.id]"
+                                  v-for="(BKCommand,
+                                  BKCommandIndex) in BKCommands[bkItem.id]"
                                 >
                                   <ElOption
                                     :key="BKCommandIndex"
@@ -95,7 +94,7 @@
                               </ElSelect>
                             </template>
                             <template v-else>
-                              <div class="matching_row__command">
+                              <div class="matching_row__command--name">
                                 {{
                                   getRealCommandByBK(bkItem.id, baseCommand._id)
                                     .name
@@ -149,7 +148,11 @@ export default {
         commands: baseCommands
       };
       const response = await $api.get(message);
-      console.log(response);
+      if (response.status) {
+        await this.getListCommands();
+      } else {
+        $message.error('Данные не сохранились. На сервере что-то пошло не так');
+      }
     },
     checkExistsName() {
       const { baseCommands } = this;
@@ -268,6 +271,9 @@ export default {
 .matching_row {
   &__command {
     text-align: center;
+    &--name {
+      font-size: 18px;
+    }
   }
 }
 </style>
