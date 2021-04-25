@@ -42,7 +42,7 @@
               @tab-add="addTabHandler"
               v-if="
                 +activeTournamentTab === tourIndex &&
-                  +activeSportTab === tabIndex
+                +activeSportTab === tabIndex
               "
             >
               <ElTabPane
@@ -75,18 +75,33 @@
                         </td>
                         <td>
                           <div class="matching_row__command">
-                            <ElSelect
-                              v-model="baseCommand.commands[bkItem.id].value"
-                              filterable
-                            >
-                              <ElOption
-                                v-for="(BKCommand,
-                                BKCommandIndex) in BKCommands[bkItem.id]"
-                                :key="BKCommandIndex"
-                                :label="BKCommand.name"
-                                :value="BKCommand._id"
-                              ></ElOption>
-                            </ElSelect>
+                            <template v-if="baseCommand.isNew">
+                              <ElSelect
+                                v-model="baseCommand.commands[bkItem.id].value"
+                                filterable
+                              >
+                                <template
+                                  v-for="(
+                                    BKCommand, BKCommandIndex
+                                  ) in BKCommands[bkItem.id]"
+                                >
+                                  <ElOption
+                                    :key="BKCommandIndex"
+                                    :label="BKCommand.name"
+                                    :value="BKCommand._id"
+                                    v-if="!BKCommand.ref_base_command"
+                                  ></ElOption>
+                                </template>
+                              </ElSelect>
+                            </template>
+                            <template v-else>
+                              <div class="matching_row__command">
+                                {{
+                                  getRealCommandByBK(bkItem.id, baseCommand._id)
+                                    .name
+                                }}
+                              </div>
+                            </template>
                           </div>
                         </td>
                       </tr>
@@ -133,8 +148,8 @@ export default {
         type: '/saveMatchedCommand',
         commands: baseCommands
       };
-      // const response = await $api.get(message);
-      // console.log(response);
+      const response = await $api.get(message);
+      console.log(response);
     },
     checkExistsName() {
       const { baseCommands } = this;
@@ -156,16 +171,23 @@ export default {
       };
       this.baseCommands.unshift(template);
     },
-    commandsField() {
-      const { bkList } = this;
+    commandsField(commandId) {
+      const { bkList, getRealCommandByBK } = this;
       const result = {};
       Object.values(bkList).forEach((item) => {
         const { id } = item;
         result[id] = {
-          value: ''
+          value:
+            commandId !== undefined ? getRealCommandByBK(id, commandId)._id : ''
         };
       });
       return result;
+    },
+    getRealCommandByBK(bkId, commandId) {
+      const { BKCommands } = this;
+      const item = BKCommands[bkId];
+      const el = item.find((i) => i.ref_base_command === commandId);
+      return el;
     },
     showLoading() {
       this.loading = this.$data.$loading.service({
@@ -192,8 +214,8 @@ export default {
       };
       const response = await $api.get(message);
       const { baseCommands, BKCommands } = response;
-      this.baseCommands = baseCommands;
       this.BKCommands = this.adapterBKCommands(BKCommands);
+      this.baseCommands = this.adabterBaseCommand(baseCommands);
     },
     adapterBKCommands(arr) {
       const obj = {};
@@ -203,6 +225,13 @@ export default {
         obj[bkId].push(item);
       });
       return obj;
+    },
+    adabterBaseCommand(arr) {
+      const { commandsField } = this;
+      arr.forEach((item) => {
+        item.commands = commandsField(item._id);
+      });
+      return arr;
     }
   }
 };

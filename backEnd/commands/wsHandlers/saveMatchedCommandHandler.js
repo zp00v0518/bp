@@ -8,11 +8,13 @@ async function saveMatchedCommandHandler(data) {
   try {
     const { commands } = data;
     const unsetCommand = getUnsetCommand(commands);
-    const result = await setNewBaseCommand(createUnsetCommands(unsetCommand));
-    setNewIds(result.ops, unsetCommand);
-		const arrCreate = createObjForSetId(commands);
-		await setRefinCommand(arrCreate);
-		message.status = true;
+    if (unsetCommand.length > 0) {
+      const result = await setNewBaseCommand(createUnsetCommands(unsetCommand));
+      setNewIds(result, unsetCommand);
+    }
+    const arrCreate = createObjForSetId(commands);
+    await setRefinCommand(arrCreate);
+    message.status = true;
   } catch (err) {
     console.log(err);
     return;
@@ -21,7 +23,7 @@ async function saveMatchedCommandHandler(data) {
 }
 
 function getUnsetCommand(arr) {
-  const z = arr.filter((i) => !i.id);
+  const z = arr.filter((i) => !i._id);
   return z;
 }
 
@@ -41,12 +43,12 @@ function setNewIds(newIds, unsetCommand) {
   });
 }
 
-function createObjForSetId(commands){
-	const obj = {};
-	commands.forEach(item => {
-		obj[item._id] = Object.values(item.commands).map(i => i.value);
-	})
-	return obj;
+function createObjForSetId(commands) {
+  const obj = {};
+  commands.forEach((item) => {
+    obj[item._id] = Object.values(item.commands).map((i) => i.value);
+  });
+  return obj;
 }
 
 module.exports = saveMatchedCommandHandler;
