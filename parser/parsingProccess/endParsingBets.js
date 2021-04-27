@@ -1,12 +1,20 @@
 const insertUnsetCommandsOnDB = require('./insertUnsetCommandsOnDB');
 const getCommandsByNameAndBK = require('./getCommandsByNameAndBK');
+const { addEventsToDB, addForkResultToDB } = require('../methods/db');
+const checkFork = require('./checkFork');
 
 async function endParsingBets(parseEvents = []) {
-  const commandList = modifyEventsForSaveCommand(parseEvents.flat(Infinity));
+  let listEvents = parseEvents.flat(Infinity);
+  const commandList = modifyEventsForSaveCommand(listEvents);
   const findedCommand = await getCommandsByNameAndBK(commandList);
   const unsetCommands = getUnsetCommand(commandList, findedCommand);
   await insertUnsetCommandsOnDB(unsetCommands);
-  return commandList;
+  setIdsToEvents(listEvents, findedCommand);
+  listEvents = listEvents.filter((i) => !!i.commandId_1 && !!i.commandId_2);
+  await addEventsToDB(listEvents);
+  const forkResult = checkFork(listEvents);
+  await addForkResultToDB(forkResult)
+  return forkResult;
 }
 
 function modifyEventsForSaveCommand(arr = []) {
@@ -45,13 +53,41 @@ function getUnsetCommand(parsedCommnads, commandFromDB) {
         el.ref_tournament === ref_tournament
       );
     });
-    if (findedEl){
+    if (findedEl) {
       item.commandId = findedEl._id;
     }
-    return !findedEl
+    return !findedEl;
   });
 
   return result;
+}
+
+function setIdsToEvents(events, commands) {
+  events.flat(Infinity).forEach((ev) => {
+    const { bkId } = ev;
+    const commandName_1 = ev.command_1;
+    const commandName_2 = ev.command_2;
+    let command_1 = null;
+    let command_2 = null;
+    commands.some((item) => {
+      if (bkId === item.bkId) {
+        if (item.name === commandName_1) {
+          command_1 = item;
+        }
+        if (item.name === commandName_2) {
+          command_2 = item;
+        }
+      }
+      return !!command_1 && !!command_2;
+    });
+    if (command_1) {
+      ev.commandId_1 = command_1.ref_base_command;
+    }
+    if (command_2) {
+      ev.commandId_2 = command_2.ref_base_command;
+    }
+  });
+  return;
 }
 
 module.exports = endParsingBets;
@@ -64,7 +100,8 @@ const f = [
       url:
         'https://www.marathonbet.com/uk/betting/Football/England/Premier+League/Leeds+United+vs+Liverpool+-+11143498',
       coeff: {
-        w1: 5.45,
+        // w1: 5.45,
+        w1: 15.45,
         x: 4.8,
         w2: 1.58,
         w1_x: 2.56,
@@ -533,10 +570,13 @@ const f = [
         w1_w2: 1.18,
         w2_x: 1.14,
         totals: {
-          '1.5': [5.3, 1.15],
-          '2.0': [4.4, 1.2],
+          // '1.5': [5.3, 1.15],
+          '1.5': [5.3, 18.15],
+          '2.0': [4.4, 18.2],
+          // '2.0': [4.4, 1.2],
           '2.5': [2.63, 1.49],
-          '3.0': [2.15, 1.76],
+          '3.0': [2.15, 18.76],
+          // '3.0': [2.15, 1.76],
           '3.5': [1.68, 2.21],
           '4.0': [1.39, 3],
           '4.5': [1.29, 3.55],
@@ -649,7 +689,8 @@ const f = [
           '0.5': [8.9, 1.03],
           '1.0': [7.7, 1.05],
           '1.5': [3.4, 1.29],
-          '2.0': [2.69, 1.45],
+          '2.0': [2.69, 19.45],
+          // '2.0': [2.69, 1.45],
           '2.5': [1.88, 1.93],
           '3.0': [1.48, 2.6],
           '3.5': [1.32, 3.15],
@@ -2902,4 +2943,4 @@ const f = [
   ]
 ];
 
-endParsingBets(f);
+// endParsingBets(f);
