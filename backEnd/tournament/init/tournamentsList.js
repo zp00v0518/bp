@@ -7,6 +7,6 @@ Object.keys(tournaments).forEach((key) => {
 });
 
 tournaments[sport.soccer.key].list = list.soccer;
-tournaments[sport.basketball.key].list = list.basketball;
+// tournaments[sport.basketball.key].list = list.basketball;
 
 module.exports = tournaments;

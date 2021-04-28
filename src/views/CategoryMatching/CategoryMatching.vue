@@ -19,6 +19,7 @@ export default {
       }
     };
   },
+
   computed: {
     currentComp() {
       return this.listComponents[this.type] || 'div';

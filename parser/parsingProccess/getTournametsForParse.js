@@ -31,5 +31,4 @@ function adapterData(arr) {
   return result;
 }
 
-getTournametsForParse();
 module.exports = getTournametsForParse;

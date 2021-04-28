@@ -10,6 +10,7 @@ async function getBKCommandsByTournament(id = '') {
     class: command.class,
     [base_command.tournament_type.name]: new ObjectId(id)
   };
+  console.log(query)
   const result = await findMethod.all(collectionName, query);
   return result.result;
 }
