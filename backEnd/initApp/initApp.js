@@ -10,3 +10,6 @@ createSportCategories();
 
 const createTournamentOnDb = require('../tournament/init');
 createTournamentOnDb();
+
+const dropCommandsCollection = require('../commands/db/dropCommandsCollection');
+dropCommandsCollection();
