@@ -2,15 +2,17 @@ const ObjectId = require('mongodb').ObjectID;
 const { schema } = require('../../db');
 const { findMethod } = require('../../db/methods');
 const config = require('../../../config');
+const { getBKTournamentByBaseTournament } = require('../../tournament/db');
 
 async function getBKCommandsByTournament(id = '') {
   const collectionName = config.collections.commands.name;
-  const { base_command, command } = schema;
+  const bkTournaments = await getBKTournamentByBaseTournament(id);
+  const ids = bkTournaments.map(i => i._id.toString());
+  const { command } = schema;
   const query = {
     class: command.class,
-    [base_command.tournament_type.name]: new ObjectId(id)
+    [command.ref_tournament.name]: {$in: ids}
   };
-  console.log(query)
   const result = await findMethod.all(collectionName, query);
   return result.result;
 }
