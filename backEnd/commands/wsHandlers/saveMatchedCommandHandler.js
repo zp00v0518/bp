@@ -1,5 +1,6 @@
 const setNewBaseCommand = require('../setNewBaseCommand');
 const { setRefinCommand } = require('../db');
+const { ObjectID } = require('bson');
 
 async function saveMatchedCommandHandler(data) {
   const message = {
@@ -24,6 +25,11 @@ async function saveMatchedCommandHandler(data) {
 
 function getUnsetCommand(arr) {
   const z = arr.filter((i) => !i._id);
+  z.forEach((item) => {
+    Object.keys(item.commands).forEach((key) => {
+      if (!item.commands[key].value) delete item.commands[key];
+    });
+  });
   return z;
 }
 

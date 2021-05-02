@@ -12,6 +12,10 @@ async function createTournamentOnDb() {
   await insertMethod.connect(config.db.name);
   const collectionName = config.collections.tournaments.name;
   const list = createListForInsert();
+  if (!list || list.length === 0) {
+    await insertMethod.close();
+    return;
+  }
   await insertMethod.many(collectionName, list);
   await insertMethod.close();
 }

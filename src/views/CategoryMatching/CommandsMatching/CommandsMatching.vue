@@ -75,7 +75,7 @@
                         </td>
                         <td>
                           <div class="matching_row__command">
-                            <template v-if="baseCommand.isNew">
+                            <template v-if="baseCommand.isNew || baseCommand.commands[bkItem.id].isNew">
                               <ElSelect
                                 v-model="baseCommand.commands[bkItem.id].value"
                                 filterable
@@ -183,6 +183,7 @@ export default {
           value:
             commandId !== undefined ? getRealCommandByBK(id, commandId)._id : ''
         };
+        if (!result[id].value) result[id].isNew = true
       });
       return result;
     },
@@ -219,7 +220,6 @@ export default {
       const { baseCommands, BKCommands } = response;
       this.BKCommands = this.adapterBKCommands(BKCommands);
       this.baseCommands = this.adabterBaseCommand(baseCommands);
-      console.log(baseCommands, BKCommands);
     },
     adapterBKCommands(arr) {
       const obj = {};
