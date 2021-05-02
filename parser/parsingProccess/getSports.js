@@ -16,8 +16,13 @@ async function parseCicle() {
   const list = listForParse.flat(Infinity);
   const result = [];
   for (const item of list) {
-    const z = await item.getSports();
-    result.push(z);
+    try {
+      const z = await item.getSports();
+      result.push(z);
+    } catch (err) {
+      console.log(item);
+      console.log(err);
+    }
   }
   return result;
 }

@@ -84,6 +84,7 @@ async function parseOneTournament(browser, url) {
       utils.stringifyWithFunc(params)
     );
   } catch (err) {
+    console.log('Проблема при обработке адреса:  ', url);
     if (err.name !== 'TimeoutError') {
       console.log(err);
       console.log('Проблема при обработке адреса:  ', url);

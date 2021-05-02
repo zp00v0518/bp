@@ -190,7 +190,7 @@ export default {
       const { BKCommands } = this;
       const item = BKCommands[bkId];
       const el = item.find((i) => i.ref_base_command === commandId);
-      return el;
+      return el || {};
     },
     showLoading() {
       this.loading = this.$data.$loading.service({
@@ -215,12 +215,11 @@ export default {
         type: '/getBaseCommand',
         tournamet_id: activeTournament._id
       };
-      console.log(message);
       const response = await $api.get(message);
       const { baseCommands, BKCommands } = response;
-      console.log(baseCommands, BKCommands);
       this.BKCommands = this.adapterBKCommands(BKCommands);
       this.baseCommands = this.adabterBaseCommand(baseCommands);
+      console.log(baseCommands, BKCommands);
     },
     adapterBKCommands(arr) {
       const obj = {};
