@@ -21,6 +21,8 @@
           tab-position="left"
           v-model="activeTournamentTab"
           @tab-click="handlerClickOnTabTournament"
+          editable
+          @tab-add="addTabHandler"
         >
           <ElTabPane
             v-for="(tour, tourIndex) in filterTournament"
@@ -121,6 +123,7 @@ export default {
     this.getBkTournaments();
   },
   methods: {
+    addTabHandler(){},
     handlerClickOnTabTournament() {
       this.$nextTick(() => {
         setTimeout(() => {
