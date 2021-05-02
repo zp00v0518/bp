@@ -12,6 +12,14 @@ const routes = [
     )
   },
   {
+    props: true,
+    path: '/parse/:type',
+    name: 'Parser',
+    component: defineAsyncComponent(() =>
+      import(/* webpackChunkName: "about" */ '../views/Parser')
+    )
+  },
+  {
     path: '/',
     name: 'ForkView',
     component: Views.ForkView

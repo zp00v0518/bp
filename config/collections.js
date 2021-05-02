@@ -8,7 +8,8 @@ const collections = {
   statistic: { name: 'statistic' },
   bk: { name: 'bk' },
   sports: { name: 'sports_category' },
-  tournaments: { name: 'tournaments' }
+  tournaments: { name: 'tournaments' },
+  parse: { name: 'parse' }
 };
 
 module.exports = collections;

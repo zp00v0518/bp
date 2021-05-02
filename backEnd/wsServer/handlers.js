@@ -7,6 +7,7 @@ const handlerGetBKList = require('../bk/handlerGetBKList');
 const sportCategory = require('../sportCategory');
 const tournaments = require('../tournament/wsHandlers');
 const commandsHandlers = require('../commands/wsHandlers');
+const parserHandlers = require('../parse/wsHandlers');
 
 const handlers = {
   get_matching: matching.getMatching,
@@ -22,7 +23,8 @@ const handlers = {
   '/getBkTournaments': tournaments.getBkTournamentsHandler,
   '/saveMatchedTournaments': tournaments.saveMatchedTournamentsHandler,
   '/getBaseCommand': commandsHandlers.getBaseCommandHandler,
-  '/saveMatchedCommand': commandsHandlers.saveMatchedCommandHandler
+  '/saveMatchedCommand': commandsHandlers.saveMatchedCommandHandler,
+  '/goParse': parserHandlers.goParseHandler
 };
 
 module.exports = handlers;
