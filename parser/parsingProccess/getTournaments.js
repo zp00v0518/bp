@@ -1,7 +1,7 @@
 const listForParse = require('./listForParse');
 const { saveTournamentsOnDb } = require('../methods/db');
 
-async function parseCicle() {
+async function getTournaments() {
   const list = listForParse.flat(Infinity);
   const result = [];
   for (const item of list) {
@@ -12,4 +12,4 @@ async function parseCicle() {
   return result;
 }
 
-parseCicle();
+module.exports = getTournaments;

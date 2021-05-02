@@ -12,7 +12,7 @@ const listForParse = require('./listForParse');
 //   ]
 // ];
 
-async function parseCicle() {
+async function parseSports() {
   const list = listForParse.flat(Infinity);
   const result = [];
   for (const item of list) {
@@ -26,5 +26,4 @@ async function parseCicle() {
   }
   return result;
 }
-
-parseCicle();
+module.exports = parseSports
