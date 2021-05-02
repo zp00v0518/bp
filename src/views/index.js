@@ -1,5 +1,4 @@
-import Matching from './Matching';
 import ForkView from './ForkView';
 import CategoryMatching from './CategoryMatching';
 
-export default { Matching, ForkView, CategoryMatching };
+export default { ForkView, CategoryMatching };
