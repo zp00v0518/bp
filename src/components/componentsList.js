@@ -18,7 +18,8 @@ import {
   ElSelect,
   ElOption,
   ElDialog,
-  ElInput
+  ElInput,
+  ElMessageBox
 } from 'element-plus';
 
 import atoms from './atoms';
@@ -43,7 +44,8 @@ const components = [
   ElSelect,
   ElOption,
   ElDialog,
-  ElInput
+  ElInput,
+  ElMessageBox 
 ];
 
 Object.keys(atoms).forEach((key) => {

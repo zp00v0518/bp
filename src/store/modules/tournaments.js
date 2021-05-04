@@ -5,6 +5,11 @@ const tournaments = {
   mutations: {
     SET_BASE_TOURNAMENT(state, payload = {}) {
       state.baseTournaments = payload;
+    },
+    ADD_TOURNAMENT_TO_LIST(state, tour = {}) {
+      const sport = tour.name_sport;
+      if (!state.baseTournaments[sport]) state.baseTournaments[sport] = [];
+      state.baseTournaments[sport].push(tour);
     }
   },
   actions: {
@@ -14,6 +19,7 @@ const tournaments = {
       const { data } = response;
       if (!data) return;
       const result = {};
+      console.log(JSON.parse(JSON.stringify(data)));
       data.forEach((item) => {
         const sport = item.name_sport;
         if (!result[sport]) result[sport] = [];

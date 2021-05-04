@@ -1,4 +1,4 @@
-const soccer = []
+const soccer = [];
 
 // const soccer = [
 //   'Чемпионат Европы. Групповой этап',

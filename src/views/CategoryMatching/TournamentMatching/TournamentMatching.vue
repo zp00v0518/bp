@@ -99,6 +99,7 @@
 </template>
 
 <script>
+import { getRandomString } from 'template_func';
 import PopupMatchToirnament from './PopupMatchToirnament';
 import matchMixin from '../matchMixin';
 
@@ -123,7 +124,17 @@ export default {
     this.getBkTournaments();
   },
   methods: {
-    addTabHandler(){},
+    addTabHandler() {
+      const key = this.activeSport.key;
+      const tourName = window.prompt('Введите название туринар');
+      if (!tourName) return;
+      const template = {
+        name_sport: key,
+        type_name: tourName,
+        _id: `NEWTOUR${getRandomString(30)}`
+      };
+      this.$store.commit('ADD_TOURNAMENT_TO_LIST', template);
+    },
     handlerClickOnTabTournament() {
       this.$nextTick(() => {
         setTimeout(() => {
@@ -216,11 +227,16 @@ export default {
       this.isReadyComponent = true;
     },
     async saveDataOnServer() {
-      const { dataforSave } = this;
+      const { dataforSave, activeSport, baseTournaments } = this;
+      const sportName = activeSport.key;
       const copy = JSON.parse(JSON.stringify(dataforSave));
       Object.keys(copy).forEach((key) => {
         const item = copy[key];
-        copy[key] = item.map((i) => i._id);
+        copy[key] = {
+          sportName,
+          tournamentName: baseTournaments[sportName].find((i) => i._id === key).type_name,
+          tournaments: item.map((i) => i._id)
+        };
       });
       const { $api, $message } = this.$data;
       if (Object.keys(copy).length === 0) {
@@ -235,7 +251,8 @@ export default {
         type: '/saveMatchedTournaments',
         data: copy
       };
-      await $api.get(message);
+      const response = await $api.get(message);
+      console.log(response);
     },
     setValueInStore(tourId, setId) {
       const { dataforSave, firstData } = this;
