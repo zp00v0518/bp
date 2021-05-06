@@ -60,13 +60,16 @@
                       <tr>
                         <th class="match-tournament__table--bk">Название БК</th>
                         <th>Имя команды</th>
+                        <th>ID команды</th>
+                        <th>ID базовое</th>
+                        <th>ID турнира (базовое)</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr
                         class="matching_row"
                         v-for="(bkItem, bkIndex) in bkList"
-                        :key="bkIndex"
+                        :key="bkIndex + tour._id"
                       >
                         <td>
                           <div class="matching_row__name">
@@ -108,6 +111,15 @@
                             </template>
                           </div>
                         </td>
+                        <td class="matching_row__command--id">
+                          {{
+                            getRealCommandByBK(bkItem.id, baseCommand._id)._id
+                          }}
+                        </td>
+                        <td class="matching_row__command--id">
+                          {{ baseCommand._id }}
+                        </td>
+                        <td class="matching_row__command--id">{{tour._id}}</td>
                       </tr>
                     </tbody>
                   </table>
@@ -269,7 +281,8 @@ export default {
         position: relative;
         padding-right: calc(var(--base-padding) * 1.2) !important;
         align-items: center;
-        min-width: 240px;
+        min-width: 200px;
+        text-align: left;
         .el-icon-close {
           position: absolute;
           right: 10px;
@@ -285,6 +298,10 @@ export default {
     text-align: center;
     &--name {
       font-size: 18px;
+      min-width: 150px;
+    }
+    &--id {
+      font-size: 12px;
     }
   }
 }

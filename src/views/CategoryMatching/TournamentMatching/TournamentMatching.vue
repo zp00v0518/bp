@@ -54,6 +54,7 @@
                     <th class="match-tournament__table--bk">БК имя</th>
                     <th>Турнир</th>
                     <th>URL</th>
+                    <th>ID</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -79,6 +80,7 @@
                         >{{ getTournamentUrl(bkItem) }}</a
                       >
                     </td>
+                    <td>{{getTournamentID(bkItem)}}</td>
                   </tr>
                 </tbody>
               </table>
@@ -124,6 +126,11 @@ export default {
     this.getBkTournaments();
   },
   methods: {
+    getTournamentID(bkItem){
+        const item = this.getTournamentForView(bkItem);
+      if (!item) return '';
+      return item._id || '';
+    },
     addTabHandler() {
       const key = this.activeSport.key;
       const tourName = window.prompt('Введите название туринар');
