@@ -1,5 +1,3 @@
-const { sendWSMessage } = require('../wsServer');
-
 // закомментируемый код проверяет вилки непосредственно в событиях 
 // const { incrementStatistic } = require('../statistic/db');
 // const { checkFork, addStatisticToForkResult } = require('../../parser/methods');
@@ -21,7 +19,7 @@ async function handlerGetActualFork(data, UserOnline) {
       result
     }
   };
-  sendWSMessage(ws, message);
+  return message;
 }
 
 module.exports = handlerGetActualFork;

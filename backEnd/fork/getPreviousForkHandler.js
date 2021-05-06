@@ -1,4 +1,3 @@
-const { sendWSMessage } = require('../wsServer');
 const getPreviousFork = require('./getPreviousFork');
 
 
@@ -12,7 +11,7 @@ async function getPreviousForkHandler(data, UserOnline) {
       result
     }
   };
-  sendWSMessage(ws, message);
+  return message;
 }
 
 module.exports = getPreviousForkHandler;

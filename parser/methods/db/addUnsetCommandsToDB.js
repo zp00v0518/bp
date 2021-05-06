@@ -1,9 +1,9 @@
 const appConfig = require('../../../config');
 const { UpdateDB, schema } = require('../../../backEnd/db');
 
-const update = new UpdateDB();
 
 async function addUnsetCommandsToDB(arr, sport = appConfig.sports.football.name) {
+  const update = new UpdateDB();
   await update.connect(appConfig.db.name);
   const collection = appConfig.collections.commands.name;
   const query = {

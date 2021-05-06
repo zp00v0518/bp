@@ -46,7 +46,7 @@ async function parseOneEvent(eventPage, url) {
     await eventPage.waitForTimeout(5000);
     return item;
   } catch (err) {
-    // console.log(`Проблема с урлом: ${url}`);
+    console.log(`Проблема с урлом: ${url}`);
     return false;
   }
 }

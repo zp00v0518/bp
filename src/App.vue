@@ -2,7 +2,7 @@
   <el-container id="wrapper" direction="vertical">
     <Vheader>Header</Vheader>
     <el-container>
-      <el-aside id="aside" v-show="menuContent.length > 0" width="200px"
+      <el-aside id="aside" v-show="menuContent.length > 0" width="150px"
         ><Menu></Menu
       ></el-aside>
       <el-main>
@@ -39,9 +39,12 @@ export default {
       if (this.$data.$api.wsInstance.readyState !== 1) {
         setTimeout(() => {
           this.initApp();
-        }, 100);
+        }, 20);
       } else {
-        this.$store.dispatch('GET_BK_LIST', this.$data.$api);
+        const api = this.$data.$api;
+        this.$store.dispatch('GET_BK_LIST', api);
+        this.$store.dispatch('GET_SPORT_TYPES', api);
+        this.$store.dispatch('GET_BASE_TOURNAMENT', api);
       }
     }
   }

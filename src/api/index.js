@@ -20,13 +20,13 @@ class WS {
     this.wsInstance.onmessage = (event) => {
       const data = JSON.parse(event.data);
       if (window.location.hostname === 'localhost') {
-        console.log(data);
-        if (this.consoleTimer) {
-          clearTimeout(this.consoleTimer);
-        }
-        this.consoleTimer = setTimeout(() => {
-          console.clear();
-        }, 5000);
+        // console.log(data);
+        // if (this.consoleTimer) {
+        //   clearTimeout(this.consoleTimer);
+        // }
+        // this.consoleTimer = setTimeout(() => {
+        //   console.clear();
+        // }, 5000);
       }
     };
     this.wsInstance.onclose = () => {
@@ -40,7 +40,13 @@ class WS {
   get(e) {
     const { wsInstance } = this;
     const { type } = e;
-    return new Promise((resolve) => {
+
+    return new Promise((resolve, reject) => {
+      if (wsInstance.readyState !== 1) {
+        console.log('Socket is close');
+        reject(false);
+        return;
+      }
       wsInstance.send(JSON.stringify(e));
       function handler(res) {
         const data = JSON.parse(res.data);
@@ -51,6 +57,14 @@ class WS {
       }
       wsInstance.addEventListener('message', handler);
     });
+  }
+  sendMessage(message) {
+    const { wsInstance } = this;
+    if (wsInstance.readyState !== 1) {
+      console.log('Socket is close');
+      return false;
+    }
+    wsInstance.send(JSON.stringify(message));
   }
 }
 

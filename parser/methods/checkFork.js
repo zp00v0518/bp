@@ -93,6 +93,7 @@ function getBets(coeffList, item) {
   });
   return getBetsResult;
 }
+
 function checkMarga(first, second) {
   return 1 / +first + 1 / +second;
 }

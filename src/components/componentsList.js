@@ -10,7 +10,16 @@ import {
   ElMenuItem,
   ElDrawer,
   ElPopover,
-  ElInputNumber
+  ElInputNumber,
+  ElTabs,
+  ElTabPane,
+  ElTable,
+  ElTableColumn,
+  ElSelect,
+  ElOption,
+  ElDialog,
+  ElInput,
+  ElMessageBox
 } from 'element-plus';
 
 import atoms from './atoms';
@@ -27,7 +36,16 @@ const components = [
   ElMenuItem,
   ElDrawer,
   ElPopover,
-  ElInputNumber
+  ElInputNumber,
+  ElTabs,
+  ElTabPane,
+  ElTable,
+  ElTableColumn,
+  ElSelect,
+  ElOption,
+  ElDialog,
+  ElInput,
+  ElMessageBox 
 ];
 
 Object.keys(atoms).forEach((key) => {

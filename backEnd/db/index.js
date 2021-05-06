@@ -4,6 +4,7 @@ const FindInDB = require('./FindInDB');
 const AggregateDB = require('./AggregateDB');
 const BulkWriteDB = require('./BulkWriteDB');
 const schema = require('./schema');
+const connectMongoDB = require('./connectMongoDB');
 
 module.exports = {
   InsertDB,
@@ -11,5 +12,6 @@ module.exports = {
   schema,
   FindInDB,
   AggregateDB,
-  BulkWriteDB
+  BulkWriteDB,
+  connectMongoDB
 };

@@ -1,3 +1,4 @@
 import sortArrByField from './sortArrByField';
+import goToUrl from './goToUrl';
 
-export default { sortArrByField };
+export { sortArrByField, goToUrl };

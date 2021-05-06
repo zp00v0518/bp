@@ -23,6 +23,8 @@
 </template>
 
 <script>
+import { goToUrl } from '../../../utils';
+
 export default {
   name: 'CheckFork',
   data() {
@@ -42,6 +44,7 @@ export default {
       const response = await this.$data.$api.get({ type: '/getActualFork' });
       const { data } = response;
       this.$store.commit('SET_CURRENT_FORK', data.result);
+      if (location.pathname !== '/') goToUrl('/');
     }
   }
 };

@@ -6,7 +6,10 @@ const collections = {
   menu: { name: 'menu' },
   results: { name: 'results' },
   statistic: { name: 'statistic' },
-  bk: { name: 'bk' }
+  bk: { name: 'bk' },
+  sports: { name: 'sports_category' },
+  tournaments: { name: 'tournaments' },
+  parse: { name: 'parse' }
 };
 
 module.exports = collections;

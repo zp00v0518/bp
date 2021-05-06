@@ -1,21 +1,25 @@
 const appConfig = require('../../../config');
 const ConnectMongoDB = require('../../db/connectMongoDB.js');
-const InsertDB = require('../../db/InsertDB');
+const UpdateDB = require('../../db/UpdateDB');
 const mongo = new ConnectMongoDB();
-const schema  = require('../../db/schema');
-
+const schema = require('../../db/schema');
 
 async function createStaticticCollection() {
-	const insertMethod = new InsertDB(mongo);
-  await insertMethod.connect(appConfig.db.name);
+  const updateMethod = new UpdateDB(mongo);
+  await updateMethod.connect(appConfig.db.name);
   const collectionName = appConfig.collections.statistic.name;
-  const template = {
-    parseCount: 0,
-    lastParse: Date.now(),
+  const query = {
     class: schema.baseStat.class
   };
-  await insertMethod.one(collectionName, template);
-  insertMethod.close();
+  const change = {
+    parseCount: 0,
+    lastParse: Date.now()
+  };
+  const doc = {
+    $set: change
+  };
+  await updateMethod.one(collectionName, query, doc, { upsert: true });
+  updateMethod.close();
 }
 
 module.exports = createStaticticCollection;
