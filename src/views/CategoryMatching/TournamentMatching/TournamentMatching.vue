@@ -149,6 +149,7 @@ export default {
     },
     checkUnicName(name) {
       const { tournamentList } = this;
+      if (!tournamentList) return true;
       const flag = tournamentList.some((i) => i.type_name.toLowerCase() === name.toLowerCase());
       return !flag;
     },

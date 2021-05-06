@@ -32,9 +32,10 @@ function modifyEventsForSaveCommand(arr = []) {
     const command_2 = getCommand(ev.command_2, ev);
     result.push(command_1, command_2);
   });
-  result = result.filter((command, index, arr) => {
-    const findIndex = arr.findIndex(
-      (elem) => elem.name === command.name || elem.name === command.name
+  result = result.filter((command, index, baseArr) => {
+    const findIndex = baseArr.findIndex(
+      (elem) => elem.name === command.name && elem.bkId === command.bkId
+      // (elem) => elem.name === command.name || elem.name === command.name
     );
     const flag = findIndex === -1 || !(findIndex < index);
     return flag;
