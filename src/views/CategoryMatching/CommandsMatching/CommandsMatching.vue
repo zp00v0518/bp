@@ -220,6 +220,7 @@ export default {
       const { baseCommands, BKCommands } = response;
       this.BKCommands = this.adapterBKCommands(BKCommands);
       this.baseCommands = this.adabterBaseCommand(baseCommands);
+      console.log(response);
     },
     adapterBKCommands(arr) {
       const obj = {};

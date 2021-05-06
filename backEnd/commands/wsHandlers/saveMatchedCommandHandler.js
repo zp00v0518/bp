@@ -1,6 +1,5 @@
 const setNewBaseCommand = require('../setNewBaseCommand');
 const { setRefinCommand } = require('../db');
-const { ObjectID } = require('bson');
 
 async function saveMatchedCommandHandler(data) {
   const message = {

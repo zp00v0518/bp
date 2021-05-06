@@ -19,7 +19,6 @@ const tournaments = {
       const { data } = response;
       if (!data) return;
       const result = {};
-      console.log(JSON.parse(JSON.stringify(data)));
       data.forEach((item) => {
         const sport = item.name_sport;
         if (!result[sport]) result[sport] = [];

@@ -1,6 +1,11 @@
 const insertUnsetCommandsOnDB = require('./insertUnsetCommandsOnDB');
 const getCommandsByNameAndBK = require('./getCommandsByNameAndBK');
-const { addEventsToDB, addForkResultToDB } = require('../methods/db');
+const {
+  addEventsToDB,
+  addForkResultToDB,
+  getStatistic
+} = require('../methods/db');
+const methods = require('../methods');
 const checkFork = require('./checkFork');
 
 async function endParsingBets(parseEvents = []) {
@@ -11,9 +16,12 @@ async function endParsingBets(parseEvents = []) {
   await insertUnsetCommandsOnDB(unsetCommands);
   setIdsToEvents(listEvents, findedCommand);
   listEvents = listEvents.filter((i) => !!i.commandId_1 && !!i.commandId_2);
+  const statistic = await getStatistic();
+  methods.addStatisticToForkResult(listEvents, statistic);
   await addEventsToDB(listEvents);
-  const forkResult = checkFork(listEvents);
-  await addForkResultToDB(forkResult)
+  let forkResult = checkFork(listEvents);
+  forkResult = methods.addStatisticToForkResult(forkResult, statistic);
+  await addForkResultToDB(forkResult);
   return forkResult;
 }
 
@@ -50,7 +58,7 @@ function getUnsetCommand(parsedCommnads, commandFromDB) {
       return (
         el.bkId === bkId &&
         el.name === name &&
-        el.ref_tournament === ref_tournament
+        el.ref_tournament.toString() === ref_tournament.toString()
       );
     });
     if (findedEl) {

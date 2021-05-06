@@ -32,5 +32,3 @@ async function parseCicle() {
   }
   return true;
 }
-
-console.log(456)

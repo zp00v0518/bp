@@ -7,7 +7,8 @@ const { getBKTournamentByBaseTournament } = require('../../tournament/db');
 async function getBKCommandsByTournament(id = '') {
   const collectionName = config.collections.commands.name;
   const bkTournaments = await getBKTournamentByBaseTournament(id);
-  const ids = bkTournaments.map(i => i._id.toString());
+  const ids = bkTournaments.map(i => i._id);
+  // const ids = bkTournaments.map(i => i._id.toString());
   const { command } = schema;
   const query = {
     class: command.class,
