@@ -75,7 +75,12 @@
                         </td>
                         <td>
                           <div class="matching_row__command">
-                            <template v-if="baseCommand.isNew || baseCommand.commands[bkItem.id].isNew">
+                            <template
+                              v-if="
+                                baseCommand.isNew ||
+                                  baseCommand.commands[bkItem.id].isNew
+                              "
+                            >
                               <ElSelect
                                 v-model="baseCommand.commands[bkItem.id].value"
                                 filterable
@@ -143,9 +148,13 @@ export default {
         $message.error('Какая-то из команд без имени');
         return;
       }
+      const copyCommand = JSON.parse(JSON.stringify(baseCommands));
+      copyCommand.forEach((item) => {
+        if (item.isNew) item.name = item.name.trim();
+      });
       const message = {
         type: '/saveMatchedCommand',
-        commands: baseCommands
+        commands: copyCommand
       };
       const response = await $api.get(message);
       if (response.status) {
@@ -183,14 +192,16 @@ export default {
           value:
             commandId !== undefined ? getRealCommandByBK(id, commandId)._id : ''
         };
-        if (!result[id].value) result[id].isNew = true
+        if (!result[id].value) result[id].isNew = true;
       });
       return result;
     },
     getRealCommandByBK(bkId, commandId) {
       const { BKCommands } = this;
       const item = BKCommands[bkId];
-      const el = item.find((i) => i.ref_base_command === commandId);
+      let el = {};
+      if (!item) return el;
+      el = item.find((i) => i.ref_base_command === commandId);
       return el || {};
     },
     showLoading() {
@@ -220,7 +231,6 @@ export default {
       const { baseCommands, BKCommands } = response;
       this.BKCommands = this.adapterBKCommands(BKCommands);
       this.baseCommands = this.adabterBaseCommand(baseCommands);
-      console.log(response);
     },
     adapterBKCommands(arr) {
       const obj = {};

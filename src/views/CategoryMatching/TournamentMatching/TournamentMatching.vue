@@ -128,12 +128,22 @@ export default {
       const key = this.activeSport.key;
       const tourName = window.prompt('Введите название туринар');
       if (!tourName) return;
+      if (!this.checkUnicName(tourName)) {
+        const { $message } = this.$data;
+        $message.error('Такое имя уже существует');
+        return;
+      }
       const template = {
         name_sport: key,
         type_name: tourName,
         _id: `NEWTOUR${getRandomString(30)}`
       };
       this.$store.commit('ADD_TOURNAMENT_TO_LIST', template);
+    },
+    checkUnicName(name) {
+      const { tournamentList } = this;
+      const flag = tournamentList.some((i) => i.type_name.toLowerCase() === name.toLowerCase());
+      return !flag;
     },
     handlerClickOnTabTournament() {
       this.$nextTick(() => {
