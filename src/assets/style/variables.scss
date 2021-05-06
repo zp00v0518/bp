@@ -4,7 +4,7 @@
   --base-step: 4px;
   --double-step: calc(var(--base-step) * 2);
   --base-padding: calc(var(--base-step) * 6);
-  --half-base-padding: calc(var(--base-padding) / 2); 
+  --half-base-padding: calc(var(--base-padding) / 2);
   --color-theme-1: #3b328c;
   --color-theme-2: #201c4d;
   --color-theme-3: #5649cc;
@@ -14,9 +14,13 @@
   --primary-text: #303133;
   --regular-text: #606266;
   --secondary-text: #909399;
-  --placeholder: #C0C4CC;
+  --placeholder: #c0c4cc;
   --link: var(--color-theme-4);
   --link-hover: var(--color-theme-5);
+  --error-color: #f56c6c;
+  --ok-color: #67c23a;
+  --info-color: #909399;
+  --primary-color: #409EFF;
   // --link: #2c68ac;
 }
 

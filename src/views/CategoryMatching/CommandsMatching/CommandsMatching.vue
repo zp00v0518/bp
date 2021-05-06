@@ -41,7 +41,8 @@
               editable
               @tab-add="addTabHandler"
               v-if="
-                +activeTournamentTab === tourIndex &&
+                isReady &&
+                  +activeTournamentTab === tourIndex &&
                   +activeSportTab === tabIndex
               "
             >
@@ -50,8 +51,21 @@
                 :key="baseCommandIndex"
                 :label="baseCommand.name"
               >
-                <template #label v-if="baseCommand.isNew">
+                <!-- <template #label v-if="baseCommand.isNew">
                   <ElInput type="text" v-model="baseCommand.name"></ElInput>
+                </template> -->
+                <template #label>
+                  <template v-if="baseCommand.isNew">
+                    <ElInput type="text" v-model="baseCommand.name"></ElInput
+                  ></template>
+                  <div class="match-tournament__item" v-else>
+                    {{ baseCommand.name }}
+                    <span
+                      class="match-tournament__item--count"
+                      :class="{ 'is-full': isFullCommands(baseCommand) }"
+                      >{{ getCountCommands(baseCommand) }}</span
+                    >
+                  </div>
                 </template>
 
                 <div class="match-tournament__table--wrap">
@@ -119,7 +133,9 @@
                         <td class="matching_row__command--id">
                           {{ baseCommand._id }}
                         </td>
-                        <td class="matching_row__command--id">{{tour._id}}</td>
+                        <td class="matching_row__command--id">
+                          {{ tour._id }}
+                        </td>
                       </tr>
                     </tbody>
                   </table>
@@ -144,11 +160,21 @@ export default {
     return {
       loading: null,
       BKCommands: [],
-      baseCommands: []
+      baseCommands: [],
+      isReady: false
     };
   },
-  created() {},
   methods: {
+    isFullCommands(baseCommand) {
+      const { bkList } = this;
+      const count = this.getCountCommands(baseCommand);
+      return count === Object.keys(bkList).length;
+    },
+    getCountCommands(baseCommand) {
+      let z = Object.values(baseCommand.commands).map((i) => i.value);
+      z = z.filter((i) => !!i);
+      return z.length;
+    },
     async saveDataOnServer() {
       const { baseCommands, $data } = this;
       const { $api, $message } = $data;
@@ -233,6 +259,7 @@ export default {
       await this.getListCommands();
     },
     async getListCommands() {
+      this.isReady = false;
       const { activeTournament, $data } = this;
       const { $api } = $data;
       const message = {
@@ -243,6 +270,7 @@ export default {
       const { baseCommands, BKCommands } = response;
       this.BKCommands = this.adapterBKCommands(BKCommands);
       this.baseCommands = this.adabterBaseCommand(baseCommands);
+      this.isReady = true;
     },
     adapterBKCommands(arr) {
       const obj = {};
@@ -283,6 +311,7 @@ export default {
         align-items: center;
         min-width: 200px;
         text-align: left;
+        padding-left: 28px !important;
         .el-icon-close {
           position: absolute;
           right: 10px;

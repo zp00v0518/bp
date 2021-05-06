@@ -35,6 +35,9 @@
                 <span
                   v-if="dataforSave[tour._id]"
                   class="match-tournament__item--count"
+                  :class="{
+                    'is-full': isFullTournament(dataforSave[tour._id].length)
+                  }"
                   >{{ dataforSave[tour._id].length }}</span
                 >
               </span>
@@ -80,7 +83,7 @@
                         >{{ getTournamentUrl(bkItem) }}</a
                       >
                     </td>
-                    <td>{{getTournamentID(bkItem)}}</td>
+                    <td>{{ getTournamentID(bkItem) }}</td>
                   </tr>
                 </tbody>
               </table>
@@ -126,8 +129,12 @@ export default {
     this.getBkTournaments();
   },
   methods: {
-    getTournamentID(bkItem){
-        const item = this.getTournamentForView(bkItem);
+    isFullTournament(count) {
+      const { bkList } = this;
+      return count === Object.keys(bkList).length;
+    },
+    getTournamentID(bkItem) {
+      const item = this.getTournamentForView(bkItem);
       if (!item) return '';
       return item._id || '';
     },
@@ -150,7 +157,9 @@ export default {
     checkUnicName(name) {
       const { tournamentList } = this;
       if (!tournamentList) return true;
-      const flag = tournamentList.some((i) => i.type_name.toLowerCase() === name.toLowerCase());
+      const flag = tournamentList.some(
+        (i) => i.type_name.toLowerCase() === name.toLowerCase()
+      );
       return !flag;
     },
     handlerClickOnTabTournament() {
@@ -313,8 +322,9 @@ export default {
       height: unset;
       line-height: unset;
       padding-bottom: 24px;
-      padding-left: 24px;
+      padding-left: 28px !important;
       display: flex;
+      text-align: left;
     }
   }
   &--search {
@@ -340,7 +350,7 @@ export default {
       top: 0;
       color: white;
       margin-left: var(--double-step);
-      background-color: var(--color-theme-4);
+      background-color: var(--error-color);
       border-radius: 50%;
       width: 12px;
       height: 12px;
@@ -349,6 +359,10 @@ export default {
       padding: var(--base-step);
       font-weight: bold;
       font-size: 12px;
+      &.is-full {
+        background-color: var(--placeholder);
+        // background-color: var(--info-color);
+      }
     }
   }
 }
