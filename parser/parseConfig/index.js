@@ -1,6 +1,6 @@
 const parseConfig = {
   parseCount: 0,
-  splitUrls: 2,
+  splitUrls: 3,
   browserConfig: {
     defaultViewport: null,
     args: ['--window-size=1920,1070'], // размер имеет значение
