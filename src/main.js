@@ -9,7 +9,7 @@ import config from '../config';
 import Api from './api';
 import 'element-plus/lib/theme-chalk/index.css';
 import componentsList from './components/componentsList';
-import { ElMessage, ElLoading, ElMessageBox } from 'element-plus';
+import { ElMessage, ElLoading } from 'element-plus';
 
 const WS = new Api();
 // eslint-disable-next-line

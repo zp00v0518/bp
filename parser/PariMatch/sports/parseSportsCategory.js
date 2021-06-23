@@ -1,14 +1,11 @@
 function parseSportsCategory(elem) {
   // const arr = [elem.children[0], elem.children[1]];
-  const result = Array.from(elem.children).map((item) => {
+  const arrElems = elem.querySelectorAll('[data-id][href')
+  const result = Array.from(arrElems).map((item) => {
     const el = {
-      name: item.firstChild.innerText
+      name: item.lastChild.innerText
     };
-    const link = item.querySelector('.hidden.groups li a').href;
-    const url = link
-      .split('/')
-      .splice(0, 5)
-      .join('/');
+    const url = item.href.replace('live', '');
     el.url = url;
     return el;
   });

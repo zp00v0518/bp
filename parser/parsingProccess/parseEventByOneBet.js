@@ -5,8 +5,10 @@ const endParsingBets = require('./endParsingBets');
 const incrementStatistic = require('../../backEnd/statistic/db/incrementStatistic');
 
 let parsingList = {};
-
+// browser.process().kill('SIGKILL')
+// https://github.com/puppeteer/puppeteer/issues/298#issuecomment-775574860
 async function parseEventByOneBet() {
+  await incrementStatistic();
   parsingList = await getTournametsForParse();
   parsingList = Object.values(parsingList);
   for (const arr of parsingList) {
@@ -30,7 +32,6 @@ async function parseEventByOneBet() {
     result = await endParsingBets(result);
     console.log(result);
   }
-  await incrementStatistic();
 }
 
 module.exports = parseEventByOneBet;

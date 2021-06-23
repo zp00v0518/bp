@@ -17,7 +17,7 @@ async function getSports() {
     await betPage.goto(url, {
       waitUntil: 'networkidle2'
     });
-    const selector = '[data-id="sports-navigation-menu"]';
+    const selector = '#lobbySportsHolder';
     await betPage.waitForSelector(selector);
     await betPage.addScriptTag({ content: `${utils.parseWithFunction}` });
     result = await betPage.$eval(
@@ -26,7 +26,7 @@ async function getSports() {
         console.clear();
         try {
           const pageMethods = window.parseWithFunction(objStr);
-          const listSports = pageMethods.parseSportsCategory(elem);
+          const listSports = pageMethods.parseSportsCategory(elem, pageMethods);
           return listSports;
         } catch (err) {
           console.log(err);
