@@ -1,88 +1,43 @@
-const appConfig = require('../../../config');
 const utils = require('../../utils');
-
-const setNamesCommand = require('./setNamesCommand');
-const setMatchCoeff = require('./setMatchCoeff');
-const getDate = require('./getDate');
-const getTotatls = require('./getTotatls');
 const parseOnEvent = require('./parseOnEvent');
-
-const params = {
-  setNamesCommand,
-  setMatchCoeff,
-  getDate,
-  appConfig,
-  parseOnEvent,
-  getTotatls
-};
+const parseConfig = require('../../parseConfig');
 
 async function parseOneTournament(browser, url) {
   let result = [];
-  let tournamentPage
+  let tournamentPage;
   try {
     tournamentPage = browser.goto ? browser : await browser.newPage();
     await tournamentPage.goto(url, {
       waitUntil: 'networkidle2',
       timeout: 30000
     });
-    // const btnSelector = '#oddsList img[onclick]';
-    const btnSelector = '#diProps button[onclick]';
-    const repeatBtnSelector = '.bet-container input[value="Повторить запрос"]';
+    const selector = '[data-id="prematch-events-list"]';
     const ops = { visible: true };
-
-    await tournamentPage.waitForSelector(
-      `${btnSelector}, ${repeatBtnSelector}`,
-      ops
+    await tournamentPage.waitForSelector(selector, ops);
+    const hrefs = await utils.getHrefs(
+      tournamentPage,
+      '[data-id="event-card-additional-info-button"]'
     );
-    let btn = await tournamentPage.$(btnSelector);
-    if (!btn) {
-      btn = await tournamentPage.$(repeatBtnSelector);
-      await btn.click();
-      await tournamentPage.waitForSelector(btnSelector, { visible: true });
-      btn = await tournamentPage.$(btnSelector);
-    }
-    await btn.click();
-    await tournamentPage.waitForSelector('[style][id].props.processed', {
-      visible: true,
-      timeout: 30000
-    });
-    const pageFrame = tournamentPage.mainFrame();
-    await pageFrame.addScriptTag({ content: `${utils.parseWithFunction}` });
-    result = await pageFrame.$eval(
-      '.dt.twp',
-      async (elem, objStr) => {
+    const separate = utils.splitArrOnSmallArr(hrefs, parseConfig.splitUrls);
+    for (const urls of separate) {
+      const promises = urls.map(async (url) => {
+        let bets = false;
+        const eventPage = await browser.newPage();
         try {
-          const options = window.parseWithFunction(objStr);
-          const firstLine = elem.querySelectorAll(
-            '.row1.processed:not(.props)'
-          );
-          const secondLine = elem.querySelectorAll(
-            '.row2.processed:not(.props)'
-          );
-          const baseRows = Array.from(firstLine).concat(Array.from(secondLine));
-          const firstExtraRows = elem.querySelectorAll(
-            '[style][id].props.processed.row1'
-          );
-          const secondExtraRows = elem.querySelectorAll(
-            '[style][id].props.processed.row2'
-          );
-          const extraRows = Array.from(firstExtraRows).concat(
-            Array.from(secondExtraRows)
-          );
-
-          const arr = Array.from(baseRows).map((row, index) => {
-            const extraRow = extraRows[index];
-            const item = options.parseOnEvent(row, extraRow, options);
-            return item;
-          });
-          return arr;
+          bets = await parseOnEvent(eventPage, url);
         } catch (err) {
-          console.log(err);
-          return [];
+          if (err.name !== 'TimeoutError') {
+            console.log(err);
+            console.log(`Проблема с ${url}`);
+          }
+          eventPage.close();
         }
-      },
-      utils.stringifyWithFunc(params)
-    );
+        return bets;
+      });
+      const f = await Promise.all(promises);
+      const arr = f.filter((i) => i);
+      result.push(...arr);
+    }
   } catch (err) {
     console.log('Проблема при обработке адреса:  ', url);
     if (err.name !== 'TimeoutError') {
