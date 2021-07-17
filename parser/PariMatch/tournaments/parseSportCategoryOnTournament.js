@@ -14,7 +14,6 @@ async function parseSportCategoryOnTournament(page, item) {
     });
     const containerSelector = '[data-id="countries-list"]';
     await page.waitForSelector(containerSelector);
-
     await page.addScriptTag({ content: `${utils.parseWithFunction}` });
     await page.addScriptTag({ content: `${getTemplateTurnament.toString()}` });
     const rows = await page.$$('[data-id^="country-id"]');
@@ -44,7 +43,7 @@ async function parseSportCategoryOnTournament(page, item) {
         );
         urls.push(...(itemUrls || []));
       } catch (error) {
-        console.log(err);
+        console.log(error);
       }
     }
   } catch (err) {

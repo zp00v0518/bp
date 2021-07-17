@@ -37,6 +37,7 @@ async function getSports() {
     );
   } catch (err) {
     console.log(err);
+    await browser.close();
     return result;
   }
   await browser.close();

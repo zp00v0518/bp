@@ -1,7 +1,7 @@
-const getSports = require('./getSports')
-const getTournaments = require('./getTournaments')
+// const getSports = require('./getSports')
+// const getTournaments = require('./getTournaments')
 
 setTimeout(() => {
-	getTournaments();
+	// getTournaments();
 	// getSports();
 }, 1000);
