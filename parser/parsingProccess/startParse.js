@@ -1,7 +1,7 @@
-// const child_process = require('child_process')
+const getSports = require('./getSports')
 
-// const lords = child_process.exec(`node ${__dirname}/parseEvents.js`, (err, stdout, stderr) => {
-// 	console.log(err)
-// 	console.log(stdout)
-// 	console.log(stderr)
-// })
+async function start() {
+    await getSports()
+}
+
+start();

@@ -17,7 +17,8 @@ async function getSports() {
     await betPage.goto(url, {
       waitUntil: 'networkidle2'
     });
-    const selector = '#lobbySportsHolder';
+    const selector = '[data-id="sports-navigation-menu"]';
+    // const selector = '#lobbySportsHolder';
     await betPage.waitForSelector(selector);
     await betPage.addScriptTag({ content: `${utils.parseWithFunction}` });
     result = await betPage.$eval(
