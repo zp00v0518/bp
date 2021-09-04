@@ -1,4 +1,4 @@
-const sport_category = {
+const sports_app = {
   soccer: {
     name: 'футбол',
     key: 'soccer' // ключ key используется на фронте
@@ -54,4 +54,4 @@ const sport_category = {
   // }
 };
 
-module.exports = sport_category;
+module.exports = sports_app;

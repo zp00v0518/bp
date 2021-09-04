@@ -18,7 +18,7 @@ function createListBulkWrite(data = {}, idsSports) {
     const arrIds = ids.map((i) => new ObjectId(i));
     const template = {
       filter: {
-        class: schema.class.sport_category,
+        class: schema.class.sport_bp,
         _id: { $in: arrIds }
       },
       update: {
