@@ -1,6 +1,6 @@
 const prefix = {
   app: '_app',
-  bp: '_bp',
+  bk: '_bk',
   ref: '=>'
 }
 Object.freeze(prefix);
@@ -12,15 +12,15 @@ const classList = {
   event: 'event',
   baseStat: 'baseStat',
   sport_app: 'sport' + prefix.app,
-  sport_bp: 'sport' + prefix.bp,
-  tournament: 'tournament' + prefix.bp,
+  sport_bk: 'sport' + prefix.bk,
+  tournament: 'tournament' + prefix.bk,
   tournament_type: 'tournament_type'
 };
 
 const refs = {
   // sport: { type: String, name: 'ref_sport' },
   sport_app: classList.sport_app + prefix.ref,
-  sport_bp: classList.sport_bp + prefix.ref,
+  sport_bk: classList.sport_bk + prefix.ref,
   sport_category: { type: String, name: 'sport_category' },
   tournament: { type: String, name: 'tournament_type' }
 };
@@ -36,7 +36,7 @@ const baseStat = {
 };
 
 const sportCategory = {
-  class: classList.sport_bp,
+  class: classList.sport_bk,
   name: { type: String, name: 'name' },
   bkId: { type: String, name: 'bkId' },
   url: { type: String, name: 'url' },
