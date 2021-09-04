@@ -63,6 +63,7 @@ export default {
   },
   methods: {
     getUrlSportCategory({ row }) {
+      console.log(row)
       if (!row.choiced) return '';
       const value = row.choiced;
       const item = row.choices.find((i) => i._id === value);

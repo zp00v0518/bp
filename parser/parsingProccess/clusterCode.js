@@ -10,7 +10,6 @@ async function clusterCode() {
     console.log('Турниры для парсинга отсутствуют');
     process.exit();
   }
-
   let promises = listTournaments.map((item) => {
     try {
       const betTarget = findBet(item.bkId);

@@ -1,8 +1,16 @@
 const { schema, connectMongoDB, BulkWriteDB } = require('../../../backEnd/db/');
 const appConfig = require('../../../config');
 const collectionName = appConfig.collections.sports.name;
-const dbName = appConfig.db.name;
 const mongo = new connectMongoDB();
+const dbName = appConfig.db.name;
+
+// const example = {
+//   _id: '60938d38749c237bb89952db',
+//   bkId: 0,
+//   class: 'sport_category',
+//   name: 'Гольф',
+//   url: 'https://www.marathonbet.com/uk/betting/Golf+-+10'
+// };
 
 async function setSportOnDB(baseArr) {
   const { config } = this;
@@ -28,7 +36,10 @@ function createListBulkWrite(data) {
         [nameKey]: item[nameKey]
       },
       update: {
-        $setOnInsert: item
+        // $setOnInsert: item,
+        $set: {
+          url: item.url
+        }
       },
       upsert: true
     };

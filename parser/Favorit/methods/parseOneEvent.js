@@ -4,8 +4,9 @@ const getTotals = require('./getTotals');
 const setNamesCommand = require('./setNamesCommand');
 
 async function parseOneEvent(eventPage, url) {
+  const item = {};
+  console.time('asd')
   try {
-    const item = {};
     eventPage.on('response', async (response) => {
       try {
         const req = response.request();
@@ -41,13 +42,16 @@ async function parseOneEvent(eventPage, url) {
     await eventPage.goto(url, {
       waitUntil: 'networkidle2'
     });
-    const selector = '.Accordion_titleBlock__wBlra';
+    const selector = '[class*="EventMarkets_markets"]';
+    // const selector = '.Accordion_titleBlock__wBlra';
+    
     await eventPage.waitForSelector(selector);
     await eventPage.waitForTimeout(5000);
     return item;
   } catch (err) {
-    console.log(`Проблема с урлом: ${url}`);
-    return false;
+    console.timeEnd('asd');
+    console.log(err, `Проблема с урлом: ${url}`);
+    return item;
   }
 }
 

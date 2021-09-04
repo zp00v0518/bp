@@ -16,7 +16,7 @@ async function parseOneTournament(browser, url) {
   //     )
   //       return;
   //     const reqData = JSON.parse(req._postData);
-  
+
   //     if (
   //       !reqData.params ||
   //       !reqData.params.by ||
@@ -26,22 +26,24 @@ async function parseOneTournament(browser, url) {
   //     const data = await response.json();
   //     const eventsData = data.result;
   //     eventsData.length = 3;
-  
+
   //   } catch (err) {
   //     console.log(`Проблема с урлом: ${url}`);
   //   }
   // });
-
 
   await tournamentPage.goto(url, {
     waitUntil: 'networkidle2'
   });
 
   try {
-    const selector = '.Accordion_body__2kc5I.Accordion_opened__QoZr8';
+    const selector = '[class*="WidgetWrapper_wrapper"]';
+    // const selector = '.Accordion_body__2kc5I.Accordion_opened__QoZr8';
     await tournamentPage.waitForSelector(selector);
     await tournamentPage.waitForTimeout(7000);
-    const hrefs = await utils.getHrefs(tournamentPage, `${selector} > a`);
+    const selectorHrefs = 'a[href*="sports/event/"]';
+    const hrefs = await utils.getHrefs(tournamentPage, `${selector} ${selectorHrefs}`);
+    // const hrefs = await utils.getHrefs(tournamentPage, `${selector} > a`);
     // *********************************
     // if (hrefs.length > 10) hrefs.length = 10;
     // **********************************
@@ -52,7 +54,8 @@ async function parseOneTournament(browser, url) {
         try {
           const bets = await parseOneEvent(newPage, url);
           await newPage.close();
-          return bets || false;
+          const emptyData = Object.keys(bets).length === 0;
+          return emptyData ? false : bets;
         } catch (err) {
           console.log(err);
           await newPage.close();
@@ -64,6 +67,7 @@ async function parseOneTournament(browser, url) {
     }
     return result;
   } catch (err) {
+    console.log(err);
     console.log(`Проблема с урлом: ${url}`);
     return result;
   }

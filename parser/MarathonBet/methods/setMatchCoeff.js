@@ -10,7 +10,9 @@ function setMatchCoeff(elem, item) {
   const { selectionKey } = elem.dataset;
   const elemMatch = matches.find((i) => selectionKey.includes(i.match));
   if (elemMatch) {
-    item.coeff[elemMatch.key] = +elem.dataset.selectionPrice;
+    	// TODO: умножается коэффициент!!!!!!
+    item.coeff[elemMatch.key] = +elem.dataset.selectionPrice *3;
+    // item.coeff[elemMatch.key] = +elem.dataset.selectionPrice;
   }
   return item;
 }

@@ -13,7 +13,9 @@ function getTotals(row) {
         const lessData = JSON.parse(less.dataset.sel);
         const key = lessData.sn.match(/[\d\.]{1,}/gi);
         if (key) {
-          item[key] = [lessData.prices[1]];
+					// TODO: умножается коэффициент!!!!!!
+          item[key] = [lessData.prices[1]*2];
+          // item[key] = [lessData.prices[1]];
           const more = tr.lastElementChild;
           const moreData = JSON.parse(more.dataset.sel);
           item[key].push(moreData.prices[1]);

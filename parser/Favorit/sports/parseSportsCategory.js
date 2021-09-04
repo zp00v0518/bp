@@ -5,7 +5,7 @@ function parseSportsCategory(elem) {
     if (!span) return;
     const el = {
       url: item.href,
-      name: span ? span.innerText : ''
+      name: item.innerText.split('\n')[0]
     };
     return el;
   });

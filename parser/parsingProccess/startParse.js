@@ -1,7 +1,7 @@
-const getSports = require('./getSports')
+// const getSports = require('./getSports')
+// const getTournaments = require('./getTournaments')
 
-async function start() {
-    await getSports()
-}
-
-start();
+setTimeout(() => {
+	// getTournaments();
+	// getSports();
+}, 1000);
