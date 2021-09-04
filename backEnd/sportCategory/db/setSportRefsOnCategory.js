@@ -23,7 +23,7 @@ function createListBulkWrite(data = {}, idsSports) {
       },
       update: {
         $set: {
-          [sportCategory.ref.name]: new ObjectId(idsSports[key]),
+          [sportCategory.sport_app_ref]: new ObjectId(idsSports[key]),
           [sportCategory.name_sport.name]: key
         }
       },
