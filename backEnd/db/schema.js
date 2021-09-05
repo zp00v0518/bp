@@ -2,7 +2,7 @@ const prefix = {
   app: '_app',
   bk: '_bk',
   ref: '=>'
-}
+};
 Object.freeze(prefix);
 
 const classList = {
@@ -13,20 +13,23 @@ const classList = {
   baseStat: 'baseStat',
   sport_app: 'sport' + prefix.app,
   sport_bk: 'sport' + prefix.bk,
-  tournament: 'tournament' + prefix.bk,
-  tournament_type: 'tournament_type'
+  // tournament: 'tournament' + prefix.bk, // TODO: remove
+  tournament_bk: 'tournament' + prefix.bk,
+  // tournament_type: 'tournament' + prefix.app,// TODO: remove
+  tournament_app: 'tournament' + prefix.app
 };
 
 const refs = {
   // sport: { type: String, name: 'ref_sport' },
   sport_app: classList.sport_app + prefix.ref,
   sport_bk: classList.sport_bk + prefix.ref,
-  sport_category: { type: String, name: 'sport_category' },
-  tournament: { type: String, name: 'tournament_type' }
+  // sport_category: { type: String, name: 'sport_category' }, // TODO: remove
+  // tournament: { type: String, name: 'tournament_app' }, // TODO: remove
+  tournament_app: 'tournament_app' + prefix.ref
 };
 
 const baseCase = {
-  name_sport: { type: String, name: 'sport_name' }
+  sport_name: { type: String, name: 'sport_name' }
 };
 
 const baseStat = {
@@ -41,21 +44,30 @@ const sportCategory = {
   bkId: { type: String, name: 'bkId' },
   url: { type: String, name: 'url' },
   category: { type: String, name: 'category' },
-  sport_app_ref: classList.sport_app + prefix.ref,
-  name_sport: baseCase.name_sport
+  ref_sport_app: classList.sport_app + prefix.ref,
+  name_sport: baseCase.sport_name
 };
+
+
+
 const tournament_type = {
-  class: classList.tournament_type,
-  name_sport: baseCase.name_sport,
-  type_name: { type: String, name: 'type_name' },
-  ref_sport: refs.sport_app
+  class: classList.tournament_bk,
+  sport_name: baseCase.sport_name,
+  // name_sport: baseCase.sport_name, // TODO: remove
+  // type_name: { type: String, name: 'type_name' }, // TODO: remove
+  name: { type: String, name: 'name' },
+  // ref_sport: refs.sport_app, // TODO: remove
+  ref_sport_app: refs.sport_app
 };
 
 const base_command = {
   class: classList.base_command,
   name: { type: String, name: 'name' },
-  [refs.tournament.name]: refs.tournament
+  ref_tournament_app: refs.tournament_app
+  // [refs.tournament.name]: refs.tournament
 };
+
+
 const command = {
   class: classList.command,
   bkId: { type: Number, name: 'bkId' },

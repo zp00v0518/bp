@@ -128,6 +128,16 @@ export default {
   created() {
     this.getBkTournaments();
   },
+  watch: {
+    bkList: {
+      deep: true,
+      handler() {
+        const { firstData } = this;
+        if (firstData && firstData.length > 0)
+          this.adaptDataForTable(firstData);
+      }
+    }
+  },
   methods: {
     isFullTournament(count) {
       const { bkList } = this;
@@ -225,27 +235,28 @@ export default {
       } else {
         const response = await api.get({ type: '/getBkTournaments' });
         this.firstData = response.data;
-        this.adaptDataForTable(response.data);
+        if (this.bkList && Object.keys(this.bkList).length > 0)
+          this.adaptDataForTable(this.firstData);
       }
     },
     adaptDataForTable(data) {
       const { bkList } = this;
       const result = {};
       data.forEach((item) => {
-        const { bkId, name_sport, tournament_type } = item;
+        const { bkId, sport_name, tournament_type } = item;
         if (!result[bkId]) {
           result[bkId] = {
             bkName: bkList[bkId].name
           };
         }
-        if (!result[bkId][name_sport]) {
-          result[bkId][name_sport] = {
+        if (!result[bkId][sport_name]) {
+          result[bkId][sport_name] = {
             choices: [],
             choiced: '',
             url: ''
           };
         }
-        result[bkId][name_sport].choices.push(item);
+        result[bkId][sport_name].choices.push(item);
         if (tournament_type) {
           this.setValueInStore(tournament_type, item._id);
         }

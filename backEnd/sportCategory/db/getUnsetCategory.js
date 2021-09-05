@@ -8,8 +8,8 @@ async function getUnsetCategory() {
   const query = {
     class: schema.class.sport_bk,
     $and: [
-      { [keys.sport_app_ref]: { $exists: false } },
-      { [keys.sport_app_ref]: { $ne: '' } }
+      { [keys.ref_sport_app]: { $exists: false } },
+      { [keys.ref_sport_app]: { $ne: '' } }
     ]
   };
   const needFields = {

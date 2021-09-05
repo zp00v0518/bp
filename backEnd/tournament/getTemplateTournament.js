@@ -3,9 +3,10 @@ const schema = require('../db/schema');
 function getTemplateTournament(tourName, sportName) {
   const type = schema.tournament_type;
   return {
-    class: type.class,
-    [type.type_name.name]: tourName,
-    [type.name_sport.name]: sportName
+    class: schema.class.tournament_app,
+    // class: type.class,
+    [type.name.name]: tourName,
+    [type.sport_name.name]: sportName
   };
 }
 

@@ -5,7 +5,7 @@ const { schema } = require('../../db');
 async function getBkTournaments() {
   const collectionName = appConfig.collections.tournaments.name;
   const query = {
-    class: schema.class.tournament
+    class: schema.class.tournament_bk
   };
   const needFields = {
     class: 0

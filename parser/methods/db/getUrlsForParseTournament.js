@@ -11,8 +11,8 @@ async function getUrlsForParseTournament(bkId) {
     class: sportCategory.class,
     [sportCategory.bkId.name]: bkId,
     $and: [
-      { [sportCategory.sport_app_ref]: { $exists: true } },
-      { [sportCategory.sport_app_ref]: { $ne: '' } }
+      { [sportCategory.ref_sport_app]: { $exists: true } },
+      { [sportCategory.ref_sport_app]: { $ne: '' } }
     ]
   };
   const result = await find.all(collection, query);
