@@ -1,7 +1,7 @@
 const prefix = {
   app: '_app',
   bk: '_bk',
-  ref: '=>'
+  ref: '_ref'
 };
 Object.freeze(prefix);
 

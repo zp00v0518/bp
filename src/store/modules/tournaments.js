@@ -20,7 +20,7 @@ const tournaments = {
       if (!data) return;
       const result = {};
       data.forEach((item) => {
-        const sport = item.name_sport;
+        const sport = item.sport_name;
         if (!result[sport]) result[sport] = [];
         result[sport].push(item);
       });

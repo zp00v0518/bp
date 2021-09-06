@@ -31,7 +31,7 @@
           >
             <template #label>
               <span class="match-tournament__item"
-                ><span>{{ tour.type_name }}</span>
+                ><span>{{ tour.name }}</span>
                 <span
                   v-if="dataforSave[tour._id]"
                   class="match-tournament__item--count"
@@ -243,7 +243,7 @@ export default {
       const { bkList } = this;
       const result = {};
       data.forEach((item) => {
-        const { bkId, sport_name, tournament_type } = item;
+        const { bkId, sport_name, tournament_app_ref } = item;
         if (!result[bkId]) {
           result[bkId] = {
             bkName: bkList[bkId].name
@@ -257,8 +257,8 @@ export default {
           };
         }
         result[bkId][sport_name].choices.push(item);
-        if (tournament_type) {
-          this.setValueInStore(tournament_type, item._id);
+        if (tournament_app_ref) {
+          this.setValueInStore(tournament_app_ref, item._id);
         }
       });
       this.adaptData = result;
@@ -290,8 +290,7 @@ export default {
         type: '/saveMatchedTournaments',
         data: copy
       };
-      const response = await $api.get(message);
-      console.log(response);
+      await $api.get(message);
     },
     setValueInStore(tourId, setId) {
       const { dataforSave, firstData } = this;
