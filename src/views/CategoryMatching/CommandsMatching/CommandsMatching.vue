@@ -33,7 +33,7 @@
           <ElTabPane
             v-for="(tour, tourIndex) in filterTournament"
             :key="tourIndex"
-            :label="tour.type_name"
+            :label="tour.name"
           >
             <!-- ********************************* -->
             <ElTabs

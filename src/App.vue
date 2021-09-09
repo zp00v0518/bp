@@ -44,7 +44,7 @@ export default {
         const api = this.$data.$api;
         this.$store.dispatch('GET_BK_LIST', api);
         this.$store.dispatch('GET_SPORT_TYPES', api);
-        this.$store.dispatch('GET_BASE_TOURNAMENT', api);
+        this.$store.dispatch('GET_APP_TOURNAMENT', api);
       }
     }
   }

@@ -3,7 +3,7 @@ const tournaments = {
     baseTournaments: {}
   },
   mutations: {
-    SET_BASE_TOURNAMENT(state, payload = {}) {
+    SET_APP_TOURNAMENT(state, payload = {}) {
       state.baseTournaments = payload;
     },
     ADD_TOURNAMENT_TO_LIST(state, tour = {}) {
@@ -13,7 +13,7 @@ const tournaments = {
     }
   },
   actions: {
-    async GET_BASE_TOURNAMENT(context, api) {
+    async GET_APP_TOURNAMENT(context, api) {
       if (api.wsInstance.readyState !== 1) return 'API not ready';
       const response = await api.get({ type: '/getAppTournaments' });
       const { data } = response;
@@ -24,7 +24,7 @@ const tournaments = {
         if (!result[sport]) result[sport] = [];
         result[sport].push(item);
       });
-      context.commit('SET_BASE_TOURNAMENT', result);
+      context.commit('SET_APP_TOURNAMENT', result);
     }
   }
 };
