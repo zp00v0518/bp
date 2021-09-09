@@ -15,7 +15,7 @@ const tournaments = {
   actions: {
     async GET_BASE_TOURNAMENT(context, api) {
       if (api.wsInstance.readyState !== 1) return 'API not ready';
-      const response = await api.get({ type: '/getBaseTournaments' });
+      const response = await api.get({ type: '/getAppTournaments' });
       const { data } = response;
       if (!data) return;
       const result = {};

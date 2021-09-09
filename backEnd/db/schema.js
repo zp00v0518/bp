@@ -25,7 +25,8 @@ const refs = {
   sport_bk: classList.sport_bk + prefix.ref,
   // sport_category: { type: String, name: 'sport_category' }, // TODO: remove
   // tournament: { type: String, name: 'tournament_app' }, // TODO: remove
-  tournament_app: 'tournament_app' + prefix.ref
+  tournament_app: classList.tournament_app + prefix.ref,
+  tournament_bk: classList.tournament_bk + prefix.ref
 };
 
 const baseCase = {
@@ -48,8 +49,6 @@ const sportCategory = {
   name_sport: baseCase.sport_name
 };
 
-
-
 const tournament_type = {
   class: classList.tournament_bk,
   sport_name: baseCase.sport_name,
@@ -66,7 +65,6 @@ const base_command = {
   ref_tournament_app: refs.tournament_app
   // [refs.tournament.name]: refs.tournament
 };
-
 
 const command = {
   class: classList.command,

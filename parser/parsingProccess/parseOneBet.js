@@ -1,5 +1,6 @@
 const puppeteer = require('puppeteer');
 const parseConfig = require('../parseConfig');
+const schema = require('../../backEnd/db/schema');
 
 async function parseOneBet(bet, item) {
   let result = [];
@@ -15,9 +16,10 @@ async function parseOneBet(bet, item) {
 }
 
 function setExtraDataToItem(arr = [], tournament) {
+  const { refs } = schema;
   arr.forEach((item) => {
     item.bkId = tournament.bkId;
-    item.ref_tournament = tournament._id;
+    item[refs.tournament_bk] = tournament._id;
   });
 }
 module.exports = parseOneBet;

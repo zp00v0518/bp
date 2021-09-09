@@ -51,6 +51,7 @@ class WS {
       function handler(res) {
         const data = JSON.parse(res.data);
         if (data.type === type) {
+          console.log(data)
           wsInstance.removeEventListener('message', handler);
           resolve(data);
         }
