@@ -10,8 +10,8 @@ async function getTournametsForParse() {
   await find.connect(dbName);
   const refs = schema.refs;
   const query = {
-    class: schema.class.tournament,
-    [refs.tournament.name]: { $exists: true }
+    class: schema.class.tournament_bk,
+    [refs.tournament_app]: { $exists: true }
   };
   const result = await find.all(collectionName, query);
   const data = adapterData(result.result);
@@ -21,7 +21,7 @@ async function getTournametsForParse() {
 
 function adapterData(arr) {
   const refs = schema.refs;
-  const field = refs.tournament.name;
+  const field = refs.tournament_app;
   const result = {};
   arr.forEach((item) => {
     const id = item[field];

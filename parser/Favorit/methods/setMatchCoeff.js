@@ -19,7 +19,7 @@ function setMatchCoeff(eventData, item) {
     if (doubleItog) {
       item.coeff[matchKey.win1_draw] = doubleItog.outcomes[0].outcome_coef;
       item.coeff[matchKey.win1_win2] = doubleItog.outcomes[1].outcome_coef;
-      item.coeff[matchKey.win2_draw] = doubleItog.outcomes[2].outcome_coe;
+      item.coeff[matchKey.win2_draw] = doubleItog.outcomes[2].outcome_coef;
     }
     // item.coeff = {
     //   [matchKey.win1]: baseItog.outcomes[0].outcome_coef,

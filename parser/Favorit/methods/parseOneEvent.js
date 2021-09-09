@@ -5,7 +5,6 @@ const setNamesCommand = require('./setNamesCommand');
 
 async function parseOneEvent(eventPage, url) {
   const item = {};
-  console.time('asd')
   try {
     eventPage.on('response', async (response) => {
       try {
@@ -49,7 +48,6 @@ async function parseOneEvent(eventPage, url) {
     await eventPage.waitForTimeout(5000);
     return item;
   } catch (err) {
-    console.timeEnd('asd');
     console.log(err, `Проблема с урлом: ${url}`);
     return item;
   }
