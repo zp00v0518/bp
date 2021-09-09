@@ -1,8 +1,10 @@
 // const getSports = require('./getSports')
 // const getTournaments = require('./getTournaments')
-const parseEvents = require('./parseEvents')
+const startParseEvents = require('./parseEvents')
 
-setTimeout(() => {
+
+setTimeout(async () => {
 	// getTournaments();
 	// getSports();
+	await startParseEvents();
 }, 1000);
