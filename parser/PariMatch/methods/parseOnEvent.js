@@ -41,10 +41,11 @@ async function parseOnEvent(eventPage, url) {
       } catch (err) {
         console.log(err);
         return false;
-      }
+      } 
     },
     utils.stringifyWithFunc(params)
   );
+  eventPage.close();
   return item
 }
 

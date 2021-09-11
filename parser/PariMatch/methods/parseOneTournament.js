@@ -16,8 +16,9 @@ async function parseOneTournament(browser, url) {
     await tournamentPage.waitForSelector(selector, ops);
     const hrefs = await utils.getHrefs(
       tournamentPage,
-      '[data-id="event-card-additional-info-button"]'
-    );
+      '[data-id="event-card"] a'
+      );
+      // '[data-id="event-card-additional-info-button"]'
     const separate = utils.splitArrOnSmallArr(hrefs, parseConfig.splitUrls);
     for (const urls of separate) {
       const promises = urls.map(async (url) => {
@@ -28,9 +29,8 @@ async function parseOneTournament(browser, url) {
         } catch (err) {
           if (err.name !== 'TimeoutError') {
             console.log(err);
-            console.log(`Проблема с ${url}`);
+            console.log(`${__filename} :  Проблема с ${url}`);
           }
-          eventPage.close();
         }
         return bets;
       });
@@ -39,6 +39,7 @@ async function parseOneTournament(browser, url) {
       result.push(...arr);
     }
   } catch (err) {
+    console.log(err)
     console.log('Проблема при обработке адреса:  ', url);
     if (err.name !== 'TimeoutError') {
       console.log(err);

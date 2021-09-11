@@ -16,7 +16,7 @@ async function parseOneTournament(browser, url) {
     const selectorHrefs = 'a[href*="sports/event/"]';
     const hrefs = await utils.getHrefs(tournamentPage, `${selector} ${selectorHrefs}`);
     // TODO: закомментировать
-    if (hrefs.length > 5) hrefs.length = 5;
+    // if (hrefs.length > 5) hrefs.length = 5;
     // **********************************
     const urlsSeparate = utils.splitArrOnSmallArr(hrefs, parseConfig.splitUrls);
     for (const urls of urlsSeparate) {

@@ -1,5 +1,5 @@
-// const getSports = require('./getSports')
-// const getTournaments = require('./getTournaments')
+const getSports = require('./getSports')
+const getTournaments = require('./getTournaments')
 const parseEventByOneBet = require('./parseEventByOneBet')
 
 
