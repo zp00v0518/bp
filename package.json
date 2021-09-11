@@ -3,15 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "vue-cli-service serve",
-    "serv": "supervisor --inspect --watch backend server.js",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
+    "app-init": "node backend/initApp/initApp.js",
     "create-admin": "node backend/roles/createAdmin.js",
     "create-menu": "node backend/menu/db/createMenuInDB.js",
-    "app-init": "node backend/initApp/initApp.js",
-    "parse-start": "node parser/parsingProccess/startParse.js"
+    "dev": "vue-cli-service serve",
+    "parse-start": "node parser/parsingProccess/startParse.js",
+    "serv": "supervisor --inspect --watch backend server.js"
   },
   "dependencies": {
     "cookies": "^0.8.0",
@@ -28,13 +28,13 @@
     "ws": "^5.2.2"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.5.0",
-    "@vue/cli-plugin-eslint": "~4.5.0",
-    "@vue/cli-plugin-pwa": "~4.5.0",
-    "@vue/cli-plugin-router": "~4.5.0",
-    "@vue/cli-plugin-unit-jest": "~4.5.0",
-    "@vue/cli-plugin-vuex": "~4.5.0",
-    "@vue/cli-service": "~4.5.0",
+    "@vue/cli-plugin-babel": "~4.5.13",
+    "@vue/cli-plugin-eslint": "~4.5.13",
+    "@vue/cli-plugin-pwa": "~4.5.13",
+    "@vue/cli-plugin-router": "~4.5.13",
+    "@vue/cli-plugin-unit-jest": "~4.5.13",
+    "@vue/cli-plugin-vuex": "~4.5.13",
+    "@vue/cli-service": "~4.5.13",
     "@vue/compiler-sfc": "^3.0.0",
     "@vue/eslint-config-standard": "^5.1.2",
     "@vue/test-utils": "^2.0.0-0",
