@@ -1,22 +1,9 @@
 <template>
   <div class="match-tournament">
-    <ElButton
-      class="match-tournament__save"
-      type="primary"
-      @click="saveDataOnServer"
-      >Сохранить выбор</ElButton
-    >
-    <ElInput
-      type="text"
-      v-model.lazy="search"
-      class="match-tournament--search"
-    ></ElInput>
+    <ElButton class="match-tournament__save" type="primary" @click="saveDataOnServer">Сохранить выбор</ElButton>
+    <ElInput type="text" v-model.lazy="search" class="match-tournament--search"></ElInput>
     <ElTabs tab-position="top" v-model="activeSportTab" ref="container">
-      <ElTabPane
-        :label="tab.name"
-        v-for="(tab, tabIndex) in sportTypes"
-        :key="tabIndex"
-      >
+      <ElTabPane :label="tab.name" v-for="(tab, tabIndex) in sportTypes" :key="tabIndex">
         <ElTabs
           tab-position="left"
           v-model="activeTournamentTab"
@@ -24,14 +11,10 @@
           editable
           @tab-add="addTabHandler"
         >
-          <ElTabPane
-            v-for="(tour, tourIndex) in filterTournament"
-            :key="tourIndex"
-            lazy
-          >
+          <ElTabPane v-for="(tour, tourIndex) in filterTournament" :key="tourIndex" lazy>
             <template #label>
-              <span class="match-tournament__item"
-                ><span>{{ tour.name }}</span>
+              <span class="match-tournament__item">
+                <span>{{ tour.name }}</span>
                 <span
                   v-if="dataforSave[tour._id]"
                   class="match-tournament__item--count"
@@ -45,11 +28,7 @@
 
             <div class="match-tournament__table--wrap">
               <table
-                v-if="
-                  isReadyComponent &&
-                    +activeTournamentTab === tourIndex &&
-                    +activeSportTab === tabIndex
-                "
+                v-if="isReadyComponent && +activeTournamentTab === tourIndex && +activeSportTab === tabIndex"
                 class="match-tournament__table"
               >
                 <thead>
@@ -61,11 +40,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr
-                    class="matching_row"
-                    v-for="(bkItem, bkIndex) in bkList"
-                    :key="bkIndex"
-                  >
+                  <tr class="matching_row" v-for="(bkItem, bkIndex) in bkList" :key="bkIndex">
                     <td>
                       <div class="matching_row__name">
                         {{ bkItem.name }}
@@ -76,12 +51,9 @@
                       {{ getTournamentName(bkItem) }}
                     </td>
                     <td>
-                      <a
-                        :href="getTournamentUrl(bkItem)"
-                        target="_blank"
-                        class="a-link matching_row__url"
-                        >{{ getTournamentUrl(bkItem) }}</a
-                      >
+                      <a :href="getTournamentUrl(bkItem)" target="_blank" class="a-link matching_row__url">{{
+                        getTournamentUrl(bkItem)
+                      }}</a>
                     </td>
                     <td>{{ getTournamentID(bkItem) }}</td>
                   </tr>
@@ -133,8 +105,7 @@ export default {
       deep: true,
       handler() {
         const { firstData } = this;
-        if (firstData && firstData.length > 0)
-          this.adaptDataForTable(firstData);
+        if (firstData && firstData.length > 0) this.adaptDataForTable(firstData);
       }
     }
   },
@@ -159,7 +130,7 @@ export default {
       }
       const template = {
         name_sport: key,
-        type_name: tourName,
+        name: tourName,
         _id: `NEWTOUR${getRandomString(30)}`
       };
       this.$store.commit('ADD_TOURNAMENT_TO_LIST', template);
@@ -167,9 +138,7 @@ export default {
     checkUnicName(name) {
       const { tournamentList } = this;
       if (!tournamentList) return true;
-      const flag = tournamentList.some(
-        (i) => i.type_name.toLowerCase() === name.toLowerCase()
-      );
+      const flag = tournamentList.some((i) => i.name.toLowerCase() === name.toLowerCase());
       return !flag;
     },
     handlerClickOnTabTournament() {
@@ -235,8 +204,7 @@ export default {
       } else {
         const response = await api.get({ type: '/getBkTournaments' });
         this.firstData = response.data;
-        if (this.bkList && Object.keys(this.bkList).length > 0)
-          this.adaptDataForTable(this.firstData);
+        if (this.bkList && Object.keys(this.bkList).length > 0) this.adaptDataForTable(this.firstData);
       }
     },
     adaptDataForTable(data) {
@@ -272,8 +240,7 @@ export default {
         const item = copy[key];
         copy[key] = {
           sportName,
-          tournamentName: baseTournaments[sportName].find((i) => i._id === key)
-            .type_name,
+          tournamentName: baseTournaments[sportName].find((i) => i._id === key).type_name,
           tournaments: item.map((i) => i._id)
         };
       });

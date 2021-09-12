@@ -110,7 +110,7 @@
                                     :key="BKCommandIndex"
                                     :label="BKCommand.name"
                                     :value="BKCommand._id"
-                                    v-if="!BKCommand.ref_command_bk"
+                                    v-if="!BKCommand.command_app_ref"
                                   ></ElOption>
                                 </template>
                               </ElSelect>
@@ -271,7 +271,7 @@ export default {
       this.BKCommands = this.adapterBKCommands(BKCommands);
       this.baseCommands = this.adabterBaseCommand(baseCommands);
       this.isReady = true;
-      console.log(baseCommands, BKCommands)
+      console.log(baseCommands, this.BKCommands)
     },
     adapterBKCommands(arr) {
       const obj = {};
