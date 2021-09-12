@@ -7,7 +7,7 @@ async function getAppCommandsByAppTournament(id = '') {
   const { refs } = schema;
   const query = {
     class: schema.class.command_app,
-    [refs.tournament_app]: id //TODO: почему-то мне кажтся, что здесь должна быть проверка на tournament_app. (последствия рефакторинга)
+    [refs.tournament_app]: id
   };
   const result = await findMethod.all(collectionName, query);
   return result.result;
