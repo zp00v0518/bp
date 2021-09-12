@@ -267,6 +267,7 @@ export default {
         tournamet_id: activeTournament._id
       };
       const response = await $api.get(message);
+      console.log(response);
       const { baseCommands, BKCommands } = response;
       this.BKCommands = this.adapterBKCommands(BKCommands);
       this.baseCommands = this.adabterBaseCommand(baseCommands);
