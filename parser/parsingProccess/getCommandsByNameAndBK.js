@@ -18,7 +18,7 @@ async function getCommandsByName(data) {
     tournaments.add(item[refTournamentKey]);
   });
   const query = {
-    class: schema.class.command,
+    class: schema.class.bk_command,
     $and: [
       { name: { $in: Array.from(commandsName) } },
       { [refTournamentKey]: { $in: Array.from(tournaments) } },

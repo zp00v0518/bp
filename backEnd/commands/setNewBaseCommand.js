@@ -6,7 +6,7 @@ async function setNewBaseCommand(unsetArr = []) {
   if (unsetArr.length === 0) return [];
   const collectionName = config.collections.commands.name;
   unsetArr.forEach((item) => {
-    item.class = schema.class.base_command;
+    item.class = schema.class.bk_command;
   });
   const result = await insertMethod.many(collectionName, unsetArr);
   return result.ops;

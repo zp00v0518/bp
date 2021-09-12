@@ -6,8 +6,8 @@ const prefix = {
 Object.freeze(prefix);
 
 const classList = {
-  command: 'command',
-  base_command: 'base_command',
+  app_command: 'app_command',
+  bk_command: 'bk_command',
   unset: 'unset',
   event: 'event',
   baseStat: 'baseStat',
@@ -59,10 +59,10 @@ const tournament_type = {
   ref_sport_app: refs.sport_app
 };
 
-const base_command = {
-  class: classList.base_command,
+const bk_command = {
+  class: classList.bk_command,
   name: { type: String, name: 'name' },
-  ref_tournament_app: refs.tournament_app
+  tournamet_bk_ref:{ type: String, name: refs.tournament_bk } ,
   // [refs.tournament.name]: refs.tournament
 };
 
@@ -72,7 +72,7 @@ const command = {
   name: { type: String, name: 'name' },
   url: { type: String, name: 'url' },
   ref_tournament: { type: String, name: 'ref_tournament' },
-  ref_base_command: { type: String, name: 'ref_base_command' }
+  ref_bk_command: { type: String, name: 'ref_bk_command' }
 };
 
 const schema = {
@@ -81,7 +81,7 @@ const schema = {
   sportCategory,
   refs,
   tournament_type,
-  base_command,
+  bk_command,
   command,
   prefix
 };

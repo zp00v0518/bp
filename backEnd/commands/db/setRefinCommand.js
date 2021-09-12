@@ -22,7 +22,7 @@ function createListBulkWrite(data) {
       },
       update: {
         $set: {
-          [command.ref_base_command.name]: new ObjectId(key)
+          [command.ref_bk_command.name]: new ObjectId(key)
         }
       },
       upsert: false

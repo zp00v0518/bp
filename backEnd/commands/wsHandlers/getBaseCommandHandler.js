@@ -1,12 +1,12 @@
 const {
   getBaseCommandsByTournament,
-  getBKCommandsByTournament
+  getBKCommandsByAppTournament
 } = require('../db');
 
 async function getBaseCommandHandler(data) {
   const { tournamet_id } = data;
   const baseCommands = await getBaseCommandsByTournament(tournamet_id);
-  const BKCommands = await getBKCommandsByTournament(tournamet_id);
+  const BKCommands = await getBKCommandsByAppTournament(tournamet_id);
   const message = {
     type: data.type,
     baseCommands,

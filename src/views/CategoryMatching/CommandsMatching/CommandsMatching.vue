@@ -110,7 +110,7 @@
                                     :key="BKCommandIndex"
                                     :label="BKCommand.name"
                                     :value="BKCommand._id"
-                                    v-if="!BKCommand.ref_base_command"
+                                    v-if="!BKCommand.ref_bk_command"
                                   ></ElOption>
                                 </template>
                               </ElSelect>
@@ -239,7 +239,7 @@ export default {
       const item = BKCommands[bkId];
       let el = {};
       if (!item) return el;
-      el = item.find((i) => i.ref_base_command === commandId);
+      el = item.find((i) => i.ref_bk_command === commandId);
       return el || {};
     },
     showLoading() {
@@ -256,6 +256,8 @@ export default {
       this.loading.close();
     },
     async changeTournaments() {
+      console.log('changeTournaments')
+      alert('changeTournaments')
       await this.getListCommands();
     },
     async getListCommands() {

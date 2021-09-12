@@ -1,5 +1,5 @@
 const getBaseCommandsByTournament = require('./getBaseCommandsByTournament');
-const getBKCommandsByTournament = require('./getBKCommandsByTournament');
+const getBKCommandsByAppTournament = require('./getBKCommandsByAppTournament');
 const setRefinCommand = require('./setRefinCommand');
 
-module.exports = { getBaseCommandsByTournament, getBKCommandsByTournament, setRefinCommand };
+module.exports = { getBaseCommandsByTournament, getBKCommandsByAppTournament, setRefinCommand };

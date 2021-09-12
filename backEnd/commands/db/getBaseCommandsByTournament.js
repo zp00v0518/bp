@@ -4,10 +4,10 @@ const config = require('../../../config');
 
 async function getBaseCommandsByTournament(id = '') {
   const collectionName = config.collections.commands.name;
-  const { base_command } = schema;
+  const { refs } = schema;
   const query = {
-    class: schema.class.base_command,
-    [base_command.tournament_type.name]: id
+    class: schema.class.bk_command,
+    [refs.tournament_bk]: id //TODO: почему-то мне кажтся, что здесь должна быть проверка на tournament_app. (последствия рефакторинга)
   };
   const result = await findMethod.all(collectionName, query);
   return result.result;

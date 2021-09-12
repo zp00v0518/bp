@@ -88,10 +88,10 @@ function setIdsToEvents(events, commands) {
     });
     if (command_1) {
       // TODO: остановился на этом. Обратить внимание на ключ ref_base_command. Его надо заменить по всей программе
-      ev.commandId_1 = command_1.ref_base_command;
+      ev.commandId_1 = command_1.ref_bk_command;
     }
     if (command_2) {
-      ev.commandId_2 = command_2.ref_base_command;
+      ev.commandId_2 = command_2.ref_bk_command;
     }
   });
   return;
