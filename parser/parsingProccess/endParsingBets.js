@@ -69,6 +69,7 @@ function getUnsetCommand(parsedCommnads, commandFromDB) {
 }
 
 function setIdsToEvents(events, commands) {
+  const { refs } = schema;
   events.flat(Infinity).forEach((ev) => {
     const { bkId } = ev;
     const commandName_1 = ev.command_1;
@@ -88,10 +89,10 @@ function setIdsToEvents(events, commands) {
     });
     if (command_1) {
       // TODO: остановился на этом. Обратить внимание на ключ ref_base_command. Его надо заменить по всей программе
-      ev.commandId_1 = command_1.ref_command_bk;
+      ev.commandId_1 = command_1[refs.command_app];
     }
     if (command_2) {
-      ev.commandId_2 = command_2.ref_command_bk;
+      ev.commandId_2 = command_2[refs.command_app];
     }
   });
   return;

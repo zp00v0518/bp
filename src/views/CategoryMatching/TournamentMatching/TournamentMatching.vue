@@ -181,7 +181,7 @@ export default {
       }
       this.popupData = elem.choices;
       this.editBk = bkItem;
-      this.tournametTarget = activeTournament.type_name;
+      this.tournametTarget = activeTournament.name;
       this.isShowDialog = true;
     },
     handlerChoice(ev) {
@@ -240,7 +240,7 @@ export default {
         const item = copy[key];
         copy[key] = {
           sportName,
-          tournamentName: baseTournaments[sportName].find((i) => i._id === key).type_name,
+          tournamentName: baseTournaments[sportName].find((i) => i._id === key).name,
           tournaments: item.map((i) => i._id)
         };
       });
