@@ -8,7 +8,7 @@ const dbName = appConfig.db.name;
 async function insertUnsetCommandsOnDB(arr = []) {
   if (arr.length === 0) return;
   arr.forEach((item) => {
-    item.class = schema.class.bk_command;
+    item.class = schema.class.command_bk;
   });
   const mongo = new connectMongoDB();
   const insert = new InsertDB(mongo);

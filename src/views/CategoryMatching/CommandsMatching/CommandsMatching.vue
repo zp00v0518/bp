@@ -76,7 +76,7 @@
                         <th>Имя команды</th>
                         <th>ID команды</th>
                         <th>ID базовое</th>
-                        <th>ID турнира (базовое)</th>
+                        <th>ID турнира (app)</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -110,7 +110,7 @@
                                     :key="BKCommandIndex"
                                     :label="BKCommand.name"
                                     :value="BKCommand._id"
-                                    v-if="!BKCommand.ref_bk_command"
+                                    v-if="!BKCommand.ref_command_bk"
                                   ></ElOption>
                                 </template>
                               </ElSelect>
@@ -239,7 +239,7 @@ export default {
       const item = BKCommands[bkId];
       let el = {};
       if (!item) return el;
-      el = item.find((i) => i.ref_bk_command === commandId);
+      el = item.find((i) => i.ref_command_bk === commandId);
       return el || {};
     },
     showLoading() {
@@ -256,8 +256,6 @@ export default {
       this.loading.close();
     },
     async changeTournaments() {
-      console.log('changeTournaments')
-      alert('changeTournaments')
       await this.getListCommands();
     },
     async getListCommands() {
