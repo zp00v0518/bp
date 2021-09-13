@@ -11,8 +11,14 @@ const tournaments = {
       if (!state.baseTournaments[sport]) state.baseTournaments[sport] = [];
       state.baseTournaments[sport].unshift(tour);
     },
-    REPLACE_NEW_TOURNAMENT(state, payload = {}) {
-      console.log("jcnfyjdbkcz nen")
+    REPLACE_NEW_TOURNAMENT(state, newTours) {
+      const { baseTournaments } = state;
+      newTours.forEach((tour) => {
+        const { sport_name, name } = tour;
+        const arr = baseTournaments[sport_name];
+        const index = arr.findIndex((i) => i.name === name);
+        arr[index] = tour
+      });
     }
   },
   actions: {

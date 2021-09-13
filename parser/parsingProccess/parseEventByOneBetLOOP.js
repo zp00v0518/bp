@@ -9,4 +9,5 @@ async function start() {
   }, 5000);
 
 }
-start();
+
+module.exports = start
