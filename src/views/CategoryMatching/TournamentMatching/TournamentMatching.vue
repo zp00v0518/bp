@@ -203,8 +203,11 @@ export default {
         }, 20);
       } else {
         const response = await api.get({ type: '/getBkTournaments' });
+        console.log('/getBkTournaments');
         this.firstData = response.data;
-        if (this.bkList && Object.keys(this.bkList).length > 0) this.adaptDataForTable(this.firstData);
+        if (this.bkList && Object.keys(this.bkList).length > 0) {
+          this.adaptDataForTable(this.firstData);
+        }
       }
     },
     adaptDataForTable(data) {
@@ -257,7 +260,11 @@ export default {
         type: '/saveMatchedTournaments',
         data: copy
       };
-      await $api.get(message);
+      const response = await $api.get(message);
+      console.log(response);
+      this.$store.commit('REPLACE_NEW_TOURNAMENT')
+        const api = this.$data.$api;
+        this.$store.dispatch('GET_APP_TOURNAMENT', api);
     },
     setValueInStore(tourId, setId) {
       const { dataforSave, firstData } = this;

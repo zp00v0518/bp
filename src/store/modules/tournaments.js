@@ -9,7 +9,10 @@ const tournaments = {
     ADD_TOURNAMENT_TO_LIST(state, tour = {}) {
       const sport = tour.name_sport;
       if (!state.baseTournaments[sport]) state.baseTournaments[sport] = [];
-      state.baseTournaments[sport].push(tour);
+      state.baseTournaments[sport].unshift(tour);
+    },
+    REPLACE_NEW_TOURNAMENT(state, payload = {}) {
+      console.log("jcnfyjdbkcz nen")
     }
   },
   actions: {
