@@ -16,6 +16,7 @@ async function addEventsToDB(data = []) {
 
 function createListBulkWrite(data) {
   const result = [];
+  const { refs } = schema;
   data.forEach((item) => {
     const template = {
       filter: {
@@ -24,7 +25,7 @@ function createListBulkWrite(data) {
         date: item.date,
         class: schema.class.event,
         bkId: item.bkId,
-        ref_tournament: item.ref_tournament
+        [refs.tournament_bk]: item[refs.tournament_bk]
       },
       update: {
         $set: {

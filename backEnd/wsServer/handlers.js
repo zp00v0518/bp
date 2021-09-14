@@ -19,7 +19,7 @@ const handlers = {
   '/getListSportCategory': sportCategory.getListSportCategoryHandle,
   '/getUnsetCategory': sportCategory.getUnsetCategoryHandle,
   '/saveMatchedSports': sportCategory.saveMatchedSportsHandle,
-  '/getBaseTournaments': tournaments.getBaseTournamentsHandler,
+  '/getAppTournaments': tournaments.getAppTournamentsHandler,
   '/getBkTournaments': tournaments.getBkTournamentsHandler,
   '/saveMatchedTournaments': tournaments.saveMatchedTournamentsHandler,
   '/getBaseCommand': commandsHandlers.getBaseCommandHandler,

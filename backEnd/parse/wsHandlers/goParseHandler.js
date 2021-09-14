@@ -1,9 +1,11 @@
 const parseSports = require('../../../parser/parsingProccess/getSports');
 const getTournaments = require('../../../parser/parsingProccess/getTournaments');
+const parseEvents = require('../../../parser/parsingProccess/parseEvents');
 
 const dictionary = {
   sports: parseSports,
-  tournament: getTournaments
+  tournament: getTournaments,
+  events: parseEvents
 };
 
 async function goParseHandler(data) {

@@ -1,10 +1,10 @@
-const sport_category = require('./sport_category');
+const sports_app = require('./sports_app');
 const appConfig = require('../../../config');
 const { BulkWriteDB, schema } = require('../../db');
 const dropSportCollection = require('../db/dropSportCollection');
 
 async function createSportCategories() {
-  const values = Object.values(sport_category);
+  const values = Object.values(sports_app);
   if (values.length === 0) return;
   await dropSportCollection();
   const bulkWrite = new BulkWriteDB();
@@ -19,7 +19,7 @@ async function createSportCategories() {
 function createListBulkWrite(data) {
   const result = [];
   data.forEach((item) => {
-    item.class = schema.class.sport;
+    item.class = schema.class.sport_app;
     const template = {
       filter: {
         name: item.name

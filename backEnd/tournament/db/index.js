@@ -1,13 +1,13 @@
-const getBaseTournaments = require('./getBaseTournaments');
+const getAppTournaments = require('./getAppTournaments');
 const getBkTournaments = require('./getBkTournaments');
 const saveMatchedTournaments = require('./saveMatchedTournaments');
-const getBKTournamentByBaseTournament = require('./getBKTournamentByBaseTournament');
+const getBKTournamentByAppTournament = require('./getBKTournamentByAppTournament');
 const addNewTournamentsOnDB = require('./addNewTournamentsOnDB');
 
 module.exports = {
-  getBaseTournaments,
+  getAppTournaments,
   getBkTournaments,
   saveMatchedTournaments,
-  getBKTournamentByBaseTournament,
+  getBKTournamentByAppTournament,
   addNewTournamentsOnDB
 };

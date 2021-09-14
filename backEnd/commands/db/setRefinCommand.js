@@ -12,17 +12,17 @@ async function setRefinCommand(obj = {}) {
 
 function createListBulkWrite(data) {
   const result = [];
-  const { command } = schema;
+  const { refs } = schema;
   Object.keys(data).forEach((key) => {
     const arrIds = data[key].map((i) => new ObjectId(i));
     const template = {
       filter: {
-        class: schema.class.command,
+        class: schema.class.command_bk,
         _id: { $in: arrIds }
       },
       update: {
         $set: {
-          [command.ref_base_command.name]: new ObjectId(key)
+          [refs.command_app]: new ObjectId(key)
         }
       },
       upsert: false

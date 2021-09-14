@@ -9,7 +9,7 @@
     </div>
     <div class="bk-block__row">
       <span class="bk-block__row--label">Коэффициент</span>
-      <span class="bk-block__row--value bk-block__bet">{{ data.coeff }}</span>
+      <span class="bk-block__row--value bk-block__bet">{{ Number(data.coeff).toFixed(2) }}</span>
     </div>
     <div class="bk-block__row">
       <span class="bk-block__row--label">Размер ставки</span>
@@ -31,7 +31,7 @@ export default {
   name: 'BkBlock',
   emits: ['change'],
   props: {
-    data: null,
+    data: { type: Object, default: () => ({ coeff: 0 }) },
     right: { type: Boolean, default: false },
     betSum: { type: Number, default: 1 }
   },
@@ -66,6 +66,7 @@ export default {
 .bk-block {
   &__name {
     font-weight: bold;
+    font-size: calc(var(--base-font-size) * 1.4);
     text-align: center;
     padding: 0 var(--base-padding);
     margin-bottom: var(--double-step);

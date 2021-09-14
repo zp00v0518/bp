@@ -8,7 +8,7 @@ async function saveTournamentsOnDb(arr = []) {
   await bulkWrite.connect(config.db.name);
   const collectionName = config.collections.tournaments.name;
   list.forEach((item) => {
-    item.class = schema.class.tournament;
+    item.class = schema.class.tournament_bk;
   });
   const bulkList = createListBulkWrite(list);
   await bulkWrite.set(collectionName, bulkList);

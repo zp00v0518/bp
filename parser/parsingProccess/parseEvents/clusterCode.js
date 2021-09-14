@@ -1,6 +1,6 @@
-const listForParse = require('./listForParse');
-const parseOneBet = require('./parseOneBet');
-const endParsingBets = require('./endParsingBets');
+const listForParse = require('../listForParse');
+const parseOneBet = require('../parseOneBet');
+const endParsingBets = require('../endParsingBets');
 
 async function clusterCode() {
   const betName = process.env.BET;

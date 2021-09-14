@@ -5,10 +5,10 @@ const { schema } = require('../../db');
 async function getAllSports() {
   const collectionName = appConfig.collections.sports.name;
   const query = {
-    class: schema.class.sport
+    class: schema.class.sport_app
   };
   const needFields = {
-    class: 0,
+    class: 0
     // _id: 0
   };
   const result = await findMethod.all(collectionName, query, { needFields });

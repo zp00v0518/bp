@@ -1,5 +1,6 @@
 const setNewBaseCommand = require('../setNewBaseCommand');
 const { setRefinCommand } = require('../db');
+const schema = require('../../db/schema.js');
 
 async function saveMatchedCommandHandler(data) {
   const message = {
@@ -33,9 +34,13 @@ function getUnsetCommand(arr) {
 }
 
 function createUnsetCommands(unsetArr) {
+  const { refs } = schema;
   const z = unsetArr.map((i) => {
     const { name, tournament_type } = i;
-    const template = { name, tournament_type };
+    const template = {
+      name,
+      [refs.tournament_app]: tournament_type
+    };
     return template;
   });
   return z;

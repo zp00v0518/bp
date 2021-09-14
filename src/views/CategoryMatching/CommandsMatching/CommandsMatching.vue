@@ -33,7 +33,7 @@
           <ElTabPane
             v-for="(tour, tourIndex) in filterTournament"
             :key="tourIndex"
-            :label="tour.type_name"
+            :label="tour.name"
           >
             <!-- ********************************* -->
             <ElTabs
@@ -47,23 +47,23 @@
               "
             >
               <ElTabPane
-                v-for="(baseCommand, baseCommandIndex) in baseCommands"
-                :key="baseCommandIndex"
-                :label="baseCommand.name"
+                v-for="(appCommandItem, appCommandIndex) in baseCommands"
+                :key="appCommandIndex"
+                :label="appCommandItem.name"
               >
                 <!-- <template #label v-if="baseCommand.isNew">
                   <ElInput type="text" v-model="baseCommand.name"></ElInput>
                 </template> -->
                 <template #label>
-                  <template v-if="baseCommand.isNew">
-                    <ElInput type="text" v-model="baseCommand.name"></ElInput
+                  <template v-if="appCommandItem.isNew">
+                    <ElInput type="text" v-model="appCommandItem.name"></ElInput
                   ></template>
                   <div class="match-tournament__item" v-else>
-                    {{ baseCommand.name }}
+                    {{ appCommandItem.name }}
                     <span
                       class="match-tournament__item--count"
-                      :class="{ 'is-full': isFullCommands(baseCommand) }"
-                      >{{ getCountCommands(baseCommand) }}</span
+                      :class="{ 'is-full': isFullCommands(appCommandItem) }"
+                      >{{ getCountCommands(appCommandItem) }}</span
                     >
                   </div>
                 </template>
@@ -74,9 +74,9 @@
                       <tr>
                         <th class="match-tournament__table--bk">Название БК</th>
                         <th>Имя команды</th>
-                        <th>ID команды</th>
-                        <th>ID базовое</th>
-                        <th>ID турнира (базовое)</th>
+                        <th>ID команды (bk)</th>
+                        <th>ID команды (app)</th>
+                        <th>ID турнира (app)</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -94,12 +94,12 @@
                           <div class="matching_row__command">
                             <template
                               v-if="
-                                baseCommand.isNew ||
-                                  baseCommand.commands[bkItem.id].isNew
+                                appCommandItem.isNew ||
+                                  appCommandItem.commands[bkItem.id].isNew
                               "
                             >
                               <ElSelect
-                                v-model="baseCommand.commands[bkItem.id].value"
+                                v-model="appCommandItem.commands[bkItem.id].value"
                                 filterable
                               >
                                 <template
@@ -110,7 +110,7 @@
                                     :key="BKCommandIndex"
                                     :label="BKCommand.name"
                                     :value="BKCommand._id"
-                                    v-if="!BKCommand.ref_base_command"
+                                    v-if="!BKCommand.command_app_ref"
                                   ></ElOption>
                                 </template>
                               </ElSelect>
@@ -118,7 +118,7 @@
                             <template v-else>
                               <div class="matching_row__command--name">
                                 {{
-                                  getRealCommandByBK(bkItem.id, baseCommand._id)
+                                  getRealCommandByBK(bkItem.id, appCommandItem._id)
                                     .name
                                 }}
                               </div>
@@ -127,11 +127,11 @@
                         </td>
                         <td class="matching_row__command--id">
                           {{
-                            getRealCommandByBK(bkItem.id, baseCommand._id)._id
+                            getRealCommandByBK(bkItem.id, appCommandItem._id)._id
                           }}
                         </td>
                         <td class="matching_row__command--id">
-                          {{ baseCommand._id }}
+                          {{ appCommandItem._id }}
                         </td>
                         <td class="matching_row__command--id">
                           {{ tour._id }}
@@ -225,12 +225,12 @@ export default {
       const { bkList, getRealCommandByBK } = this;
       const result = {};
       Object.values(bkList).forEach((item) => {
-        const { id } = item;
-        result[id] = {
+        const bkId = item.id;
+        result[bkId] = {
           value:
-            commandId !== undefined ? getRealCommandByBK(id, commandId)._id : ''
+            commandId !== undefined ? getRealCommandByBK(bkId, commandId)._id : ''
         };
-        if (!result[id].value) result[id].isNew = true;
+        if (!result[bkId].value) result[bkId].isNew = true;
       });
       return result;
     },
@@ -239,7 +239,7 @@ export default {
       const item = BKCommands[bkId];
       let el = {};
       if (!item) return el;
-      el = item.find((i) => i.ref_base_command === commandId);
+      el = item.find((i) => i.command_app_ref === commandId);
       return el || {};
     },
     showLoading() {
@@ -271,6 +271,7 @@ export default {
       this.BKCommands = this.adapterBKCommands(BKCommands);
       this.baseCommands = this.adabterBaseCommand(baseCommands);
       this.isReady = true;
+      console.log(baseCommands, this.BKCommands)
     },
     adapterBKCommands(arr) {
       const obj = {};

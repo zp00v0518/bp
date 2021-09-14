@@ -1,21 +1,37 @@
+const prefix = {
+  app: '_app',
+  bk: '_bk',
+  ref: '_ref'
+};
+Object.freeze(prefix);
+
 const classList = {
-  command: 'command',
-  base_command: 'base_command',
+  command_app: 'command_app',
+  command_bk: 'command_bk',
   unset: 'unset',
   event: 'event',
   baseStat: 'baseStat',
-  sport: 'sport',
-  sport_category: 'sport_category',
-  tournament: 'tournament',
-  tournament_type: 'tournament_type'
+  sport_app: 'sport' + prefix.app,
+  sport_bk: 'sport' + prefix.bk,
+  // tournament: 'tournament' + prefix.bk, // TODO: remove
+  tournament_bk: 'tournament' + prefix.bk,
+  // tournament_type: 'tournament' + prefix.app,// TODO: remove
+  tournament_app: 'tournament' + prefix.app
 };
+
 const refs = {
-  sport: { type: String, name: 'ref_sport' },
-  sport_category: { type: String, name: 'sport_category' },
-  tournament: { type: String, name: 'tournament_type' }
+  // sport: { type: String, name: 'ref_sport' },
+  sport_app: classList.sport_app + prefix.ref,
+  sport_bk: classList.sport_bk + prefix.ref,
+  // sport_category: { type: String, name: 'sport_category' }, // TODO: remove
+  // tournament: { type: String, name: 'tournament_app' }, // TODO: remove
+  tournament_app: classList.tournament_app + prefix.ref,
+  tournament_bk: classList.tournament_bk + prefix.ref,
+  command_app: classList.command_app + prefix.ref
 };
+
 const baseCase = {
-  name_sport: { type: String, name: 'name_sport' }
+  sport_name: { type: String, name: 'sport_name' }
 };
 
 const baseStat = {
@@ -25,33 +41,39 @@ const baseStat = {
 };
 
 const sportCategory = {
-  class: classList.sport_category,
+  class: classList.sport_bk,
   name: { type: String, name: 'name' },
   bkId: { type: String, name: 'bkId' },
   url: { type: String, name: 'url' },
   category: { type: String, name: 'category' },
-  ref: refs.sport,
-  name_sport: baseCase.name_sport
-};
-const tournament_type = {
-  class: classList.tournament_type,
-  name_sport: baseCase.name_sport,
-  type_name: { type: String, name: 'type_name' },
-  ref_sport: refs.sport
+  ref_sport_app: classList.sport_app + prefix.ref,
+  name_sport: baseCase.sport_name
 };
 
-const base_command = {
-  class: classList.base_command,
+const tournament_type = {
+  class: classList.tournament_bk,
+  sport_name: baseCase.sport_name,
+  // name_sport: baseCase.sport_name, // TODO: remove
+  // type_name: { type: String, name: 'type_name' }, // TODO: remove
   name: { type: String, name: 'name' },
-  [refs.tournament.name]: refs.tournament
+  // ref_sport: refs.sport_app, // TODO: remove
+  ref_sport_app: refs.sport_app
 };
+
+const command_bk = {
+  class: classList.command_bk,
+  name: { type: String, name: 'name' },
+  tournamet_bk_ref:{ type: String, name: refs.tournament_bk } ,
+  // [refs.tournament.name]: refs.tournament
+};
+
 const command = {
-  class: classList.command,
+  class: classList.command_bk,
   bkId: { type: Number, name: 'bkId' },
   name: { type: String, name: 'name' },
   url: { type: String, name: 'url' },
-  ref_tournament: { type: String, name: 'ref_tournament' },
-  ref_base_command: { type: String, name: 'ref_base_command' }
+  // ref_tournament: { type: String, name: 'ref_tournament' },
+  // ref_bk_command: { type: String, name: 'ref_bk_command' }
 };
 
 const schema = {
@@ -60,8 +82,9 @@ const schema = {
   sportCategory,
   refs,
   tournament_type,
-  base_command,
-  command
+  command_bk,
+  command,
+  prefix
 };
 
 module.exports = schema;

@@ -6,10 +6,10 @@ async function getUnsetCategory() {
   const collectionName = appConfig.collections.sports.name;
   const keys = schema.sportCategory;
   const query = {
-    class: schema.class.sport_category,
+    class: schema.class.sport_bk,
     $and: [
-      { [keys.ref.name]: { $exists: false } },
-      { [keys.ref.name]: { $ne: '' } }
+      { [keys.ref_sport_app]: { $exists: false } },
+      { [keys.ref_sport_app]: { $ne: '' } }
     ]
   };
   const needFields = {

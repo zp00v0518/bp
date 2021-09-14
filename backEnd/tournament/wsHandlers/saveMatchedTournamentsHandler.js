@@ -1,5 +1,6 @@
 const { saveMatchedTournaments, addNewTournamentsOnDB } = require('../db');
 
+// TODO: остановился здесь - на сохранении нового турнира в БД
 async function saveMatchedTournamentsHandler(data) {
   const frontData = data.data;
   const newTournaments = getUnsetTours(frontData);
@@ -22,7 +23,7 @@ async function saveMatchedTournamentsHandler(data) {
 
 function addNewTornamentForSave(dataForSave, newTour, newTournaments){
   Object.values(newTournaments).forEach(item => {
-    const savedTour = newTour.find(i => i.type_name === item.tournamentName && i.name_sport === item.sportName);
+    const savedTour = newTour.find(i => i.name === item.tournamentName && i.sport_name === item.sportName);
     dataForSave[savedTour._id] = item.tournaments;
   })
 };

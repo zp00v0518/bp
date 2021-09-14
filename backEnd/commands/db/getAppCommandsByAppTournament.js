@@ -2,15 +2,15 @@ const { schema } = require('../../db');
 const { findMethod } = require('../../db/methods');
 const config = require('../../../config');
 
-async function getBaseCommandsByTournament(id = '') {
+async function getAppCommandsByAppTournament(id = '') {
   const collectionName = config.collections.commands.name;
-  const { base_command } = schema;
+  const { refs } = schema;
   const query = {
-    class: schema.class.base_command,
-    [base_command.tournament_type.name]: id
+    class: schema.class.command_app,
+    [refs.tournament_app]: id
   };
   const result = await findMethod.all(collectionName, query);
   return result.result;
 }
 
-module.exports = getBaseCommandsByTournament;
+module.exports = getAppCommandsByAppTournament;

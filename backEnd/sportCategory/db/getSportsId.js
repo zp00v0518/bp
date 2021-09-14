@@ -5,7 +5,7 @@ const { schema } = require('../../db');
 async function getSportsId(arr = []) {
   const collectionName = config.collections.sports.name;
   const query = {
-    class: schema.class.sport,
+    class: schema.class.sport_app,
     name: { $in: arr }
   };
   const finded = await findMethod.all(collectionName, query);

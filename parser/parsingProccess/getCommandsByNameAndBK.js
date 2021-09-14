@@ -10,16 +10,18 @@ async function getCommandsByName(data) {
   const commandsName = new Set();
   const bkIds = new Set();
   const tournaments = new Set();
+  const { refs } = schema;
+  const refTournamentKey = refs.tournament_bk;
   data.forEach((item) => {
     commandsName.add(item.name);
     bkIds.add(item.bkId);
-    tournaments.add(item.ref_tournament);
+    tournaments.add(item[refTournamentKey]);
   });
   const query = {
-    class: schema.class.command,
+    class: schema.class.command_bk,
     $and: [
       { name: { $in: Array.from(commandsName) } },
-      { ref_tournament: { $in: Array.from(tournaments) } },
+      { [refTournamentKey]: { $in: Array.from(tournaments) } },
       { bkId: { $in: Array.from(bkIds) } }
     ]
   };
