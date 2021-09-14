@@ -1,4 +1,7 @@
 const matchKey = require('../parseConfig/matchKey');
+const schema = require('../../backEnd/db/schema');
+const { refs } = schema;
+
 const matching = {
   [matchKey.win1]: [matchKey.win2_draw],
   [matchKey.win2]: [matchKey.win1_draw],
@@ -26,7 +29,7 @@ function checkFork(data) {
     forkItem.fork.push(...result);
     if (forkItem.fork.length > 0) forkResult.push(forkItem);
   });
-  return forkResult
+  return forkResult;
 }
 
 function modifyEventsForCherk(data) {
@@ -124,7 +127,7 @@ function getBkSection(bk, bet, coeff) {
   return {
     bkId: bk.bkId,
     url: bk.url,
-    ref_tournament: bk.ref_tournament,
+    [refs.tournament_bk]: bk[refs.tournament_bk],
     bet,
     coeff: coeff !== undefined ? coeff : bk.coeff[bet]
   };

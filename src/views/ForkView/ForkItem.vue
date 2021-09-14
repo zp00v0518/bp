@@ -1,10 +1,10 @@
 <template>
   <div class="fork-item">
     <div class="fork-item__info">
-      <div class="fork-item__info__title">
-        <!-- <span>Доходность:</span> -->
+      <!-- <div class="fork-item__info__title">
+        <span>Доходность:</span>
         <span title="Коэффициент доходности">{{ data.marga.toFixed(4) }}</span>
-      </div>
+      </div> -->
       <div class="fork-item__info__commands">
         <span>{{ data.command_1 }}</span>
         <span>{{ data.command_2 }}</span>
@@ -27,11 +27,11 @@
     </div>
     <div class="fork-item__profit--wrap">
       <div class="fork-item__profit">
-        Прибыль: <span class="fork-item__profit--sum">{{ profit_1 }}</span>
+        Прибыль: <span class="fork-item__profit--sum">${{ profit_1 }}</span>
       </div>
-      <div class="fork-item__profit">
+      <!-- <div class="fork-item__profit">
         Прибыль: <span class="fork-item__profit--sum">{{ profit_2 }}</span>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -49,7 +49,7 @@ export default {
   data() {
     return {
       Pic,
-      firstBkBet: 100,
+      firstBkBet: 1000,
       secondBkBet: 0
     };
   },
@@ -66,11 +66,12 @@ export default {
       const { data, firstBkBet, secondBkBet } = this;
       const { firstBk, secondBk } = data;
       let value = 0;
-      if (second) {
-        value = +secondBk.coeff * secondBkBet - firstBkBet;
-      } else {
-        value = +firstBk.coeff * firstBkBet - secondBkBet;
-      }
+      value = +firstBk.coeff * firstBkBet - secondBkBet - firstBkBet;
+      // if (second) {
+      //   value = +secondBk.coeff * secondBkBet - firstBkBet - secondBkBet;
+      // } else {
+      //   value = +firstBk.coeff * firstBkBet - secondBkBet - firstBkBet;
+      // }
       return Math.abs(value).toFixed(2);
     },
     getFindDate(value) {
@@ -133,13 +134,16 @@ export default {
       }
     }
     &__commands {
-      margin-top: var(--half-base-padding);
+      // margin-top: var(--half-base-padding);
       margin-bottom: var(--half-base-padding);
       white-space: nowrap;
       text-align: center;
+      font-weight: bold;
+      font-size: calc(var(--base-font-size) * 1.8);
+      color: var(--color-theme-1);
       span {
         &:first-child {
-          margin-right: calc(var(--base-padding) * 2);
+          margin-right: calc(var(--base-padding));
         }
       }
     }
@@ -168,12 +172,15 @@ export default {
   &__profit {
     &--sum {
       font-weight: bold;
+      font-size: calc(var(--base-font-size) * 2);
+      color: #44bb08;
+      margin-left: var(--double-step);
     }
     &--wrap {
       padding: var(--half-base-padding);
       padding-top: 0;
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
     }
   }
 }
