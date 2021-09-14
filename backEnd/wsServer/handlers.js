@@ -10,8 +10,8 @@ const commandsHandlers = require('../commands/wsHandlers');
 const parserHandlers = require('../parse/wsHandlers');
 
 const handlers = {
-  get_matching: matching.getMatching,
-  set_matching: matching.setMatching,
+  // get_matching: matching.getMatching,
+  // set_matching: matching.setMatching,
   [routerList.getMenu.name]: getMenu,
   '/getActualFork': handlerGetActualFork,
   '/getPreviousFork': getPreviousForkHandler,
