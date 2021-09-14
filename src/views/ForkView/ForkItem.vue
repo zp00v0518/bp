@@ -12,18 +12,9 @@
       <div class="fork-item__info--date">{{ getFindDate(data.eventDate) }}</div>
     </div>
     <div class="fork-item__main">
-      <BkBlock
-        :data="data.firstBk"
-        @change-sum="handlerChange"
-        :betSum="firstBkBet"
-      ></BkBlock>
+      <BkBlock :data="data.firstBk" :allFork="data" @change-sum="handlerChange" :betSum="firstBkBet"></BkBlock>
       <div class="fork-item__main__icon"><img :src="Pic" /></div>
-      <BkBlock
-        :data="data.secondBk"
-        right
-        @change-sum="handlerChange"
-        :betSum="secondBkBet"
-      ></BkBlock>
+      <BkBlock :data="data.secondBk" :allFork="data" right @change-sum="handlerChange" :betSum="secondBkBet"></BkBlock>
     </div>
     <div class="fork-item__profit--wrap">
       <div class="fork-item__profit">
@@ -85,20 +76,12 @@ export default {
       const { value, right } = ev;
       if (!right) {
         this.firstBkBet = value;
-        this.secondBkBet = this.checkSizeBet(
-          this.firstBkBet,
-          data.firstBk.coeff,
-          data.secondBk.coeff
-        );
+        this.secondBkBet = this.checkSizeBet(this.firstBkBet, data.firstBk.coeff, data.secondBk.coeff);
         return;
       }
       this.secondBkBet = value;
 
-      this.firstBkBet = this.checkSizeBet(
-        this.secondBkBet,
-        data.secondBk.coeff,
-        data.firstBk.coeff
-      );
+      this.firstBkBet = this.checkSizeBet(this.secondBkBet, data.secondBk.coeff, data.firstBk.coeff);
     },
     checkSizeBet(baseBet = 100, coeff1, coeff2) {
       return (coeff1 / coeff2) * baseBet;
@@ -139,8 +122,9 @@ export default {
       white-space: nowrap;
       text-align: center;
       font-weight: bold;
-      font-size: calc(var(--base-font-size) * 1.8);
+      font-size: calc(var(--base-font-size) * 1.2);
       color: var(--color-theme-1);
+
       span {
         &:first-child {
           margin-right: calc(var(--base-padding));
@@ -203,6 +187,9 @@ export default {
       margin-right: 0;
       margin-left: var(--half-base-padding);
     }
+  }
+  .fork-item__info__commands {
+    font-size: var(--base-font-size);
   }
 }
 </style>

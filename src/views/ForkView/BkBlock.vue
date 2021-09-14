@@ -3,9 +3,11 @@
     <a :href="data.url || '/'" class="bk-block__name a-link" target="_blank">
       {{ curBk.name }}
     </a>
-    <div class="bk-block__row">
+    <div class="bk-block__row ">
       <span class="bk-block__row--label">Тип ставки</span>
-      <span class="bk-block__row--value bk-block__bet">{{ data.bet }}</span>
+      <span class="bk-block__row--value bk-block__bet type-bet">
+        {{ $t(data.bet) }} <span v-if="allFork.total">{{ allFork.total }} </span>
+      </span>
     </div>
     <div class="bk-block__row">
       <span class="bk-block__row--label">Коэффициент</span>
@@ -32,9 +34,11 @@ export default {
   emits: ['change'],
   props: {
     data: { type: Object, default: () => ({ coeff: 0 }) },
+    allFork: { type: Object, default: () => ({}) },
     right: { type: Boolean, default: false },
     betSum: { type: Number, default: 1 }
   },
+
   data() {
     return {
       sum: this.betSum
@@ -79,9 +83,11 @@ export default {
     &--value {
       margin-left: var(--half-base-padding);
       font-weight: bold;
-      // &.el-input-number--mini {
-      //   width: 85px;
-      // }
+
+      &.type-bet {
+        font-style: italic;
+        text-decoration: underline;
+      }
     }
     &--label {
       position: relative;
