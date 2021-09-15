@@ -13,7 +13,7 @@ const params = {
 
 async function parseOneEvent(eventPage, url) {
   await eventPage.goto(url, {
-    waitUntil: 'networkidle2'
+    waitUntil: 'domcontentloaded'
   });
   await eventPage.waitForSelector('.left-indentation');
   // await eventPage.waitForSelector('.category-label-link');

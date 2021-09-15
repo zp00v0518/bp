@@ -6,12 +6,14 @@
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
-    "app-init": "node backend/initApp/initApp.js",
-    "create-admin": "node backend/roles/createAdmin.js",
-    "create-menu": "node backend/menu/db/createMenuInDB.js",
+    "app-init": "node backEnd/initApp/initApp.js",
+    "create-admin": "node backEnd/roles/createAdmin.js",
+    "create-menu": "node backEnd/menu/db/createMenuInDB.js",
     "dev": "vue-cli-service serve",
     "parse-start": "node parser/parsingProccess/startParse.js",
-    "serv": "supervisor --inspect --watch backend server.js"
+    "serv": "supervisor --inspect --watch backEnd server.js",
+    "dump-w": "cd C:/Program Files/MongoDB/Tools/100/bin && mongodump --db bets --out  C:/Users/zp00v/Desktop/Projects/bp/dump",
+    "restore-w": "cd C:/Program Files/MongoDB/Tools/100/bin && mongorestore --verbose  C:/Users/zp00v/Desktop/Projects/bp/dump "
   },
   "dependencies": {
     "cookies": "^0.8.0",

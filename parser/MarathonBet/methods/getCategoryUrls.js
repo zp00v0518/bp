@@ -5,7 +5,7 @@ async function getCategoryUrls(browser, url) {
   let result = [];
   try {
     await categoryPage.goto(sportUrl, {
-      waitUntil: 'networkidle2'
+      waitUntil: 'domcontentloaded'
     });
     await categoryPage.waitForSelector('#events_content');
     const pageFrame = categoryPage.mainFrame();

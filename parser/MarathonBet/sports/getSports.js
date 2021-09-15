@@ -24,7 +24,7 @@ async function getSports() {
   let result = [];
   try {
     await betPage.goto(url, {
-      waitUntil: 'networkidle2',
+      waitUntil: 'domcontentloaded',
       timeout: 1000 * 50
     });
     const selector = '.sport-menu-header';
