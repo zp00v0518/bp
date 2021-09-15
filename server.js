@@ -1,4 +1,4 @@
-require('./backend/wsServer/wsServer.js');
+require('./backEnd/wsServer/wsServer.js');
 require('dotenv').config();
 const http = require('http');
 const config = require('./config');
