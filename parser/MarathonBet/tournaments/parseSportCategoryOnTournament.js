@@ -6,7 +6,7 @@ async function parseSportCategoryOnTournament(page, item) {
   let urls = [];
   try {
     await page.goto(curUrl, {
-      waitUntil: 'networkidle2'
+      waitUntil: 'domcontentloaded'
     });
     await page.waitForSelector('#events_content');
     urls = await page.$$eval('.category-label-link', (arr) => {

@@ -6,7 +6,7 @@ async function getUrlsForParse() {
   const browser = await puppeteer.launch(parseConfig.browserConfig);
   const page = await browser.newPage();
   await page.goto(config.path, {
-    waitUntil: 'networkidle2'
+    waitUntil: 'domcontentloaded'
   });
   await page.waitForSelector('.category-label-link');
   const pageFrame = page.mainFrame();

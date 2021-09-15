@@ -7,7 +7,7 @@ async function parseOneTournament(browser, url) {
   const result = [];
   try {
     await tournamentPage.goto(url, {
-      waitUntil: 'networkidle2'
+      waitUntil: 'domcontentloaded'
     });
     await tournamentPage.waitForSelector('.category-label-link');
     const hrefs = await utils.getHrefs(tournamentPage, '.member-link');
