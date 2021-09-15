@@ -1,1 +1,1 @@
-{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_"}],"uuid":"be35c1f761484f88af72c0f83acffbd5","collectionName":"sports_category","type":"collection"}
+{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_"}],"uuid":"ff5354296396449ea1f34f8d82856ea7","collectionName":"sports_category","type":"collection"}
