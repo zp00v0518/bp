@@ -23,9 +23,8 @@ export default {
         type: '/goParse',
         target: this.type
       };
-      const response = await $api.get(message);
+      await $api.get(message);
       this.isDisabled = false;
-      console.log(response);
     }
   }
 };
