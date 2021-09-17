@@ -62,8 +62,8 @@ export default {
   }
   &__body {
     position: relative;
-    display: flex;
-    flex-wrap: wrap;
+    // display: flex;
+    // flex-wrap: wrap;
     &:after {
       display: block;
       content: '';
