@@ -2,12 +2,7 @@
   <div class="previos-fork">
     <div class="previos-fork__title">Недавние вилки</div>
     <template v-if="previousList.length > 0 && Object.keys(bkList).length > 0">
-      <ActualFork
-        v-for="(arr, index) in previousList"
-        :forkList="arr"
-        :key="index"
-        >{{ test(arr) }}</ActualFork
-      >
+      <ActualFork v-for="(arr, index) in previousList" :forkList="arr" :key="index">{{ test(arr) }}</ActualFork>
     </template>
   </div>
 </template>
@@ -61,6 +56,23 @@ export default {
 .previos-fork {
   border-top: 1px solid #999999;
   padding-top: var(--base-padding);
+  position: relative;
+  &:after {
+    display: block;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.2);
+    transition: all 0.3s
+  }
+  &:hover {
+    &:after {
+      opacity: 0,
+    }
+  }
   &__title {
     font-weight: bold;
     font-size: calc(var(--base-font-size) * 1.6);
