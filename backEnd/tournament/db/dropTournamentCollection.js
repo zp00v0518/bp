@@ -1,11 +1,11 @@
 const config = require('../../../config');
 const dropCollection = require('../../db/methods/dropCollection');
 
-async function dropMenuCollection() {
+async function dropTournamentCollection() {
   const dbName = config.db.name;
-  const collectionName = config.collections.menu.name;
+  const collectionName = config.collections.tournaments.name;
   const result = await dropCollection(dbName, collectionName);
   return result;
 }
 
-module.exports = dropMenuCollection;
+module.exports = dropTournamentCollection;

@@ -21,15 +21,16 @@ async function createTournamentOnDb() {
 }
 
 function createListForInsert() {
-  const type = schema.tournament_type;
+  const { tournament_type } = schema;
+  const classList = schema.class;
   const result = [];
   Object.keys(tournamentsList).forEach((key) => {
     const item = tournamentsList[key];
     const z = item.list.map((name) => {
       return {
-        class: type.class,
-        [type.type_name.name]: name,
-        [type.name_sport.name]: key
+        class: classList.tournament_app,
+        [tournament_type.name.name]: name,
+        [tournament_type.sport_name.name]: key
       };
     });
     result.push(...z);
