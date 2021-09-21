@@ -17,7 +17,7 @@ const tournaments = {
         const { sport_name, name } = tour;
         const arr = baseTournaments[sport_name];
         const index = arr.findIndex((i) => i.name === name);
-        arr[index] = tour
+        arr[index] = tour;
       });
     }
   },

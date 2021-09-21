@@ -1,12 +1,6 @@
 <template>
   <div @mouseenter="handlerMouseEnter" @mouseleave="visible = false">
-    <ElPopover
-      popper-class="check-btn"
-      :content="tooltip"
-      width="90px"
-      :disabled="!disabled"
-      v-model:visible="visible"
-    >
+    <ElPopover popper-class="check-btn" :content="tooltip" width="90px" :disabled="!disabled" v-model:visible="visible">
       <template #reference>
         <ElButton
           :type="disabled ? 'info' : 'default'"
@@ -43,6 +37,7 @@ export default {
     async handlerClick() {
       const response = await this.$data.$api.get({ type: '/getActualFork' });
       const { data } = response;
+      if (!data) return;
       this.$store.commit('SET_CURRENT_FORK', data.result);
       if (location.pathname !== '/') goToUrl('/');
     }
