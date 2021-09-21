@@ -14,6 +14,7 @@ const fork = {
   actions: {
     async GET_PREVIOUS_FORK(context, api) {
       const response = await api.get({ type: '/getPreviousFork' });
+      if (!response.data) return;
       context.commit('SET_PREVIOUS_FORK', response.data.result);
     }
   }

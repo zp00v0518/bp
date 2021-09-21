@@ -5,6 +5,4 @@ const rolesList = {
   user: { name: 'user', accessList: [routerList.getActualFork.name, routerList.getMenu.name] }
 };
 
-
-
 module.exports = rolesList;
