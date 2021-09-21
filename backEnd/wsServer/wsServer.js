@@ -1,6 +1,6 @@
 const WS = require('ws');
 const config = require('../../config');
-const handlers = require('./handlers');
+const getRouteHandler = require('./getRouteHandler');
 const sendWSMessage = require('./sendWSMessage');
 const { getUserByCookies } = require('../user/db');
 const Cookies = require('cookies');
@@ -36,8 +36,9 @@ wsServer.on('connection', async (ws, req) => {
     try {
       data = JSON.parse(message);
       const { type } = data;
-      if (handlers[type]) {
-        const message = await handlers[type](data, UserOnLine[userCookies]);
+      const handler = getRouteHandler(type);
+      if (handler) {
+        const message = await handler(data, UserOnLine[userCookies]);
         if (message) {
           sendWSMessage(ws, message);
         }

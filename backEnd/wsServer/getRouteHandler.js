@@ -26,10 +26,9 @@ const handlers = {
   [routerList.saveMatchedCommand.name]: commandsHandlers.saveMatchedCommandHandler,
   [routerList.goParse.name]: parserHandlers.goParseHandler
 };
-const hand = {};
 
-module.exports = handlers;
-
-class Handler {
-  constructor() {}
+function getRouteHandler(routeName) {
+  return handlers[routeName] || false;
 }
+
+module.exports = getRouteHandler;
