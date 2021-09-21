@@ -1,3 +1,4 @@
 const rolesList = require('./rolesList');
+const checkAccess = require('./checkAccess');
 
-module.exports = { rolesList };
+module.exports = { rolesList, checkAccess };
