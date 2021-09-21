@@ -1,6 +1,7 @@
 const WS = require('ws');
 const config = require('../../config');
-const handlers = require('./handlers');
+const getRouteHandler = require('./getRouteHandler');
+const { checkAccess } = require('../roles');
 const sendWSMessage = require('./sendWSMessage');
 const { getUserByCookies } = require('../user/db');
 const Cookies = require('cookies');
@@ -31,13 +32,16 @@ wsServer.on('connection', async (ws, req) => {
     delete UserOnLine[userCookies];
   });
   ws.on('message', async (message) => {
-    if (!UserOnLine[userCookies]) return;
+    const userElem = UserOnLine[userCookies]
+    if (!userElem) return;
     let data;
     try {
       data = JSON.parse(message);
       const { type } = data;
-      if (handlers[type]) {
-        const message = await handlers[type](data, UserOnLine[userCookies]);
+      const access = userElem.user ? checkAccess(type, userElem.user.role) : false
+      const handler = getRouteHandler(type);
+      if (access && handler) {
+        const message = await handler(data, userElem);
         if (message) {
           sendWSMessage(ws, message);
         }

@@ -16,6 +16,7 @@ const global = {
   actions: {
     async GET_BK_LIST(context, api) {
       const response = await api.get({ type: '/get_bk_list' });
+      if (!response.data) return false;
       const { list } = response.data;
       const result = {};
       list.forEach((item) => {

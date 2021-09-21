@@ -1,5 +1,41 @@
 {
   "getMenu": {
     "name": "/getMenu"
+  },
+  "getActualFork": {
+    "name": "/getActualFork"
+  },
+  "getPreviousFork": {
+    "name": "/getPreviousFork"
+  },
+  "get_bk_list": {
+    "name": "/get_bk_list"
+  },
+  "getListSportCategory": {
+    "name": "/getListSportCategory"
+  },
+  "getUnsetCategory": {
+    "name": "/getUnsetCategory"
+  },
+  "saveMatchedSports": {
+    "name": "/saveMatchedSports"
+  },
+  "getAppTournaments": {
+    "name": "/getAppTournaments"
+  },
+  "getBkTournaments": {
+    "name": "/getBkTournaments"
+  },
+  "saveMatchedTournaments": {
+    "name": "/saveMatchedTournaments"
+  },
+  "getBaseCommand": {
+    "name": "/getBaseCommand"
+  },
+  "saveMatchedCommand": {
+    "name": "/saveMatchedCommand"
+  },
+  "goParse": {
+    "name": "/goParse"
   }
 }
