@@ -13,18 +13,23 @@ const handlers = {
   // get_matching: matching.getMatching,
   // set_matching: matching.setMatching,
   [routerList.getMenu.name]: getMenu,
-  '/getActualFork': handlerGetActualFork,
-  '/getPreviousFork': getPreviousForkHandler,
-  '/get_bk_list': handlerGetBKList,
-  '/getListSportCategory': sportCategory.getListSportCategoryHandle,
-  '/getUnsetCategory': sportCategory.getUnsetCategoryHandle,
-  '/saveMatchedSports': sportCategory.saveMatchedSportsHandle,
-  '/getAppTournaments': tournaments.getAppTournamentsHandler,
-  '/getBkTournaments': tournaments.getBkTournamentsHandler,
-  '/saveMatchedTournaments': tournaments.saveMatchedTournamentsHandler,
-  '/getBaseCommand': commandsHandlers.getBaseCommandHandler,
-  '/saveMatchedCommand': commandsHandlers.saveMatchedCommandHandler,
-  '/goParse': parserHandlers.goParseHandler
+  [routerList.getActualFork.name]: handlerGetActualFork,
+  [routerList.getPreviousFork.name]: getPreviousForkHandler,
+  [routerList.get_bk_list.name]: handlerGetBKList,
+  [routerList.getListSportCategory.name]: sportCategory.getListSportCategoryHandle,
+  [routerList.getUnsetCategory.name]: sportCategory.getUnsetCategoryHandle,
+  [routerList.saveMatchedSports.name]: sportCategory.saveMatchedSportsHandle,
+  [routerList.getAppTournaments.name]: tournaments.getAppTournamentsHandler,
+  [routerList.getBkTournaments.name]: tournaments.getBkTournamentsHandler,
+  [routerList.saveMatchedTournaments.name]: tournaments.saveMatchedTournamentsHandler,
+  [routerList.getBaseCommand.name]: commandsHandlers.getBaseCommandHandler,
+  [routerList.saveMatchedCommand.name]: commandsHandlers.saveMatchedCommandHandler,
+  [routerList.goParse.name]: parserHandlers.goParseHandler
 };
+const hand = {};
 
 module.exports = handlers;
+
+class Handler {
+  constructor() {}
+}
