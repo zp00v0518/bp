@@ -15,7 +15,7 @@ export default {
       listComponents: {
         sport: SportMatching,
         tournament: TournamentMatching,
-        commands: CommandsMatching
+        team: CommandsMatching
       }
     };
   },

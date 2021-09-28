@@ -13,6 +13,5 @@ async function createMenuInDB() {
   await insertMethod.many(collectionName, menu);
   await insertMethod.close();
 }
-createMenuInDB();
 
 module.exports = createMenuInDB;

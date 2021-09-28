@@ -7,22 +7,26 @@ const sports_app = {
     name: 'хоккей',
     key: 'hockey'
   },
+  basketball: {
+    name: 'баскетбол',
+    key: 'basketball'
+  },
   gandball: {
     name: 'гандбол',
     key: 'gandball'
+  },
+  tennis: {
+    name: 'теннис',
+    key: 'tennis'
+  },
+  boxing: {
+    name: 'бокс',
+    key: 'boxing'
+  },
+  ufs: {
+    name: 'мма',
+    key: 'ufs'
   }
-  // basketball: {
-  //   name: 'баскетбол',
-  //   key: 'basketball'
-  // },
-  // tennis: {
-  //   name: 'теннис',
-  //   key: 'tennis'
-  // },
-  // boxing: {
-  //   name: 'бокс',
-  //   key: 'boxing'
-  // },
   // volleyball: {
   //   name: 'волейбол',
   //   key: 'volleyball'
@@ -36,10 +40,7 @@ const sports_app = {
   //   name: 'настольный теннис',
   //   key: 'ping_pong'
   // },
-  // ufs: {
-  //   name: 'мма',
-  //   key: 'ufs'
-  // },
+
   // american_football: {
   //   name: 'американский футбол',
   //   key: 'american_football'

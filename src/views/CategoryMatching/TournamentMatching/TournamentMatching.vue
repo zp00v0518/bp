@@ -168,6 +168,7 @@ export default {
     },
     getCurrentDataBK(bkItem) {
       const { activeSport, adaptData } = this;
+      if (!adaptData[bkItem.id]) return;
       const sportName = activeSport.name;
       const elem = adaptData[bkItem.id][sportName];
       return elem;
@@ -261,9 +262,9 @@ export default {
         data: copy
       };
       const response = await $api.get(message);
-      const {newTour} = response;
+      const { newTour } = response;
       this.$store.commit('REPLACE_NEW_TOURNAMENT', newTour);
-      await this.getBkTournaments()
+      await this.getBkTournaments();
     },
     setValueInStore(tourId, setId) {
       const { dataforSave, firstData } = this;
@@ -278,6 +279,7 @@ export default {
     scrollContent() {
       const ref = this.$refs.container.$el;
       const item = ref.querySelector('.match-tournament__table--wrap table');
+      if (!item) return;
       const elemStyle = item.getBoundingClientRect();
       if (elemStyle.top <= 0) {
         item.scrollIntoView(true);
