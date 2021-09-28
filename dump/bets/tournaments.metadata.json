@@ -1,1 +1,1 @@
-{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_"}],"uuid":"ebf150bdf80444b6b9b7ee45b9f3a0c5","collectionName":"tournaments","type":"collection"}
+{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_"}],"uuid":"59c0d2a5b0194e458325de0d6fccbf6f","collectionName":"tournaments","type":"collection"}
