@@ -168,6 +168,7 @@ export default {
     },
     getCurrentDataBK(bkItem) {
       const { activeSport, adaptData } = this;
+      if (!adaptData[bkItem.id]) return;
       const sportName = activeSport.name;
       const elem = adaptData[bkItem.id][sportName];
       return elem;
