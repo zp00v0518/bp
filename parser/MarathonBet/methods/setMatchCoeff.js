@@ -12,7 +12,7 @@ function setMatchCoeff(elem, item) {
   if (elemMatch) {
     item.coeff[elemMatch.key] = +elem.dataset.selectionPrice;
     // TODO: умножается коэффициент!!!!!!
-    // item.coeff[elemMatch.key] = +elem.dataset.selectionPrice *3;
+    item.coeff[elemMatch.key] = +elem.dataset.selectionPrice + 0.1;
     // item.coeff[elemMatch.key] = +elem.dataset.selectionPrice;
   }
   return item;

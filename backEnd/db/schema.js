@@ -3,7 +3,7 @@ const prefix = {
   bk: '_bk',
   ref: '_ref'
 };
-Object.freeze(prefix);
+// Object.freeze(prefix);
 
 const classList = {
   command_app: 'command_app',
@@ -63,7 +63,7 @@ const tournament_type = {
 const command_bk = {
   class: classList.command_bk,
   name: { type: String, name: 'name' },
-  tournamet_bk_ref:{ type: String, name: refs.tournament_bk } ,
+  tournamet_bk_ref: { type: String, name: refs.tournament_bk }
   // [refs.tournament.name]: refs.tournament
 };
 
@@ -71,9 +71,21 @@ const command = {
   class: classList.command_bk,
   bkId: { type: Number, name: 'bkId' },
   name: { type: String, name: 'name' },
-  url: { type: String, name: 'url' },
+  url: { type: String, name: 'url' }
   // ref_tournament: { type: String, name: 'ref_tournament' },
   // ref_bk_command: { type: String, name: 'ref_bk_command' }
+};
+
+const forkResult = {
+  commandId_1: { type: String, name: 'commandId_1' },
+  commandId_2: { type: String, name: 'commandId_2' },
+  command_1: { type: String, name: 'command_1' },
+  command_2: { type: String, name: 'command_2' },
+  eventDate: { type: Number, name: 'eventDate' },
+  created_at: { type: Number, name: 'created_at' },
+  parseCount: { type: Number, name: 'parseCount' },
+  fork: { type: Array, name: 'fork' },
+  eventId: { type: String, name: 'eventId' }
 };
 
 const schema = {
@@ -84,7 +96,19 @@ const schema = {
   tournament_type,
   command_bk,
   command,
-  prefix
+  prefix,
+  forkResult
 };
+
+function frezeeObject(obj) {
+  Object.keys(obj).forEach((key) => {
+    const value = obj[key];
+    if (typeof value === 'object' && value !== null) {
+      Object.freeze(value);
+      frezeeObject(value);
+    }
+  });
+}
+frezeeObject(schema);
 
 module.exports = schema;
