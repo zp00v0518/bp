@@ -1,5 +1,6 @@
 const matchKey = require('../parseConfig/matchKey');
 const schema = require('../../backEnd/db/schema');
+const forkFabrica = require('./forkFabrica');
 const { refs } = schema;
 
 const matching = {
@@ -13,19 +14,7 @@ function checkFork(data) {
 
   events.forEach((item) => {
     const result = getFork(item);
-    const forkItem = {
-      commandId_1: item[0].commandId_1.toString(),
-      commandId_2: item[0].commandId_2.toString(),
-      command_1: item[0].command_1,
-      command_2: item[0].command_2,
-      // eventId: item._id,
-      eventDate: item[0].date,
-      created_at: Date.now(),
-      fork: []
-    };
-    if (item._id) {
-      forkItem.eventId = item._id;
-    }
+    const forkItem = forkFabrica(item);
     forkItem.fork.push(...result);
     if (forkItem.fork.length > 0) forkResult.push(forkItem);
   });
