@@ -9,6 +9,7 @@
       ></Icon>
       <router-link to="/">Home</router-link>
     </div>
+    <Donate/>
     <div class="app-header__right">
       <CheckFork></CheckFork>
     </div>
@@ -17,10 +18,11 @@
 
 <script>
 import CheckFork from './moleculs/CheckFork';
+import Donate from './moleculs/Donate'
 
 export default {
   name: 'Vheader',
-  components: { CheckFork },
+  components: { CheckFork, Donate },
   computed: {
     menuContent() {
       return this.$store.state.menu.content;
