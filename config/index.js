@@ -23,6 +23,10 @@ const config = {
       dev: {
         folder: '',
         html: 'dev.html'
+      },
+      prod: {
+        html: '/index.html',
+        folder: '/app'
       }
     }
   },
