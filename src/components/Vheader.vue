@@ -9,7 +9,7 @@
       ></Icon>
       <router-link to="/">Home</router-link>
     </div>
-    <Donate/>
+    <!-- <Donate/> -->
     <div class="app-header__right">
       <CheckFork></CheckFork>
     </div>
