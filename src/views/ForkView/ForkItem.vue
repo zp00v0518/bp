@@ -29,7 +29,7 @@
 
 <script>
 import BkBlock from './BkBlock';
-import Pic from '../../assets/images/double arrow_4.png';
+import Pic from '../../assets/images/double_arrow_4.png';
 
 export default {
   name: 'ForkItem',
