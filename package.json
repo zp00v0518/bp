@@ -17,6 +17,7 @@
     "del-command": "node backEnd/commands/db/deleteUnsetCommands.js "
   },
   "dependencies": {
+    "argon2": "^0.28.2",
     "cookies": "^0.8.0",
     "core-js": "^3.6.5",
     "dotenv": "^8.2.0",
