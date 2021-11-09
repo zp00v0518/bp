@@ -1,8 +1,10 @@
+const getHashPass = require('./getHashPass')
 const rolesList = require('../roles/rolesList');
 
-function createUser(data) {
+async function createUser(data) {
   const user = {};
-  user.pass = data.pass;
+  const pass = await getHashPass(data);
+  user.pass = pass;
   user.email = data.email;
   user.date = {
     registr: new Date(),
