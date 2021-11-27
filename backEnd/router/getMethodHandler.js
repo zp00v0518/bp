@@ -3,7 +3,7 @@ const url = require('url');
 const config = require('../../config');
 const { fileReader, sendResponse, mimeType } = require('../template_modules');
 const { GETlist } = require('./GETrouting');
-const MODE = process.env.APP_MODE;
+const APP_MODE = process.env.APP_MODE;
 
 function getMethodHandler(req, res, startPath) {
   const urlParse = url.parse(req.url, true);
@@ -43,12 +43,14 @@ function getPathToFile(value, startPath) {
     return pathJoin;
   }
   // if (!parseValue.ext){
-  //   file = config.path.app[MODE].html;
+  //   file = config.path.app[APP_MODE].html;
   // }
+  if(!APP_MODE) return 'false'
+  
   if (value === GETlist.app) {
-    file = config.path.app[MODE].html;
+    file = config.path.app[APP_MODE].html;
   }
-  folder += config.path.app[MODE].folder;
+  folder += config.path.app[APP_MODE].folder;
   const pathJoin = path.join(startPath, folder, file);
   return pathJoin;
 }

@@ -4,7 +4,7 @@ const config = require('../../../config');
 
 async function addNewUserToApp(userData) {
   const collectionName = config.collections.users.name;
-  let user = createUser(userData);
+  let user = await createUser(userData);
   let insertResult;
   try {
     insertResult = await insertMethod.one(collectionName, user);

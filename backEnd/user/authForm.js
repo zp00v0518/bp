@@ -3,14 +3,16 @@ const { sendResponse } = require('../template_modules');
 const config = require('../../config');
 const addCookieToUserAndDb = require('./addCookieToUserAndDb');
 const { GETlist } = require('../router/GETrouting');
+const getHashPass = require('./getHashPass');
 
 async function authForm({ req, res, postData }) {
   const collectionName = config.collections.users.name;
   const userData = postData.data;
+  const hash = await getHashPass(userData);
   const findOptions = {
     query: {
       email: userData.email,
-      pass: userData.pass
+      pass: hash
     }
   };
   let user = await findMethod.one(collectionName, findOptions);

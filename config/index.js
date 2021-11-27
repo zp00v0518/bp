@@ -35,7 +35,8 @@ const config = {
     name: 'bets'
   },
   collections,
-  sports
+  sports,
+  extraHash: '$argon2i$v=19$m=4096,t=3,p=1'
 };
 
 module.exports = config;
