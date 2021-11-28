@@ -8,7 +8,7 @@
     "lint": "vue-cli-service lint",
     "app-init": "node backEnd/initApp/initApp.js",
     "create-admin": "node backEnd/roles/createAdmin.js",
-    "create-menu": "node backEnd/menu/db/createMenuInDB.js",
+    "create-menu": "node backEnd/menu/initMenu.js",
     "dev": "vue-cli-service serve",
     "parse-start": "node parser/parsingProccess/startParse.js",
     "serv": "supervisor --inspect --watch backEnd server.js",
