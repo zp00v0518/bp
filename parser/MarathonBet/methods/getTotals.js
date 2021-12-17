@@ -7,19 +7,19 @@ function getTotals(row) {
       '[data-header-highlighted-bounded="true"]'
     );
     const item = {};
+    console.clear()
     Array.from(rows).forEach((tr) => {
+      const valueSelector = '.coeff-value';
+      const coefSelector = '.coeff-price';
       const less = tr.firstElementChild;
-      if (less.dataset.sel) {
-        const lessData = JSON.parse(less.dataset.sel);
-        const key = lessData.sn.match(/[\d\.]{1,}/gi);
-        if (key) {
-					// TODO: умножается коэффициент!!!!!!
-          item[key] = [lessData.prices[1]*2];
-          // item[key] = [lessData.prices[1]];
-          const more = tr.lastElementChild;
-          const moreData = JSON.parse(more.dataset.sel);
-          item[key].push(moreData.prices[1]);
-        }
+      let valueElem = less.querySelector(valueSelector)
+      if (valueElem){
+        const key = valueElem.textContent.match(/[\d\.]{1,}/gi)[0]
+        const lessCoef = less.querySelector(coefSelector).textContent.match(/[\d\.]{1,}/gi)[0]
+        const moreElem = tr.lastElementChild;
+        const moreCoef = moreElem.querySelector(coefSelector).textContent.match(/[\d\.]{1,}/gi)[0]
+        item[key] = [+lessCoef, +moreCoef]
+        console.log(key, lessCoef, moreCoef)
       }
     });
     return item;
