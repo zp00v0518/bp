@@ -35,7 +35,7 @@ export default {
       if (!search) return tournamentList;
       const v = search.toLowerCase();
       return tournamentList.filter((i) =>
-        i.type_name.toLowerCase().includes(v)
+        i.name.toLowerCase().includes(v)
       );
     }
   }
