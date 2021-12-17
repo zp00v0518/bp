@@ -8,7 +8,8 @@ async function parseOneBet(bet, item) {
   try {
     result = await bet.parseOneTournament(browser, item.url);
   } catch (err) {
-    console.log(err);
+    const {name, message} = err
+    console.log(`${name}:${message}     ${item.url}`);
   }
   setExtraDataToItem(result, item);
   await browser.close();
