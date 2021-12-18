@@ -8,7 +8,7 @@ async function getPreviousForkByParseCount(num = 0) {
   const result = await findMethod.all(
     collectionName,
     { [field]: { $lt: num } },
-    { limit: 10 }
+    { limit: 10, sort: { created_at: -1 } }
   );
   return result.result;
 }

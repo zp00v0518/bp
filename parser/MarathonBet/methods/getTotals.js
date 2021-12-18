@@ -18,6 +18,8 @@ function getTotals(row) {
         const lessCoef = less.querySelector(coefSelector).textContent.match(/[\d\.]{1,}/gi)[0]
         const moreElem = tr.lastElementChild;
         const moreCoef = moreElem.querySelector(coefSelector).textContent.match(/[\d\.]{1,}/gi)[0]
+        // !!!!! умножается коэфициент, для тестов
+        // item[key] = [+lessCoef * 2, +moreCoef]
         item[key] = [+lessCoef, +moreCoef]
         console.log(key, lessCoef, moreCoef)
       }
