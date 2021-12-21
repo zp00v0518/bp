@@ -14,7 +14,10 @@
     "serv": "supervisor --inspect --watch backEnd server.js",
     "dump-w": "cd C:/Program Files/MongoDB/Tools/100/bin && mongodump --db bets --out  C:/Users/zp00v/Desktop/Projects/bp/dump",
     "restore-w": "cd C:/Program Files/MongoDB/Tools/100/bin && mongorestore --verbose  C:/Users/zp00v/Desktop/Projects/bp/dump ",
-    "del-command": "node backEnd/commands/db/deleteUnsetCommands.js "
+    "del-command": "node backEnd/commands/db/deleteUnsetCommands.js ",
+    "serv-p": "node parser/server/index.js",
+    "serv-p-dev": "supervisor --inspect --watch parser/server parser/server/index.js",
+    "parse-bet": "node parser/parseBetServer/index.js"
   },
   "dependencies": {
     "argon2": "^0.28.2",
