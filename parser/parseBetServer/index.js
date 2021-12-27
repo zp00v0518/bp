@@ -1,4 +1,6 @@
 // сервер, предназначение которого парсить конторы и отправлять данные назад
+require('dotenv').config({ path: './parse_main_server.env' });
+require('dotenv').config({ path: './parse_server.env' });
 const WS = require('ws');
 const template = require('template_func');
 const { sendWSMessage } = require('../../backEnd/wsServer');
@@ -8,11 +10,12 @@ let timer = null;
 const handlers = {
   '/getUrlForParse': parsingData
 };
-
 async function main() {
-  console.log(123);
+  const port = process.env.WS_PORT || 8888
+  const ip_connect = process.env.IP_CONNECT || 'localhost'
+  const url = `ws://${ip_connect}:${port}`
   let wsServer = {};
-  wsServer = new WS('ws://localhost:8888');
+  wsServer = new WS(url);
   wsServer.on('error', () => {});
 
   wsServer.on('open', () => {

@@ -1,5 +1,5 @@
 // сервер который менеджерит данными, которые надо парсить. Записывает результаты в БД
-require('dotenv').config({ path: './parse_server.env' });
+require('dotenv').config({ path: './parse_main_server.env' });
 const WS = require('ws');
 const template = require('template_func');
 const { sendWSMessage } = require('../../backEnd/wsServer');
@@ -16,14 +16,14 @@ const handlers = {
   '/getUrlForParse': getUrlForParseHandler,
   '/parsingResult': parsingResultHandler,
 }
+const IPS = process.env.IPS ? process.env.IPS.trim().split(';') : []
+if (!IPS[IPS.length - 1]) IPS.splice(IPS.length - 1)
 
 async function start() {
   await getTournament();
   const wsServer = new WS.Server({ port }, () => {
     console.log(`WS-Сервер запущен по адресу ws://localhost:${port}`);
   });
-  const IPS = ['::ffff:127.0.0.1'];
-
   wsServer.on('connection', (ws, req) => {
     const ip = req.socket.remoteAddress;
     if (!IPS.includes(ip)) return;
