@@ -26,6 +26,7 @@ async function start() {
   });
   wsServer.on('connection', (ws, req) => {
     const ip = req.socket.remoteAddress;
+    console.log(ip)
     if (!IPS.includes(ip)) return;
 
     ws.on('message', async (ev) => {
