@@ -1,3 +1,4 @@
+const ObjectId = require('mongodb').ObjectID;
 const schema = require('../../backEnd/db/schema');
 const FindInDB = require('../../backEnd/db/FindInDB');
 const config = require('../../config');
@@ -15,7 +16,9 @@ async function getCommandsByName(data) {
   data.forEach((item) => {
     commandsName.add(item.name);
     bkIds.add(item.bkId);
-    tournaments.add(item[refTournamentKey]);
+    let id = item[refTournamentKey]
+    if (typeof id === 'string') id = new ObjectId(id)
+    tournaments.add(id);
   });
   const query = {
     class: schema.class.command_bk,
