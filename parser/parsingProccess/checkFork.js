@@ -81,6 +81,7 @@ function matchTotals(arr, item) {
   Object.keys(totals).forEach((goalTotal) => {
     const value = totals[goalTotal];
     arr.forEach((bets) => {
+      if (!bets.coeff) return
       const betsTotals = bets.coeff.totals;
       if (!betsTotals || !betsTotals[goalTotal]) return;
       const d = checkMarga(value[0], betsTotals[goalTotal][1]);
