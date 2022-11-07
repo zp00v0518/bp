@@ -11,14 +11,13 @@ async function parseOneTournament(browser, url) {
       waitUntil: 'networkidle2',
       timeout: 30000
     });
-    const selector = '[data-id="prematch-events-list"]';
+    // const selector = '[data-id="prematch-events-list"]';
+    const selector = '[data-onboarding*="tournament"]';
     const ops = { visible: true };
     await tournamentPage.waitForSelector(selector, ops);
-    const hrefs = await utils.getHrefs(
-      tournamentPage,
-      '[data-id="event-card"] a'
-      );
-      // '[data-id="event-card-additional-info-button"]'
+    const pathTohref = '[data-onboarding*="event-card"] a';
+    // const pathTohref = '[data-id="event-card"] a'
+    const hrefs = await utils.getHrefs(tournamentPage, pathTohref);
     const separate = utils.splitArrOnSmallArr(hrefs, parseConfig.splitUrls);
     for (const urls of separate) {
       const promises = urls.map(async (url) => {

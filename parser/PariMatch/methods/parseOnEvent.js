@@ -17,10 +17,11 @@ async function parseOnEvent(eventPage, url) {
   await eventPage.goto(url, {
     waitUntil: 'networkidle2'
   });
-  const btnSelector = '[data-id="event-markets-tab-all"]';
+  const btnSelector = '[data-id="event-market-tabs-carousel"]';
+  // const btnSelector = '[data-id="event-markets-tab-all"]';
   await eventPage.waitForSelector(btnSelector);
-  let btn = await eventPage.$(btnSelector);
-  await btn.click();
+  // let btn = await eventPage.$(btnSelector);
+  // await btn.click();
   await eventPage.addScriptTag({ content: `${utils.parseWithFunction}` });
   const item = await eventPage.$eval(
     '#root',
