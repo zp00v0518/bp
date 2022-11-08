@@ -4,7 +4,9 @@ const schema = require('../../backEnd/db/schema');
 
 async function parseOneBet(bet, item) {
   let result = [];
-  const browser = await puppeteer.launch(parseConfig.browserConfig);
+  const config = Object.assign({},parseConfig.browserConfig);
+  if (bet.config.name === 'Favorit') config.headless = false;
+  const browser = await puppeteer.launch(config);
   try {
     result = await bet.parseOneTournament(browser, item.url);
   } catch (err) {

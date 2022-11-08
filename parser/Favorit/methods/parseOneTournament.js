@@ -15,9 +15,13 @@ async function parseOneTournament(browser, url) {
       width: 1023,
       height: 1070,
     });
-    const selector = '[class*="WidgetWrapper_wrapper"]';
+    let selector = '[class*="WidgetWrapper_wrapper"]';
+    // const html = await tournamentPage.content();
+    // console.log(html)
     await tournamentPage.waitForSelector(selector);
-    await tournamentPage.waitForTimeout(7000);
+    selector = '[class*="SliderItems_container"]';
+    await tournamentPage.waitForSelector(selector);
+    await tournamentPage.waitForTimeout(9000);
     // const selectorHrefs = 'a[href*="sports/event/"]';
     const selectorHrefs = '[data-role^="event-id-"]';
     let hrefs = await tournamentPage.$$eval(selectorHrefs, (arr) => {
