@@ -2,7 +2,7 @@ function getTotals(eventData) {
   try {
     const template = {};
     const totals = eventData.filter(
-      (i) => i.market_template_weigh === 14 && i.result_type_weigh === 1
+      (i) => i.market_template_weigh === 50 && i.result_type_weigh === 1
     );
     if (!totals) return false;
     totals.forEach((item) => {

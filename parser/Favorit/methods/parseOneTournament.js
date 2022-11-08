@@ -10,6 +10,11 @@ async function parseOneTournament(browser, url) {
   });
 
   try {
+    await tournamentPage.waitForTimeout(1000);
+    await tournamentPage.setViewport({
+      width: 1023,
+      height: 1070,
+    });
     const selector = '[class*="WidgetWrapper_wrapper"]';
     await tournamentPage.waitForSelector(selector);
     await tournamentPage.waitForTimeout(7000);
