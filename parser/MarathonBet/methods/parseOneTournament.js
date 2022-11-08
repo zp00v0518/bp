@@ -9,7 +9,7 @@ async function parseOneTournament(browser, url) {
     await tournamentPage.goto(url, {
       waitUntil: 'domcontentloaded'
     });
-    await tournamentPage.waitForSelector('.category-label-link');
+    await tournamentPage.waitForSelector('.category-label');
     const hrefs = await utils.getHrefs(tournamentPage, '.member-link');
     const separate = utils.splitArrOnSmallArr(hrefs, parseConfig.splitUrls);
     for (const urls of separate) {
