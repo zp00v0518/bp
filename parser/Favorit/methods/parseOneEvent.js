@@ -25,7 +25,7 @@ async function parseOneEvent(eventPage, url) {
               if (!item.coeff) item.coeff = {};
               item.coeff.totals = totals;
             }
-          } else if (reqData.method === 'frontend/event/get' && typeof reqData?.params?.by?.event_id === 'number') {
+          } else if (reqData.method === 'frontend/event/get' && reqData.params && reqData.params.by && typeof reqData.params.by.event_id === 'number') {
             const data = await response.json();
             const results = data.result;
             if (!!item.date) return;
