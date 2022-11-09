@@ -49,6 +49,14 @@ async function getTournament() {
 
   await incrementStatistic();
   parsingList = await getTournametsForParse();
+  // for debuggger - remove not used tournaments
+  // Object.keys(parsingList).forEach(key => {
+  //   const item = parsingList[key]
+  //   if (item[0].name === 'NHL'){
+  //     parsingList = {}
+  //     parsingList[key] = item
+  //   }
+  // })
   parsingList = Object.values(parsingList);
   // parsingList = parsingList.flat(Infinity);
 }
