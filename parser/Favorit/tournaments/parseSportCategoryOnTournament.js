@@ -18,7 +18,7 @@ class Callback {
     const method = reqData.method;
     if (!Object.values(path).includes(method)) return false;
     if (method === path.sport) await this.getSportData(response);
-    if (method === path.tournament) {
+    if (method === path.tournament && reqData?.params?.by?.service_id === 0) {
       const result = await this.getTournaments(response, item);
       return result;
     }
