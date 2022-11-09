@@ -3,7 +3,7 @@ const config = require('../../../config');
 
 async function saveTournamentsOnDb(arr = []) {
   const bulkWrite = new BulkWriteDB();
-  if (arr.length === 0) return;
+  if (!arr[0]) return;
   const list = arr.flat(Infinity);
   await bulkWrite.connect(config.db.name);
   const collectionName = config.collections.tournaments.name;

@@ -29,7 +29,8 @@ async function parseSportCategoryOnTournament(page, item) {
             console.clear();
             const pageFuncs = window.parseWithFunction(stringFuncs);
             const name_tournament = node.innerText.split('\n')[0];
-            const links = node.querySelectorAll('a[href');
+            // const links = node.querySelectorAll('a[href');
+            const links = node.nextElementSibling.querySelectorAll('a[href');
             const res = Array.from(links).map((el) => {
               const template = pageFuncs.getTemplateTurnament();
               template.url = el.href;
