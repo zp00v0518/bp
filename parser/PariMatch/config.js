@@ -1,7 +1,8 @@
 const config = {
   id: 1,
   path: 'https://parimatch.com/sport/futbol',
-  name: 'PariMatch'
+  name: 'PariMatch',
+  browser: null
 };
 
 module.exports = config;

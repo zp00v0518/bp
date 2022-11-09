@@ -4,6 +4,10 @@ const config = {
   name: 'Favorit',
   response: {
     api1: 'https://www.favorit.com.ua/frontend_api2/'
+  },
+  browser: {
+    headless: false,
+    devtools: true
   }
 };
 

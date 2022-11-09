@@ -41,11 +41,11 @@ class Callback {
   }
   async getSportData(response) {
     const d = await response.json();
-    this.sportData = d.result;
+    this.sportData.push(...d.result);
   }
   async getCategoryData(response) {
     const d = await response.json();
-    this.categoryData = d.result;
+    this.categoryData.push(...d.result);
   }
   async getTournaments(response, item) {
     const data = await response.json();

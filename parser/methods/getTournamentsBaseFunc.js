@@ -12,9 +12,11 @@ async function getTournamentsBaseFunc(parserCallback){
     throw er;
   }
   const separate = utils.splitArrOnSmallArr(result, 2);
-  const browser = await puppeteer.launch(parseConfig.browserConfig);
   const tournaments = [];
   for (const items of separate) {
+    let browserConfig = Object.assign({}, parseConfig.browserConfig);
+    browserConfig = config.browser ? Object.assign(browserConfig, config.browser) : browserConfig
+    const browser = await puppeteer.launch(browserConfig);
     const promises = items.map(async (item) => {
       let bets = false;
       const tournamentPage = await browser.newPage();
@@ -32,8 +34,9 @@ async function getTournamentsBaseFunc(parserCallback){
     const f = await Promise.all(promises);
     const arr = f.filter((i) => i);
     tournaments.push(...arr);
+    await browser.close();
   }
-  await browser.close();
+  // await browser.close();
   return tournaments;
 }
 
