@@ -240,11 +240,17 @@ export default {
       const { dataforSave, activeSport, baseTournaments } = this;
       const sportName = activeSport.key;
       const copy = JSON.parse(JSON.stringify(dataforSave));
+      const allTournaments = []
+      Object.keys(baseTournaments).forEach(tourName => {
+        allTournaments.push(...baseTournaments[tourName])
+      })
       Object.keys(copy).forEach((key) => {
         const item = copy[key];
+        const tournament = allTournaments.find((i) => i._id === key)
+        // const tournament = baseTournaments[sportName].find((i) => i._id === key)
         copy[key] = {
           sportName,
-          tournamentName: baseTournaments[sportName].find((i) => i._id === key).name,
+          tournamentName: tournament.name,
           tournaments: item.map((i) => i._id)
         };
       });
