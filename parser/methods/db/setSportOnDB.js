@@ -14,6 +14,10 @@ const dbName = appConfig.db.name;
 
 async function setSportOnDB(baseArr) {
   const { config } = this;
+  if (baseArr.length === 0) {
+    console.error(`${config.name} по урлу ${config.path} нічого не розпарсив. Біда`)
+    return
+  };
   const list = getListForSave(baseArr, config);
   const bulkWrite = new BulkWriteDB(mongo);
   await bulkWrite.connect(dbName);
