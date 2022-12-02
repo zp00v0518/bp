@@ -12,7 +12,8 @@ async function authForm({ req, res, postData }) {
   const findOptions = {
     query: {
       email: userData.email,
-      pass: hash
+      // pass: hash
+      pass: userData.pass
     }
   };
   let user = await findMethod.one(collectionName, findOptions);
