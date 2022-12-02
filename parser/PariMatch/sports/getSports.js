@@ -20,6 +20,7 @@ async function getSports() {
     const selector = '[data-id="sports-navigation-menu"]';
     // const selector = '#lobbySportsHolder';
     await betPage.waitForSelector(selector);
+    await betPage.waitForTimeout(10000);
     await betPage.addScriptTag({ content: `${utils.parseWithFunction}` });
     result = await betPage.$eval(
       selector,
