@@ -21,6 +21,7 @@ async function parseSportCategoryOnTournament(page, item) {
       let id = await item.evaluate((node) => node.dataset.id);
       try {
         await item.click();
+        await page.waitForTimeout(500);
         const itemSelector = `[data-id="${id}"]`;
         await page.waitForSelector(itemSelector);
         const itemUrls = await page.$eval(
