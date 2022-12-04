@@ -5,8 +5,8 @@ const PariMatch = require('../PariMatch');
 const list = [
   // [Favorit]
   // [MarathonBet]
-  // [PariMatch]
-  [MarathonBet, Favorit, PariMatch]
+  [PariMatch]
+  // [MarathonBet, Favorit, PariMatch]
   // [MarathonBet, PariMatch]
 ];
 

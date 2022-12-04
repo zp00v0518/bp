@@ -1,4 +1,4 @@
-const listForParse = require('../listForParse');
+const listForParse = require('../../parseConfig/listForParse');
 const parseOneBet = require('../parseOneBet');
 const endParsingBets = require('../endParsingBets');
 

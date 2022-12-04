@@ -1,4 +1,4 @@
-const listForParse = require('./listForParse');
+const listForParse = require('../parseConfig/listForParse');
 
 function findBet(id) {
   let result = {};

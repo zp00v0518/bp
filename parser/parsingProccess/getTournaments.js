@@ -1,4 +1,4 @@
-const listForParse = require('./listForParse');
+const listForParse = require('../parseConfig/listForParse');
 const { saveTournamentsOnDb } = require('../methods/db');
 
 async function getTournaments() {
