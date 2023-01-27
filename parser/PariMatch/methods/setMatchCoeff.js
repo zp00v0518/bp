@@ -1,6 +1,7 @@
 function setMatchCoeff(document, item, config) {
   const conf = config.matchKey;
-  const outcomesElems = document.querySelectorAll('.EC_oK_EC_q.EC_lJ_EC_lL.EC_lJ_EC_M');
+  const lineDOM = document.querySelector('#line-holder')
+  const outcomesElems = lineDOM.querySelectorAll('.EC_Oi.EC_Oe.EC_Og');
   const winRow = outcomesElems[0];
   // const winRow = winHeader.parentElement.nextElementSibling;
   const winOutcomes = winRow.querySelectorAll('[data-id="animated-odds-value"]')

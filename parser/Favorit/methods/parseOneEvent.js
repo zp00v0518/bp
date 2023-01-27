@@ -3,7 +3,8 @@ const getDate = require('./getDate');
 const getTotals = require('./getTotals');
 const setNamesCommand = require('./setNamesCommand');
 
-async function parseOneEvent(eventPage, url) {
+async function parseOneEvent(eventPage, url, option = {}) {
+  const { config } = option;
   const item = {};
   try {
     eventPage.on('response', async (response) => {
@@ -11,7 +12,7 @@ async function parseOneEvent(eventPage, url) {
         const req = response.request();
         if (
           req._method === 'POST' &&
-          req._url === 'https://www.favorit.com.ua/frontend_api2/'
+          req._url === config.response.api1
         ) {
           const reqData = JSON.parse(req._postData);
           if (reqData.method === 'frontend/market/get') {
@@ -43,7 +44,7 @@ async function parseOneEvent(eventPage, url) {
     });
     const selector = '[class*="EventMarkets_markets"]';
     // const selector = '.Accordion_titleBlock__wBlra';
-    
+
     await eventPage.waitForSelector(selector);
     await eventPage.waitForTimeout(5000);
     return item;

@@ -4,6 +4,7 @@ const parseConfig = require('../../parseConfig');
 
 async function parseOneTournament(browser, url) {
   const tournamentPage = await browser.newPage();
+  const config = this.config;
   const result = [];
   await tournamentPage.goto(url, {
     waitUntil: 'networkidle2'
@@ -43,7 +44,7 @@ async function parseOneTournament(browser, url) {
       const promises = urls.map(async (url) => {
         const newPage = await browser.newPage();
         try {
-          const bets = await parseOneEvent(newPage, url);
+          const bets = await parseOneEvent(newPage, url, { config });
           await newPage.close();
           const emptyData = Object.keys(bets).length === 0;
           return emptyData ? false : bets;
