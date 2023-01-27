@@ -10,12 +10,13 @@ const funcInPage = {
 };
 
 async function getSports() {
-  const url = 'https://www.marathonbet.com/uk/';
+  // const url = 'https://www.marathonbet.com/uk/';
   // const devSettings = {
   //   devtools: true,
   //   headless: false,
   //   args: ['--window-size=1920,1070', '--window-position=-310,-1080']
   // };
+  const url = this.config.path || 'https://www.marathonbet.com/uk/'
   const browser = await puppeteer.launch(
     parseConfig.browserConfig
     // Object.assign(parseConfig.browserConfig, devSettings)

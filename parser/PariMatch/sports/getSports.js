@@ -9,7 +9,8 @@ const funcInPage = {
 };
 
 async function getSports() {
-  const url = 'https://parimatch.com/';
+  // const url = 'https://parimatch.com/';
+  const url = this.config.path || 'https://parimatch.com/'
   const browser = await puppeteer.launch(parseConfig.browserConfig);
   const betPage = await browser.newPage();
   let result = [];

@@ -1,9 +1,9 @@
 const config = {
-  path: 'https://www.favorit.com.ua/ru/sports/sport/soccer/',
+  path: 'https://www.favbet.ua',
   id: 2,
   name: 'Favorit',
   response: {
-    api1: 'https://www.favorit.com.ua/frontend_api2/'
+    api1: 'https://www.favbet.ua/frontend_api2/'
   },
   browser: {
     headless: false,

@@ -9,12 +9,13 @@ const funcInPage = {
 };
 
 async function getSports() {
-  const url = 'https://www.favorit.com.ua/ru/sports/';
-  const devSettings = {
-    // devtools: true,
-    // headless: false,
-    // args: ['--window-size=1920,1070', '--window-position=-310,-1080']
-  };
+  // const url = 'https://www.favorit.com.ua/ru/sports/';
+  const url = this.config.path + '/ru/sports/' || 'https://www.favorit.com.ua/ru/sports/'
+  // const devSettings = {
+  //   devtools: true,
+  //   headless: false,
+  //   args: ['--window-size=1920,1070', '--window-position=-310,-1080']
+  // };
   const browser = await puppeteer.launch(
     parseConfig.browserConfig
     // Object.assign(parseConfig.browserConfig, devSettings)
