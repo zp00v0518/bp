@@ -2,14 +2,17 @@ const ConnectMongoDB = require('../connectMongoDB');
 
 async function dropCollection(dbName = 'test', collectionName = 'test') {
   const Mongo = new ConnectMongoDB();
-  const z = await Mongo.connect({ dbName });
+  await Mongo.connect({ dbName });
   const collection = await Mongo.open(collectionName);
   let flag = false;
-  try {
-    await collection.drop();
-    flag = true;
-  } catch (err) {
-    console.log(err)
+  const x = await collection.stats()
+  if (x.size > 0) { // when size === 0 MongoClient throw error
+    try {
+      await collection.drop();
+      flag = true;
+    } catch (err) {
+      console.log(err)
+    }
   }
   Mongo.close();
   return flag;
