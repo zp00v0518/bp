@@ -49,7 +49,7 @@ function getFork(arrEvents) {
 
 function getBets(checkArr, item) {
   let getBetsResult = [];
-
+  if (!item.coeff) return false
   const totalsResult = matchTotals(checkArr, item);
   getBetsResult.push(...totalsResult);
 
@@ -58,16 +58,21 @@ function getBets(checkArr, item) {
     const start = item.coeff[key];
     checkArr.forEach((bets) => {
       matchList.forEach((matchKey) => {
-        const target = bets.coeff[matchKey];
-        const marga = checkMarga(start, target);
-        if (marga < 1) {
-          const cell = {
-            marga,
-            firstBk: getBkSection(item, key),
-            secondBk: getBkSection(bets, matchKey)
-          };
-          getBetsResult.push(cell);
+        try {
+          const target = bets.coeff[matchKey];
+          const marga = checkMarga(start, target);
+          if (marga < 1) {
+            const cell = {
+              marga,
+              firstBk: getBkSection(item, key),
+              secondBk: getBkSection(bets, matchKey)
+            };
+            getBetsResult.push(cell);
+          }
+        } catch (error) {
+          console.log(`bkId:${bets.bkId}  command_1:'${bets.command_1}'   command_2:'${bets.command_2}'  date:${bets.date}`)
         }
+
       });
     });
   });
