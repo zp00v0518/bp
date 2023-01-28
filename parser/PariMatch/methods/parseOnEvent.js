@@ -47,7 +47,9 @@ async function parseOnEvent(eventPage, url) {
     utils.stringifyWithFunc(params)
   );
   if (item === false) {
-    console.log('Parimatch => parseOnEvent - подія не распарсена, напевно, злетів якийсь CSS-селектор ')
+    console.log('Parimatch => parseOnEvent - подія не распарсена, напевно, злетів якийсь CSS-селектор')
+    console.log(`${url}`)
+    console.log('')
   }
   eventPage.close();
   return item

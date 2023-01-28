@@ -52,14 +52,16 @@ class Callback {
     if (data && data.result) {
       const { categoryData } = this;
       const reg = /s\/sport/gi;
-      const categoryUrl = item.url.replace(reg, 's/category');
+      const categoryUrl = item.url.replace(reg, 's/tournament');
+      // const categoryUrl = item.url.replace(reg, 's/category');
       const result = data.result.map((tournament) => {
         const { category_id } = tournament;
         const categoryItem = categoryData.find(
           (i) => i.category_id === category_id
         );
         const template = getTemplateTurnament();
-        template.url = categoryUrl + tournament.category_id;
+        // template.url = categoryUrl + tournament.category_id;
+        template.url = categoryUrl + tournament.tournament_id
         template.name =
           categoryItem.category_name + ' ' + tournament.tournament_name;
         return template;

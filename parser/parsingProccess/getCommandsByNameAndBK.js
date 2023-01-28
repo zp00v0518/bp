@@ -17,7 +17,7 @@ async function getCommandsByName(data) {
     commandsName.add(item.name);
     bkIds.add(item.bkId);
     let id = item[refTournamentKey]
-    if (typeof id === 'string') id = new ObjectId(id)
+    // if (typeof id === 'string') id = new ObjectId(id)
     tournaments.add(id);
   });
   const query = {

@@ -12,10 +12,10 @@ async function parseOneTournament(browser, url) {
 
   try {
     await tournamentPage.waitForTimeout(1000);
-    await tournamentPage.setViewport({
-      width: 1023,
-      height: 1070,
-    });
+    // await tournamentPage.setViewport({
+    //   width: 1023,
+    //   height: 1070,
+    // });
     let selector = '[class*="WidgetWrapper_wrapper"]';
     // const html = await tournamentPage.content();
     // console.log(html)
@@ -32,7 +32,7 @@ async function parseOneTournament(browser, url) {
       return [...set];
     })
     hrefs = hrefs.map(i => {
-      const newUrl = url.replace('category', 'event').replace(/[0-9]{1,}/gi, i)
+      const newUrl = url.replace('tournament', 'event').replace(/[0-9]{1,}/gi, i)
       return newUrl
     })
     // const hrefs = await utils.getHrefs(tournamentPage, `${selector} ${selectorHrefs}`);
