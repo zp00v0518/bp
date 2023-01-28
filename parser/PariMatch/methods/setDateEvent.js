@@ -1,5 +1,5 @@
 function setDateEvent(document, item) {
-  const monthList = [0, 1, 2, 3, 'май', 'июн', 'июл', 'авг', 8, 9, 'нояб.', 'дек'];
+  const monthList = ['січ', 'лют', 2, 3, 'трав', 'чер', 'лип', 'серп', 8, 9, 'лист.', 'дек'];
   const elDateInfo = document.querySelectorAll(
     '[data-id="prematch-infoboard-time-status"] span'
   )
