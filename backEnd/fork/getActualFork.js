@@ -18,7 +18,7 @@ async function getActualFork() {
   const stat = await getStatistic();
   const { parseCount } = stat;
   const collectionName = appConfig.collections.results.name;
-  const pipline = createPipline(parseCount);
+  const pipline = createPipline(parseCount - 1);
   const result = await aggregateMethod.get(collectionName, pipline);
   return result;
 }
