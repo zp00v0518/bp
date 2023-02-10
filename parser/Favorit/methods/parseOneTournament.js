@@ -17,8 +17,6 @@ async function parseOneTournament(browser, url) {
     //   height: 1070,
     // });
     let selector = '[class*="WidgetWrapper_wrapper"]';
-    // const html = await tournamentPage.content();
-    // console.log(html)
     await tournamentPage.waitForSelector(selector);
     selector = '[class*="SliderItems_container"]';
     await tournamentPage.waitForSelector(selector);
@@ -46,7 +44,7 @@ async function parseOneTournament(browser, url) {
         try {
           const bets = await parseOneEvent(newPage, url, { config });
           await newPage.close();
-          const emptyData = Object.keys(bets).length === 0;
+          const emptyData = bets && Object.keys(bets).length === 0;
           return emptyData ? false : bets;
         } catch (err) {
           console.log(err);

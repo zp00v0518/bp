@@ -45,12 +45,14 @@ async function parseOneEvent(eventPage, url, option = {}) {
     const selector = '[class*="EventMarkets_markets"]';
     // const selector = '.Accordion_titleBlock__wBlra';
 
+    await eventPage.waitForTimeout(9000);
     await eventPage.waitForSelector(selector);
-    await eventPage.waitForTimeout(5000);
+    await eventPage.waitForTimeout(9000);
     return item;
   } catch (err) {
+    console.log(`Проблема с урлом: ${url}`);
     console.log(err, `Проблема с урлом: ${url}`);
-    return item;
+    return false;
   }
 }
 

@@ -3,6 +3,7 @@ function setDateEvent(document, item) {
   const elDateInfo = document.querySelectorAll(
     '[data-id="prematch-infoboard-time-status"] span'
   )
+  console.log('elDateInfo', elDateInfo)
   if (!elDateInfo || elDateInfo.length !== 2) return;
   const dateArr = elDateInfo[0].innerText.split(' ');
   const date = new Date();
